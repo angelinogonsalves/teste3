@@ -33,7 +33,8 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Inicio</a>
+      <a href="url('/')" class="nav-link">Início</a>
+    
       </li>
     </ul>
 
@@ -86,7 +87,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-header">Cadastros</li>      
           <li class="nav-item">
-            <a href="pages/forms/cadastro_usuarios.html" class="nav-link">
+            <a href="{{ url('/usuarios') }}" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Usuários
