@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Razza | Inicio </title>
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -201,7 +201,22 @@
 
             <!-- Main content PAGINA HOME-->
             <div class="content">
-                <div class="container-fluid">
+                <div class="container-fluid">                                
+                    @if(Session::has('success'))
+                        <div class="alert alert-success">
+                            {{ Session::get('success') }}
+                            @php
+                                Session::forget('success');
+                            @endphp
+                        </div>            
+                    @endif
+
+                    @if($errors)
+                        @foreach ($errors->all() as $error)
+                        <div class="alert alert-danger">
+                            {{ $error }}</div>
+                        @endforeach
+                    @endif                        
 
                     @yield('content')
 

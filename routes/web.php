@@ -40,7 +40,7 @@ Route::group(array('prefix' => 'unidades'), function(){
     Route::get('/', [UnidadeController::class,'index'])->name('unidades');
     Route::get('/criar', [UnidadeController::class,'editUnidade'])->name('criar');
     Route::post('/excluir', [UnidadeController::class,'excluir'])->name('excluir');
-    Route::post('/salvar', [UnidadeController::class,'Salvar'])->name('salvar');
+    Route::post('/salvar', [UnidadeController::class,'salvaUnidade'])->name('salvar');
 });
 
 
