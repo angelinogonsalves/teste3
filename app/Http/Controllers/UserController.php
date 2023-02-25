@@ -9,11 +9,11 @@ class UserController extends Controller
     //
     public function index()
     {
-        return view('home');
+        return view('user.lista-user');
     }
 
     public function editUser()
     {
-        return view('home');
+        return view('user.novo-user');
     }
 }
