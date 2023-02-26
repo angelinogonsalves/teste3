@@ -15,7 +15,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>CPF / CNPJ</label>
-                            <input type="text" name="cpf_cnpj" class="form-control" placeholder="Digite...">
+                            <input type="text" name="cnpj" class="form-control" placeholder="Digite..." value="{{old('cnpj', $dados->cnpj)}}">
                         </div>
                     </div>
                     <div class="col-sm-5">
@@ -40,7 +40,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Telefone</label>
-                            <input type="text" name="celular" class="form-control" placeholder="informe.." value="{{old('telefone', $dados->telefone)}}">
+                            <input type="text" name="telefone" class="form-control" placeholder="informe.." value="{{old('telefone', $dados->telefone)}}">
                         </div>
                     </div>
                     <div class="col-sm-9">

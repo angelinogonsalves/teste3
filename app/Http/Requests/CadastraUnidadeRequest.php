@@ -20,19 +20,20 @@ class CadastraUnidadeRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
     public function rules(): array
-    {
+    {        
         return [
             'id' => 'nullable|integer',
-            'razao_social' => 'required|max:100',
-            'nome_fantasia' => 'required|max:100',
-            'cnpj' => 'nullable|integer|max:15',                        
-            'telefone' => 'nullable|integer|max:15',                                                
-            'endereco' => 'nullable|max:150',                                                
-            'numero' => 'nullable|max:10',                                                
-            'bairro' => 'nullable|max:100',                                                
-            'cep' => 'nullable|integer|max:8',                                                
-            'cidade' => 'nullable|max:100',                                                
-            'uf' => 'nullable|max:2'
+            'razao_social' => 'string|required|max:100',
+            'nome_fantasia' => 'string|required|max:100',
+            'email' => 'string|nullable|max:100',
+            'cnpj' => 'integer|nullable|digits:14',                        
+            'telefone' => 'integer|nullable|digits_between:10,12',                                                
+            'endereco' => 'string|nullable|max:150',                                                
+            'numero' => 'string|nullable|max:10',                                                
+            'bairro' => 'string|nullable|max:100',                                                
+            'cep' => 'string|nullable|max:8',                                                
+            'cidade' => 'string|nullable|max:100',                                                
+            'uf' => 'string|nullable|max:2'
         ];
     }
 }
