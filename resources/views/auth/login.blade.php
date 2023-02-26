@@ -22,7 +22,7 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="#" class="h1"><b>Razza</b>PRO</a>
+                <a href="/login" class="h1"><b>Razza</b>PRO</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Entre com seu e-mail e senha</p>
@@ -45,14 +45,6 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">
-                                    Relembre
-                                </label>
-                            </div>
-                        </div>
                         <!-- /.col -->
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary btn-block">Entrar</button>
@@ -60,7 +52,7 @@
                         <!-- /.col -->
                     </div>
                 </form>
-
+                <br>
                 <p class="mb-1">
                     <a href="{{url('/recuperar-senha')}}">Esqueci minha senha</a>
                 </p>
