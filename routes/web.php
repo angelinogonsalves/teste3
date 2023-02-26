@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\UnidadeController;
 use App\Http\Controllers\UserController;
@@ -17,6 +19,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', [HomeController::class,'index'])->name('home');
+
+
+Route::get('/login', [AuthController::class,'login'])->name('login');
+
+Route::get('/register', [AuthController::class,'register'])->name('register');
+
+Route::get('/recuperar-senha', [AuthController::class,'recuperarSenha'])->name('recuperar-senha');
+
 
 
 //criar os middlewares de admin.------------
@@ -41,6 +51,12 @@ Route::group(array('prefix' => 'unidades'), function(){
     Route::get('/criar', [UnidadeController::class,'editUnidade'])->name('criar');
     Route::post('/excluir', [UnidadeController::class,'excluir'])->name('excluir');
     Route::post('/salvar', [UnidadeController::class,'salvaUnidade'])->name('salvar');
+});
+Route::group(array('prefix' => 'pedidos'), function(){
+    Route::get('/', [PedidoController::class,'index'])->name('pedidos');
+    Route::get('/criar', [PedidoController::class,'editPedido'])->name('criar');
+    Route::post('/excluir', [PedidoController::class,'excluir'])->name('excluir');
+    Route::post('/salvar', [PedidoController::class,'salvaUnidade'])->name('salvar');
 });
 
 
