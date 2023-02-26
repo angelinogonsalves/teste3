@@ -25,7 +25,7 @@
                     <!-- /.card -->
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{url('unidades/criar')}}"class="btn btn-primary">Adicionar Novo <i
+                            <a href="{{url('unidades/cadastro')}}"class="btn btn-primary">Adicionar Novo <i
                                     class="nav-icon far fa-plus-square"></i></a>
                         </div>
                         <!-- /.card-header -->
@@ -38,45 +38,31 @@
                                         <th>CNPJ</th>
                                         <th>Cidade</th>
                                         <th>Ações</th>
-
                                     </tr>
                                 </thead>
 
                                 <tbody>
+                                    @if ($dados)
+                                        @foreach($dados as $d)
+                                        <tr>
+                                            <td>{{$d->id}}</td>
+                                            <td>{{$d->nome_fantasia}}</td>
+                                            <td>{{$d->cnpj}}</td>                                            
+                                            <td>{{$d->cidade}}</td>                                                                                        
+                                            <td>
+                                            <form action="{{url('unidades/excluir',[$d->id])}}" method="post">
+                                                @csrf
+                                                <a class="btn btn-primary btn-sm" href="{{url('unidades/cadastro',[$d->id])}}">Ver | Editar</a>                                                
+                                                    <input type="submit" value="Delete" class="btn btn-danger btn-sm">                                                    
+                                                </form>                                              
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    @else
                                     <tr>
-                                        <td>123</td>
-                                        <td>Positivo
-                                        </td>
-                                        <td>845266995000125</td>
-                                        <td>Curitiba</td>
-                                        <td>
-                                            <a class="btn btn-primary btn-sm">Ver | Editar</a>
-                                            <a class="btn btn-danger btn-sm">Delete</a>
-                                        </td>
+                                        <td colspan="5" class="text-center">Não foram encontradas Unidades</td>                                      
                                     </tr>
-                                    <tr>
-                                        <td>123</td>
-                                        <td>Positivo
-                                        </td>
-                                        <td>845266995000125</td>
-                                        <td>Curitiba</td>
-                                        <td>
-                                            <a class="btn btn-primary btn-sm">Ver | Editar</a>
-                                            <a class="btn btn-danger btn-sm">Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>123</td>
-                                        <td>Positivo
-                                        </td>
-                                        <td>845266995000125</td>
-                                        <td>Curitiba</td>
-                                        <td>
-                                            <a class="btn btn-primary btn-sm">Ver | Editar</a>
-                                            <a class="btn btn-danger btn-sm">Delete</a>
-                                        </td>
-                                    </tr>
-
+                                    @endif                                  
                                     </tfoot>
                             </table>
                         </div>
@@ -87,6 +73,6 @@
                 <!-- /.col -->
             </div>
             <!-- /.row -->
-        </div>
+        </div>        
     </section>
 @endsection

@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CadastraUnidadeRequest;
 use App\Http\Services\UnidadeService;
-use Illuminate\Http\Request;
+use App\Models\Unidade;
 
-class UnidadeController extends Controller
+class UnidadeController extends BaseController
 {
     protected $redirectTo = false;
 
@@ -19,20 +19,28 @@ class UnidadeController extends Controller
 
     public function index()
     {
-        return view('unidade.lista-unidade');
+        $unidades =  $this->unidadeService->getAllUnidades();       
+        return view('unidade.lista-unidade',['dados' => $unidades]);
     }
 
-    public function editUnidade()
-    {
-        return view('unidade.nova-unidade');
+    public function verUnidade(Unidade $unidade)
+    {                   
+        return view('unidade.nova-unidade',['dados' => $unidade]);
     }
 
-    public function salvaUnidade(CadastraUnidadeRequest $request){
+    public function excluirUnidade(Unidade $unidade){              
+
+        $returnUnidade = $this->unidadeService->excluiUnidade($unidade);    
+
+        return $this->responseData($returnUnidade,'unidades');                   
+    }
+
+    public function salvaUnidade(CadastraUnidadeRequest $request){    
     
         $validatedUnidade = $request->validated();
 
-        $returnClient = $this->unidadeService->cadastraUnidade($validatedUnidade);    
+        $returnUnidade = $this->unidadeService->salvaUnidade($validatedUnidade);    
 
-        return back()->with('success', 'Unidade salva com sucesso.');
+        return $this->responseData($returnUnidade,'/unidades/cadastro');                   
     }
 }

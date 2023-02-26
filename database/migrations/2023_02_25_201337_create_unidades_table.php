@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('unidades', function (Blueprint $table) {
             $table->id();            
             $table->string('razao_social',100);
-            $table->string('nome_fantasia',100)->nullable();
+            $table->string('nome_fantasia',100);
             $table->string('cnpj',15)->nullable();                        
             $table->string('email',100)->nullable();
             $table->string('telefone',15)->nullable();

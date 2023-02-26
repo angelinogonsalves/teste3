@@ -48,9 +48,9 @@ Route::group(array('prefix' => 'produtos'), function(){
 
 Route::group(array('prefix' => 'unidades'), function(){
     Route::get('/', [UnidadeController::class,'index'])->name('unidades');
-    Route::get('/criar', [UnidadeController::class,'editUnidade'])->name('criar');
-    Route::post('/excluir', [UnidadeController::class,'excluir'])->name('excluir');
-    Route::post('/salvar', [UnidadeController::class,'salvaUnidade'])->name('salvar');
+    Route::get('/cadastro/{unidade?}', [UnidadeController::class,'verUnidade'])->name('ver-unidade');    
+    Route::post('/excluir/{unidade?}', [UnidadeController::class,'excluirUnidade'])->name('excluir-unidade');
+    Route::post('/salvar', [UnidadeController::class,'salvaUnidade'])->name('salvar-unidade');
 });
 Route::group(array('prefix' => 'pedidos'), function(){
     Route::get('/', [PedidoController::class,'index'])->name('pedidos');

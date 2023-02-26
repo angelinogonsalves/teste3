@@ -27,7 +27,7 @@
 -->
 
 <body class="hold-transition sidebar-mini">
-
+<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
     <div class="wrapper">
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -238,6 +238,40 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('js/pages/dashboard3.js') }}"></script>
 
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        function excluir(id,route){           
+            let url = `${route}/excluir`;
+          
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: {
+                    "id": id                    
+                },
+                cache: false,
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                success: function (response)
+                {
+                    console.log(response);
+                    alert(response);
+                //    location.reload(); 
+                   
+                },
+                error: function (response) {
+                    alert(response);
+                }                
+            });
+
+          //  location.reload(); 
+        }
+    </script>
 </body>
 
 </html>

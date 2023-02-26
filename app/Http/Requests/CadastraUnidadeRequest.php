@@ -22,8 +22,9 @@ class CadastraUnidadeRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'id' => 'nullable|integer',
             'razao_social' => 'required|max:100',
-            'nome_fantasia' => 'nullable|max:100',
+            'nome_fantasia' => 'required|max:100',
             'cnpj' => 'nullable|integer|max:15',                        
             'telefone' => 'nullable|integer|max:15',                                                
             'endereco' => 'nullable|max:150',                                                
