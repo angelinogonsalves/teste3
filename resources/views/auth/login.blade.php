@@ -62,7 +62,7 @@
                 </form>
 
                 <p class="mb-1">
-                    <a href="{{url('/register')}}">Esqueci minha senha</a>
+                    <a href="{{url('/recuperar-senha')}}">Esqueci minha senha</a>
                 </p>
                 <p class="mb-0">
                     <a href="{{url('/register')}}" class="text-center">Quero realizar meu cadastro</a>

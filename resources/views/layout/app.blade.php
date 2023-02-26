@@ -172,7 +172,7 @@
                                 <i class="nav-icon fas fa-calendar-alt"></i>
                                 <p>
                                     Relatórios
-                                    <span class="badge badge-info right">2</span>
+                                    <span class="badge badge-info right">1</span>
                                 </p>
                             </a>
                         </li>

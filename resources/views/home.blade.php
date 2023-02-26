@@ -65,114 +65,114 @@
         </div>
         <!-- /.col -->
     </div>
-
     <div class="card">
-        <div class="card-header border-0">
-            <h3 class="card-title">Ultimos Pedidos</h3>
+        <div class="card-header border-transparent">
+            <h3 class="card-title">Ultimos pedidos</h3>
+
             <div class="card-tools">
-                <a href="#" class="btn btn-tool btn-sm">
-                    <i class="fas fa-download"></i>
-                </a>
-                <a href="#" class="btn btn-tool btn-sm">
-                    <i class="fas fa-bars"></i>
-                </a>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
         </div>
-        <div class="card-body table-responsive p-0">
-            <table class="table table-striped table-valign-middle">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Data Pedido</th>
-                        <th>Aluno - R.A.</th>
-                        <th>Valor Pedido</th>
-                        <th>Status</th>
-                        <th>Unidade</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            1231
-                        </td>
-                        <td>25/05/1585</td>
-                        <td>
-                            Alnuo Zé Silva -
-                            <small class="text-success mr-3">
-                                1234565
-                            </small>
-                        </td>
-                        <td>
-                            R$ 255,33
-                        </td>
-                        <td>
-                            Pago
-                        </td>
-                        <td>
-                            Unidade Positivo Junior
-                        </td>
-                        <td>
-                            <a href="#" class="text-muted">
-                                <i class="fas fa-search"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            1231
-                        </td>
-                        <td>25/05/1585</td>
-                        <td>
-                            Alnuo Zé Silva -
-                            <small class="text-success mr-3">
-                                1234565
-                            </small>
-                        </td>
-                        <td>
-                            R$ 255,33
-                        </td>
-                        <td>
-                            Pendente
-                        </td>
-                        <td>
-                            Unidade Positivo Junior
-                        </td>
-                        <td>
-                            <a href="#" class="text-muted">
-                                <i class="fas fa-search"></i>
-                            </a>
-                        </td>
-                    <tr>
-                        <td>
-                            1231
-                        </td>
-                        <td>25/05/1585</td>
-                        <td>
-                            Alnuo Zé Silva -
-                            <small class="text-success mr-3">
-                                1234565
-                            </small>
-                        </td>
-                        <td>
-                            R$ 255,33
-                        </td>
-                        <td>
-                            Em producao
-                        </td>
-                        <td>
-                            Unidade Positivo Junior
-                        </td>
-                        <td>
-                            <a href="#" class="text-muted">
-                                <i class="fas fa-search"></i>
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <!-- /.card-header -->
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table m-0">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Data Pedido</th>
+                            <th>Aluno - R.A.</th>
+                            <th>Valor Pedido</th>
+                            <th>Status</th>
+                            <th>Unidade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="pages/examples/invoice.html">OR9842</a></td>
+                            <td>22/10/200:20:25:25</td>
+                            <td>
+                                Alnuo Zé Silva -
+                                <small class="text-success mr-3">
+                                    1234565
+                                </small>
+                            </td>
+                            <td>
+                                <div class="sparkbar" data-color="#00a65a" data-height="20">1222,22</div>
+                            </td>
+                            <td><span class="badge badge-success">Pago</span></td>
+                            <td>
+                                Unidade Positivo Junior
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="pages/examples/invoice.html">OR1848</a></td>
+                            <td>22/10/200:20:25:25</td>
+                            <td>
+                                Alnuo Zé Silva -
+                                <small class="text-success mr-3">
+                                    1234565
+                                </small>
+                            </td>
+                            <td>
+                                <div class="sparkbar" data-color="#f39c12" data-height="20"></div>
+                            </td>
+                            <td><span class="badge badge-danger">Pagamento pendente</span></td>
+                            <td>
+                                Unidade Positivo Junior
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                            <td>22/10/200:20:25:25</td>
+                            <td>
+                                Alnuo Zé Silva -
+                                <small class="text-success mr-3">
+                                    1234565
+                                </small>
+                            </td>
+                            <td>
+                                <div class="sparkbar" data-color="#f56954" data-height="20">8855,5</div>
+                            </td>
+                            <td><span class="badge badge-white">Cancelado</span></td>
+                            <td>
+                                Unidade Positivo Junior
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                            <td>22/10/200:20:25:25</td>
+                            <td>
+                                Alnuo Zé Silva -
+                                <small class="text-success mr-3">
+                                    1234565
+                                </small>
+                            </td>
+                            <td>
+                                <div class="sparkbar" data-color="#f56954" data-height="20">90,55</div>
+                            </td>
+                            <td><span class="badge badge-primary">Em produção</span></td>
+                            <td>
+                                Unidade Positivo Junior
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.table-responsive -->
         </div>
+        <!-- /.card-body -->
+        <div class="card-footer clearfix">
+            <a href="{{ url('pedidos/criar') }}" class="btn btn-sm btn-info float-left">Novo Pedido</a>
+            <a href="{{ url('/pedidos') }}" class="btn btn-sm btn-secondary float-right">Ver todos Pedidos</a>
+        </div>
+        <!-- /.card-footer -->
     </div>
     <!-- /.card -->
-    </div>
 @endsection

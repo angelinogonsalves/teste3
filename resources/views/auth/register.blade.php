@@ -25,7 +25,7 @@
                 <a href="../../index2.html" class="h1"><b>Razza</b>PRO</a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Realizar novo cadastro</p>
+                <p class="login-box-msg">Realizar cadastro..</p>
 
                 <form action="../../index.html" method="post">
                     <div class="input-group mb-3">
@@ -41,6 +41,18 @@
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12">
+                        <div class="form-group">
+                            <label>Selecione sua unidade</label>
+                            <div class="select-purple">
+                                <select class="select" multiple="multiple" data-placeholder="selecione sua Unidade"
+                                    data-dropdown-css-class="select2-purple" style="width: 100%;">
+                                    <option>Positivo A</option>
+                                    <option>Positivo B</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -86,7 +98,7 @@
                     </div>
                 </form>
 
-                <a href="login-v2.html" class="text-center">Já tenho uma conta. Ir para Login</a>
+                <a href="{{ url('/login') }}" class="text-center">Já tenho uma conta. Ir para Login</a>
             </div>
             <!-- /.form-box -->
         </div><!-- /.card -->
