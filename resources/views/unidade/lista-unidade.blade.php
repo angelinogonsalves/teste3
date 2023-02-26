@@ -42,8 +42,7 @@
                                 </thead>
 
                                 <tbody>
-                                    @if ($dados)
-                                        @foreach($dados as $d)
+                                    @forelse($dados as $d)
                                         <tr>
                                             <td>{{$d->id}}</td>
                                             <td>{{$d->nome_fantasia}}</td>
@@ -57,12 +56,11 @@
                                                 </form>                                              
                                             </td>
                                         </tr>
-                                        @endforeach
-                                    @else
-                                    <tr>
-                                        <td colspan="5" class="text-center">Não foram encontradas Unidades</td>                                      
-                                    </tr>
-                                    @endif                                  
+                                        @empty
+                                        <tr>
+                                            <td colspan="5" class="text-center">Não foram encontradas Unidades</td>                                      
+                                        </tr>
+                                        @endforelse                                                           
                                     </tfoot>
                             </table>
                         </div>

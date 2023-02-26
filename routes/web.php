@@ -34,9 +34,9 @@ Route::get('/recuperar-senha', [AuthController::class,'recuperarSenha'])->name('
 
 Route::group(array('prefix' => 'usuarios'), function(){
     Route::get('/', [UserController::class,'index'])->name('usuarios');
-    Route::get('/criar', [UserController::class,'editUser'])->name('criar');
-    Route::post('/excluir', [UserController::class,'criar'])->name('excluir');
-    Route::post('/salvar', [UserController::class,'criar'])->name('salvar');
+    Route::get('/cadastro/{user?}', [UserController::class,'verUsuario'])->name('ver-usuario');
+    Route::post('/excluir/{user?}', [UserController::class,'excluirUsuario'])->name('excluir-usuario');
+    Route::post('/salvar', [UserController::class,'salvaUsuario'])->name('salvar-usuario');
 });
 
 Route::group(array('prefix' => 'produtos'), function(){

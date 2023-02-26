@@ -20,14 +20,14 @@ class BaseController extends Controller
         return redirect()->back()->with('success', $response['message']);        
     }                 
 
-    private function responseError(array $response) : RedirectResponse  {                
-        return redirect()->back()->with('error', $response["message"]);              
+    private function responseError(array $response) : RedirectResponse  {       
+        return redirect()->back()->withErrors($response['message']);          
     }   
 
-    public function responseData(array $response,string $route) : RedirectResponse  {
+    public function responseData(array $response,string $route) : RedirectResponse  {      
         if ($response["success"] === true){
             return $this->responseSuccess($response,$route);
         }
-        return $this->responseError($response, $route);
+        return $this->responseError($response);
     }
 }

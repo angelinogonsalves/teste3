@@ -34,8 +34,7 @@
                         <div class="form-group">
                             <label>Tamanhos disponiveis</label>
                             <div class="select2-purple">
-                                <select class="select2" multiple="multiple" data-placeholder="Selecione tamanhos"
-                                    data-dropdown-css-class="select2-purple" style="width: 100%;">
+                                <select class="selectpicker bs-select form-control" multiple="" data-live-search="true"  data-placeholder="Selecione tamanhos">
                                     <option>P</option>
                                     <option>M</option>
                                     <option>G</option>
@@ -55,8 +54,7 @@
                         <div class="form-group">
                             <label>Produtos dipniveis nas seguintes unidades</label>
                             <div class="select2-purple">
-                                <select class="select2" multiple="multiple" data-placeholder="Selecione unidades"
-                                    data-dropdown-css-class="select2-purple" style="width: 100%;">
+                            <select class="selectpicker bs-select form-control" multiple="" data-live-search="true"  data-placeholder="Selecione unidades">                                
                                     <option>Positivo sul</option>
                                     <option>Positivo Junior</option>
                                     <option>Positivo Norte</option>

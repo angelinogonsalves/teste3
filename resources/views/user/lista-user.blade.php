@@ -26,7 +26,7 @@
                     <!-- /.card -->
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{url('usuarios/criar')}}" class="btn btn-primary">Adicionar Novo <i
+                            <a href="{{url('usuarios/cadastro')}}" class="btn btn-primary">Adicionar Novo <i
                                     class="nav-icon far fa-plus-square"></i></a>
                         </div>
                         <!-- /.card-header -->
@@ -43,45 +43,27 @@
                                     </tr>
                                 </thead>
 
-                                <tbody>
+                                <tbody>                        
+                                    @forelse($dados as $d)
                                     <tr>
-                                        <td>123</td>
-                                        <td>Internet
-                                            Explorer 4.0
-                                        </td>
-                                        <td>Win 95+</td>
-                                        <td> 4</td>
+                                        <td>{{$d->id}}</td>
+                                        <td>{{$d->nome}}</td>
+                                        <td>{{$d->email}}</td>                                            
+                                        <td>{{$d->tipo_usuario}}</td>                                                                                        
                                         <td>
-                                            <a class="btn btn-primary btn-sm">Ver | Editar</a>
-                                            <a class="btn btn-danger btn-sm">Delete</a>
+                                        <form action="{{url('usuarios/excluir',[$d->id])}}" method="post">
+                                            @csrf
+                                            <a class="btn btn-primary btn-sm" href="{{url('usuarios/cadastro',[$d->id])}}">Ver | Editar</a>                                                
+                                                <input type="submit" value="Delete" class="btn btn-danger btn-sm">                                                    
+                                            </form>                                              
                                         </td>
                                     </tr>
+                                    @empty                                                                        
                                     <tr>
-                                        <td>12321</td>
-                                        <td>Internet
-                                            Explorer 5.0
-                                        </td>
-                                        <td>Win 95+</td>
-                                        <td>5</td>
-                                        <td>
-                                            <a class="btn btn-primary btn-sm">Ver | Editar</a>
-                                            <a class="btn btn-danger btn-sm">Delete</a>
-                                        </td>
+                                        <td colspan="5" class="text-center">Não foram encontradas Usuários</td>                                      
                                     </tr>
-                                    <tr>
-                                        <td>123</td>
-                                        <td>Internet
-                                            Explorer 5.5
-                                        </td>
-                                        <td>Win 95+</td>
-                                        <td>5.5</td>
-                                        <td>
-                                            <a class="btn btn-primary btn-sm">Ver | Editar</a>
-                                            <a class="btn btn-danger btn-sm">Delete</a>
-                                        </td>
-                                    </tr>
-
-                                    </tfoot>
+                                @endforelse                  
+                                </tfoot>
                             </table>
                         </div>
                         <!-- /.card-body -->

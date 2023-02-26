@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
+    <!-- bootstrap select -->
+    <link rel="stylesheet" href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.min.css') }}">
 </head>
 <!--
 `body` tag options:
@@ -237,40 +239,15 @@
     <script src="{{ asset('js/demo.js') }}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('js/pages/dashboard3.js') }}"></script>
-
+    <!-- Bootstrap select -->
+    <script src="{{ asset('plugins/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
+    
     <script>
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
-        function excluir(id,route){           
-            let url = `${route}/excluir`;
-          
-            $.ajax({
-                url: url,
-                type: "POST",
-                data: {
-                    "id": id                    
-                },
-                cache: false,
-                contentType: 'application/json; charset=utf-8',
-                processData: false,
-                success: function (response)
-                {
-                    console.log(response);
-                    alert(response);
-                //    location.reload(); 
-                   
-                },
-                error: function (response) {
-                    alert(response);
-                }                
-            });
-
-          //  location.reload(); 
-        }
     </script>
 </body>
 

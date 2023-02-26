@@ -9,7 +9,7 @@ class Unidade extends Model
 {
     use HasFactory;
 
-    protected $fillable = [           
+    protected $fillable = [          
         'razao_social',
         'nome_fantasia',
         'cnpj',                     
