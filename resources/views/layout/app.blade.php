@@ -142,33 +142,16 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-header">Dados Pedido</li>
+                        <li class="nav-header">Fazer Pedido</li>
                         <li class="nav-item">
                             <a href="{{ url('/pedidos') }}" class="nav-link">
-                                <i class="nav-icon fas fa-table"></i>
-                                <p>
-                                    Pedidos
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
+                                <i class="far fa-plus-square nav-icon"></i>
+                                <p>Pedidos</p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ url('pedidos/criar') }}"class="nav-link">
-                                        <i class="far fa-plus-square nav-icon"></i>
-                                        <p>Novo Pedido</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ url('/pedidos') }}" class="nav-link">
-                                        <i class="far fa-thumbs-up nav-icon"></i>
-                                        <p>Pedidos</p>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
                         <li class="nav-header">Relatórios</li>
                         <li class="nav-item">
-                            <a href="pages/calendar.html" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-calendar-alt"></i>
                                 <p>
                                     Relatórios

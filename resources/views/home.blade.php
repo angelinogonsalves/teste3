@@ -161,7 +161,6 @@
                                 Unidade Positivo Junior
                             </td>
                         </tr>
-
                     </tbody>
                 </table>
             </div>
@@ -169,7 +168,6 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer clearfix">
-            <a href="{{ url('pedidos/criar') }}" class="btn btn-sm btn-info float-left">Novo Pedido</a>
             <a href="{{ url('/pedidos') }}" class="btn btn-sm btn-secondary float-right">Ver todos Pedidos</a>
         </div>
         <!-- /.card-footer -->

@@ -7,6 +7,12 @@
                 <div class="col-sm-6">
                     <h1>Pedidos</h1>
                 </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Pedidos</li>
+                    </ol>
+                </div>
             </div>
         </div><!-- /.container-fluid -->
     </section>
@@ -18,10 +24,12 @@
                     <!-- /.card -->
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ url('pedidos/criar') }}"class="btn btn-primary">Adicionar Novo <i
+                            <a href="{{ url('pedidos/criar') }}"class="btn btn-sm btn-primary">Adicionar Novo Pedido  <i
                                     class="nav-icon far fa-plus-square"></i></a>
+                            <a href="{{ url('/pedidos') }}" class="btn btn-sm btn-success float-right">Atualizar dados Pagamentos </a>
+                            
                         </div>
-                        <!-- /.card-header -->
+                        <!-- /.card-header  usar modelo table que baixa em CSV-->
                         <div class="card-body table-responsive p-0">
                             <table class="table table-striped table-valign-middle">
                                 <thead>
@@ -50,9 +58,7 @@
                                         <td>
                                             R$ 255,33
                                         </td>
-                                        <td>
-                                            Pago
-                                        </td>
+                                        <td><span class="badge badge-success">Pago</span></td>
                                         <td>
                                             Unidade Positivo Junior
                                         </td>
@@ -76,9 +82,7 @@
                                         <td>
                                             R$ 255,33
                                         </td>
-                                        <td>
-                                            Pendente
-                                        </td>
+                                        <td><span class="badge badge-danger">Pagamento Pendente</span></td>
                                         <td>
                                             Unidade Positivo Junior
                                         </td>
@@ -101,9 +105,7 @@
                                         <td>
                                             R$ 255,33
                                         </td>
-                                        <td>
-                                            Em producao
-                                        </td>
+                                        <td><span class="badge badge-primary">Em produção</span></td>
                                         <td>
                                             Unidade Positivo Junior
                                         </td>
