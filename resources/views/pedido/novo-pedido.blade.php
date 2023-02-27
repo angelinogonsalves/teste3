@@ -146,7 +146,7 @@
                                 <thead>
                                     <tr>
                                         <th>Produto</th>
-                                        <th>Qtd</th>
+                                        <th>Quantidade</th>
                                         <th>Valor Item</th>
                                         <th>Tamanho</th>
                                         <th>Modalidade</th>
@@ -158,7 +158,8 @@
                                 <tbody>
                                     <tr>
                                         <td><a href="destalhes">Calção Feminino tipo liso</a></td>
-                                        <td> 2 </td>
+                                        <td><input class="form-control-sm" type="number" value="" min="0"
+                                                max="10" step="0" /></td>
                                         <td> 50,99 </td>
                                         <td>M</td>
                                         <td>Futebol</td>
@@ -174,7 +175,8 @@
                                     </tr>
                                     <tr>
                                         <td><a href="destalhes">Camiseta uniforme positivos modelo x</a></td>
-                                        <td> 1 </td>
+                                        <td><input class="form-control-sm" type="number" value="" min="0"
+                                                max="10" step="0" /></td>
                                         <td> 100,00 </td>
                                         <td>M</td>
                                         <td>Futebol</td>
