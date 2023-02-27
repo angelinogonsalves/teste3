@@ -29,10 +29,10 @@ Route::get('/register', [AuthController::class,'register'])->name('register');
 Route::get('/recuperar-senha', [AuthController::class,'recuperarSenha'])->name('recuperar-senha');
 
 //TELA HOME ALUNO
-Route::get('/aluno-home', [AlunoController::class,'inicio'])->name('aluno-home');
-Route::get('/detalhes-pedido', [AlunoController::class,'detalhesPedido'])->name('aluno-detalhes-pedido');
-
-
+Route::group(array('prefix' => 'aluno'), function(){
+    Route::get('/home', [AlunoController::class,'inicio'])->name('home');
+    Route::get('/detalhes-pedido', [AlunoController::class,'detalhesPedido'])->name('detalhes-pedido');
+});
 
 //criar os middlewares de admin.------------
 //Route::get('/usuarios', [UserController::class,'index'])->name('users');
