@@ -15,4 +15,8 @@ class ProdutoController extends Controller
     {
         return view('produto.novo-produto');
     }
+    public function detalhes()
+    {
+        return view('produto.detalhes-produto');
+    }
 }

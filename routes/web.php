@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PedidoController;
@@ -27,6 +28,10 @@ Route::get('/register', [AuthController::class,'register'])->name('register');
 
 Route::get('/recuperar-senha', [AuthController::class,'recuperarSenha'])->name('recuperar-senha');
 
+//TELA HOME ALUNO
+Route::get('/aluno-home', [AlunoController::class,'inicio'])->name('aluno-home');
+Route::get('/detalhes-pedido', [AlunoController::class,'detalhesPedido'])->name('aluno-detalhes-pedido');
+
 
 
 //criar os middlewares de admin.------------
@@ -42,6 +47,7 @@ Route::group(array('prefix' => 'usuarios'), function(){
 Route::group(array('prefix' => 'produtos'), function(){
     Route::get('/', [ProdutoController::class,'index'])->name('produtos');
     Route::get('/criar', [ProdutoController::class,'editProduto'])->name('criar');
+    Route::get('/detalhes', [ProdutoController::class,'detalhes'])->name('detlhes');
     Route::post('/excluir', [ProdutoController::class,'criar'])->name('produtos');
     Route::post('/salvar', [ProdutoController::class,'criar'])->name('produtos');
 });
