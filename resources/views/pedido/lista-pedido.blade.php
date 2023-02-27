@@ -24,14 +24,14 @@
                     <!-- /.card -->
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ url('pedidos/criar') }}"class="btn btn-sm btn-primary">Adicionar Novo Pedido  <i
-                                    class="nav-icon far fa-plus-square"></i></a>
-                            <a href="{{ url('/pedidos') }}" class="btn btn-sm btn-success float-right">Atualizar dados Pagamentos </a>
-                            
+                            <a href="{{ url('pedidos/criar') }}"class="btn btn btn-primary">Adicionar Novo Pedido</a>
+                            <a href="{{ url('/pedidos') }}" class="btn btn btn-success float-right">Atualizar dados
+                                Pagamentos </a>
+
                         </div>
                         <!-- /.card-header  usar modelo table que baixa em CSV-->
                         <div class="card-body table-responsive p-0">
-                            <table class="table table-striped table-valign-middle">
+                            <table id="tabela_itens_produto" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
@@ -63,9 +63,7 @@
                                             Unidade Positivo Junior
                                         </td>
                                         <td>
-                                            <a href="#" class="text-muted">
-                                                <i class="fas fa-search"></i>
-                                            </a>
+                                            <a class="btn btn-info  btn-sm">Ver | Editar</a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -87,9 +85,7 @@
                                             Unidade Positivo Junior
                                         </td>
                                         <td>
-                                            <a href="#" class="text-muted">
-                                                <i class="fas fa-search"></i>
-                                            </a>
+                                            <a class="btn btn-primary btn-sm">Ver | Editar</a>
                                         </td>
                                     <tr>
                                         <td>
@@ -110,9 +106,7 @@
                                             Unidade Positivo Junior
                                         </td>
                                         <td>
-                                            <a href="#" class="text-muted">
-                                                <i class="fas fa-search"></i>
-                                            </a>
+                                            <a class="btn btn-primary btn-sm">Ver | Editar</a>
                                         </td>
                                     </tr>
                                 </tbody>
