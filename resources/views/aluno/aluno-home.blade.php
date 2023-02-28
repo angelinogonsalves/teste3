@@ -93,7 +93,7 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="card-title m-0">Meus Peidos</h5>
+                                    <h5 class="card-title m-0">Meus Pedidos</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="card-body p-0">
