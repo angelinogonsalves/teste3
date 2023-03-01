@@ -6,28 +6,31 @@
             <h3 class="card-title">Cadastrando Produto...</h3>
         </div>
         <!-- /.card-header -->
-        <div class="card-body">
-            <form>
+        <div class="card-body">            
+            <form action="{{ url('produtos/salvar') }}" method="post">
+                @csrf
+                
+                <input type="hidden" name="id" value="{{old('id', $dados->id)}}">
+
                 <div class="row">
                     <div class="col-sm-4">
                         <!-- text input -->
                         <div class="form-group">
                             <label>Código RZ</label>
-                            <input type="text" name="codigo_rz" class="form-control" placeholder="código RZ">
+                            <input type="text" name="codigo" class="form-control" placeholder="código RZ" value="{{old('codigo', $dados->codigo)}}">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Nome do Produto</label>
-                            <input type="text" name="nome_produto" class="form-control"
-                                placeholder="Escreva nome do produto">
+                            <input type="text" name="produto" class="form-control" placeholder="Escreva nome do produto" value="{{old('id', $dados->id)}}">
                         </div>
                     </div>
                     <div class="col-sm-7">
                         <!-- text input -->
                         <div class="form-group">
                             <label>Descrição do Produto</label>
-                            <textarea class="form-control" name="descricao" rows="3" placeholder="Descrição"></textarea>
+                            <textarea class="form-control" name="descricao" rows="3" placeholder="Descrição">{{old('descricao', $dados->descricao)}}</textarea>
                         </div>
                     </div>
                     <div class="col-sm-5">
@@ -46,8 +49,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Valor Produto (R$)</label>
-                            <input type="text" name="valor_produto" class="form-control"
-                                placeholder="Escreva valor 0,00">
+                            <input type="text" name="valor" class="form-control" placeholder="Escreva valor 0,00"  value="{{old('valor', $dados->valor)}}">
                         </div>
                     </div>
                     <div class="col-sm-9">
@@ -114,17 +116,18 @@
                         </div>
                     </div>
                 </div>
+            
+                <div class="row">
+                    <div class="col-12">
+                    </div>
+                    <div class="col-6">
+                        <a href="#" class="btn btn-secondary">Voltar</a>
+                    </div>
+                    <div class="col-6">
+                        <input type="submit" value="Cadastrar" class="btn btn-success float-right">
+                    </div>
+                </div>
             </form>
-            <div class="row">
-                <div class="col-12">
-                </div>
-                <div class="col-6">
-                    <a href="#" class="btn btn-secondary">Voltar</a>
-                </div>
-                <div class="col-6">
-                    <input type="submit" value="Cadastrar" class="btn btn-success float-right">
-                </div>
-            </div>
         </div>
     </div>
 @endsection

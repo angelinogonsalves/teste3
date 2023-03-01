@@ -3,7 +3,6 @@
 namespace App\Http\Services;
 
 use App\Models\Unidade;
-use App\Models\User;
 use Exception;
 
 class UnidadeService {
@@ -30,16 +29,7 @@ class UnidadeService {
     }
 
     public function getAllUnidades(){
-        /*
-        if (auth()->user()->tipo_usuario >=3) {
-            return Unidade::where('unidade_id',auth()->user()->unidade_id)->orderby('nome_fantasia')->get();  
-        }*/    
-        return Unidade::orderby('nome_fantasia')->get();                    
-        
-    }
-
-    public function getUnidadeUsuario(User $user){
-                 
+        return Unidade::orderby('nome_fantasia')->get();            
     }
 
     public function excluiUnidade(Unidade $unidade){

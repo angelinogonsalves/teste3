@@ -25,11 +25,28 @@
                 <a href="/login" class="h1"><b>Razza</b>PRO</a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Entre com seu e-mail e senha</p>
+                @if (Session::has('success'))
+                    <div class="alert alert-success">
+                        {{ Session::get('success') }}
+                        @php
+                            Session::forget('success');
+                        @endphp
+                    </div>
+                @endif
 
-                <form action="../../index3.html" method="post">
+                @if ($errors)
+                    @foreach ($errors->all() as $error)
+                        <div class="alert alert-danger">
+                            {{ $error }}</div>
+                    @endforeach
+                @endif
+                
+                    
+                <p class="login-box-msg">Entre com seu e-mail e senha</p>
+                <form action="{{ url('loga') }}" method="post">                
+                    @csrf
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input name="email" type="email" class="form-control" placeholder="Email" value="{{ old('email') }}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -37,7 +54,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="senha" class="form-control" placeholder="Senha">
+                        <input name="password" type="password" class="form-control" placeholder="Senha" value="{{ old('password') }}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -47,7 +64,7 @@
                     <div class="row">
                         <!-- /.col -->
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                            <input type="submit" class="btn btn-primary btn-block" value="Entrar"/>
                         </div>
                         <!-- /.col -->
                     </div>
