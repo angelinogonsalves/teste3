@@ -20,7 +20,14 @@ class ProdutoController extends BaseController
 
     public function index()
     {
-        return view('produto.lista-produto');
+        $produtos = $this->produtoService->getAllProdutos();   
+        
+        $produtos = $produtos->map(function($produtos) {
+            $produtos->valor = $this->formatMoneyBR($produtos->valor,true);
+            return $produtos;
+        });
+
+        return view('produto.lista-produto',['dados' => $produtos]);
     }
 
     public function verProduto(Produto $produto)

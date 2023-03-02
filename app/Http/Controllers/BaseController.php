@@ -30,4 +30,8 @@ class BaseController extends Controller
         }
         return $this->responseError($response);
     }
+
+    public function formatMoneyBR($value,$addSifrao = false) {
+        return ($addSifrao ? 'R$ ' : '') . ' ' . number_format($value, 2, ',', '.');
+    }
 }

@@ -24,7 +24,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{url('produtos/criar')}}" class="btn btn-primary"> Adicionar Novo
+                            <a href="{{url('produtos/cadastro')}}" class="btn btn-primary"> Adicionar Novo
                                 <i class="nav-icon far fa-plus-square"> </i> </a>
                         </div>
                         <div class="card-body">
@@ -41,39 +41,26 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-                                        <td>123</td>
-                                        <td>rz4564
-                                        </td>
-                                        <td>camiseta</td>
-                                        <td>60,00</td>
-                                        <td>
-                                            <a class="btn btn-primary btn-sm">Ver | Editar</a>
-                                            <a class="btn btn-danger btn-sm">Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>123</td>
-                                        <td>rz4564
-                                        </td>
-                                        <td>camiseta</td>
-                                        <td>60,00</td>
-                                        <td>
-                                            <a class="btn btn-primary btn-sm">Ver | Editar</a>
-                                            <a class="btn btn-danger btn-sm">Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>123</td>
-                                        <td>rz4564
-                                        </td>
-                                        <td>camiseta</td>
-                                        <td>60,00</td>>
-                                        <td>
-                                            <a class="btn btn-primary btn-sm">Ver | Editar</a>
-                                            <a class="btn btn-danger btn-sm">Delete</a>
-                                        </td>
-                                    </tr>
+                                    @forelse($dados as $d)
+                                        <tr>
+                                            <td>{{$d->id}}</td>
+                                            <td>{{$d->codigo}}</td>
+                                            <td>{{$d->descricao}}</td>                                            
+                                            <td>{{$d->valor}}</td>                                                                                        
+                                            <td>
+                                            <form action="{{url('unidades/excluir',[$d->id])}}" method="post">
+                                                @csrf
+                                                <a class="btn btn-primary btn-sm" href="{{url('produtos/cadastro',[$d->id])}}">Ver | Editar</a>                                                
+                                                    <input type="submit" value="Delete" class="btn btn-danger btn-sm">                                                    
+                                                </form>                                              
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="5" class="text-center">Não foram encontrados Produtos</td>                                      
+                                        </tr>
+                                    @endforelse                                                           
+                                </tbody>                                   
                             </table>
                         </div>
 
