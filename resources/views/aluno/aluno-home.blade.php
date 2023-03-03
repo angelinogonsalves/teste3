@@ -110,7 +110,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td><a href="{{ url('aluno/detalhes-pedido') }}">OR9842</a></td>
+                                                        <td><a href="{{ url('produtos/detalhes') }}">OR9842</a></td>
                                                         <td>22/10/2000</td>
                                                         <td>
                                                             <div class="sparkbar" data-color="#00a65a" data-height="20">
@@ -118,7 +118,7 @@
                                                         </td>
                                                         <td><span class="badge badge-success">Pago</span></td>
                                                         <td>
-                                                         <a class="btn btn-info  btn-sm">Ver Pedido</a>
+                                                         <a href="{{ url('aluno/detalhes-pedido') }}" class="btn btn-info  btn-sm">Ver Pedido</a>
                                                      </td>
                                                     </tr>
                                                     <tr>
@@ -132,7 +132,7 @@
                                                         <td><span class="badge badge-danger">Pagamento pendente</span>
                                                         </td>
                                                         <td>
-                                                         <a  href="aluno/detalhes-pedido" class="btn btn-info  btn-sm">Ver Pedido</a>
+                                                         <a  href="{{ url('aluno/aluno-detalhes-pedido') }}" class="btn btn-info  btn-sm">Ver Pedido</a>
                                                      </td>
                                                     </tr>
                                                    

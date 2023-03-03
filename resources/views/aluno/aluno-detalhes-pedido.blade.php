@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Aluno | Home </title>
+    <title>Aluno | Detalhes Pedido </title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -80,7 +80,8 @@
                     <div class="col-12">
                         <div class="callout callout-info">
                             <h5><i class="fas fa-info"></i> Atenção!</h5>
-                            Confira se todas e informações do seu pedido estão corretas. Confira nome tamanho e demais informações.
+                            Confira se todas e informações do seu pedido estão corretas. Confira nome tamanho e demais
+                            informações.
                             Caso precise mudar avisar o resposável pelo pedido
                         </div>
 
@@ -137,39 +138,39 @@
                                 <div class="col-12 table-responsive">
                                     <table class="table table">
                                         <thead>
-                                    <tr>
-                                        <th>Produto</th>
-                                        <th>Quant.</th>
-                                        <th>Valor</th>
-                                        <th>Tam.</th>
-                                        <th>Modalidade</th>
-                                        <th>Nome Pers.</th>
-                                        <th>Nº Pers.</th>
-                                        <th>Subtotal</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><a href="destalhes">Calção Feminino tipo liso</a></td>
-                                        <td>2</td>
-                                        <td> 50,99 </td>
-                                        <td>M</td>
-                                        <td>Futebol</td>
-                                        <td>Nome personalizado A </td>
-                                        <td>2</td>
-                                        <td>100,00</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="destalhes">Camiseta uniforme positivos modelo x</a></td>
-                                        <td>1</td>
-                                        <td> 100,00 </td>
-                                        <td>M</td>
-                                        <td>Futebol</td>
-                                        <td>Nome personalizado A </td>
-                                        <td>2</td>
-                                        <td> 100,00</td>
-                                    </tr>
-                                </tbody>
+                                            <tr>
+                                                <th>Produto</th>
+                                                <th>Quant.</th>
+                                                <th>Valor</th>
+                                                <th>Tam.</th>
+                                                <th>Modalidade</th>
+                                                <th>Nome Pers.</th>
+                                                <th>Nº Pers.</th>
+                                                <th>Subtotal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="destalhes">Calção Feminino tipo liso</a></td>
+                                                <td>2</td>
+                                                <td> 50,99 </td>
+                                                <td>M</td>
+                                                <td>Futebol</td>
+                                                <td>Nome personalizado A </td>
+                                                <td>2</td>
+                                                <td>100,00</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="destalhes">Camiseta uniforme positivos modelo x</a></td>
+                                                <td>1</td>
+                                                <td> 100,00 </td>
+                                                <td>M</td>
+                                                <td>Futebol</td>
+                                                <td>Nome personalizado A </td>
+                                                <td>2</td>
+                                                <td> 100,00</td>
+                                            </tr>
+                                        </tbody>
                                     </table>
                                 </div>
                                 <!-- /.col -->
@@ -177,23 +178,23 @@
                             <!-- /.row -->
 
                             <div class="row">
-                                
+
                                 <!-- accepted payments column -->
                                 <div class="col-6">
-                                                                       
+
                                     <p class="lead">Médtodos de Pagamento:</p>
-                                    <img src="../../dist/img/credit/visa.png" alt="Visa">
-                                    <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-                                    <img src="../../dist/img/credit/american-express.png" alt="American Express">
-                                    <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
+                                    <img src="//assets.pagseguro.com.br/ps-integration-assets/banners/pagamento/todos_animado_550_50.gif"
+                                        alt="Logotipos de meios de pagamento do PagSeguro"
+                                        title="Este site aceita pagamentos com as principais bandeiras e bancos, saldo em conta PagSeguro e boleto.">
 
                                     <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                        Importar Logo pagseguro aqui!... Pagamento via cartões de créditos ou PIX.
+                                        Pagamento via cartões de créditos ou PIX.
+                                        Para Ver detalhes do produto como: Descrição, Tamanho com tabela de medidas clique em cima do produto para abrir informções.
                                     </p>
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-6">
-                                    <p class="lead">Valores do Pedido  Data: 2/22/2023</p>
+                                    <p class="lead">Valores do Pedido Data: 2/22/2023</p>
 
                                     <div class="table-responsive">
                                         <table class="table">
@@ -219,15 +220,12 @@
                             <!-- this row will not appear when printing -->
                             <div class="row no-print">
                                 <div class="col-12">
-                                    <a href="invoice-print.html" rel="noopener" target="_blank"
+                                    <a href="" rel="noopener" target="_blank"
                                         class="btn btn-default"><i class="fas fa-print"></i> Imprimir</a>
                                     <button type="button" class="btn btn-success float-right"><i
-                                            class="far fa-credit-card"></i> Pagar
+                                            class="far fa-credit-card"></i> Pagar Pedido
                                     </button>
-                                    <button type="button" class="btn btn-primary float-right"
-                                        style="margin-right: 5px;">
-                                        <i class="fas fa-download"></i> Gerar PDF
-                                    </button>
+                                    
                                 </div>
                             </div>
                         </div>
