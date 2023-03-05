@@ -34,7 +34,9 @@ class CadastraProdutoRequest extends FormRequest
             'codigo' => 'required|max:50',
             'produto' => 'required|max:100',            
             'descricao' => 'nullable|max:500',                        
-            'valor' => 'required|numeric',                                   
+            'valor' => 'required|numeric',   
+            'tamanhos' => 'required',
+            'unidades' => 'required'            
         ];
     }
 }

@@ -29,19 +29,19 @@
                     <div class="col-sm-7">
                         <!-- text input -->
                         <div class="form-group">
-                            <label>Descrição do Produto</label>
-                            <textarea class="form-control" name="descricao" rows="3" placeholder="Descrição">{{old('descricao', $dados->descricao)}}</textarea>
+                            <label>Descrição do Produto</label>                            
+                            <textarea class="form-control" name="descricao" rows="3" placeholder="Descrição">{{old('descricao', $dados->descricao)}}</textarea>                           
                         </div>
                     </div>
                     <div class="col-sm-5">
                         <div class="form-group">
                             <label>Tamanhos disponiveis</label>
-                            <div class="select2-purple">
-                                <select class="selectpicker bs-select form-control" multiple="" data-live-search="true"  data-placeholder="Selecione tamanhos">
-                                    <option>P</option>
-                                    <option>M</option>
-                                    <option>G</option>
-                                    <option>GG</option>
+                            <div class="select2-purple">                              
+                                <select name="tamanhos[]" class="selectpicker bs-select form-control" multiple="" data-live-search="true"  data-placeholder="Selecione tamanhos">                                    
+                                    @forelse ($lista_tamanhos as $t)                                  
+                                        <option value="{{$t->id}}" {{(in_array($t->id,$tamanhos_selecionados) ? 'selected=""' : '')}}>{{$t->tamanho}}</option>                                                                                                    
+                                    @empty
+                                    @endforelse                                
                                 </select>
                             </div>
                         </div>
@@ -54,12 +54,13 @@
                     </div>
                     <div class="col-sm-9">
                         <div class="form-group">
-                            <label>Produtos dipniveis nas seguintes unidades</label>
+                            <label>Produtos disponiveis nas seguintes unidades</label>
                             <div class="select2-purple">
-                            <select class="selectpicker bs-select form-control" multiple="" data-live-search="true"  data-placeholder="Selecione unidades">                                
-                                    <option>Positivo sul</option>
-                                    <option>Positivo Junior</option>
-                                    <option>Positivo Norte</option>
+                                <select name="unidades[]" class="selectpicker bs-select form-control" multiple="" data-live-search="true"  data-placeholder="Selecione as unidades">                                   
+                                    @forelse ($lista_unidades as $u)                                  
+                                        <option value="{{$u->id}}" {{(in_array($u->id,$unidades_selecionadas) ? 'selected=""' : '')}}>{{$u->nome_fantasia}}</option>                                                                                                    
+                                    @empty
+                                    @endforelse                                
                                 </select>
                             </div>
                         </div>

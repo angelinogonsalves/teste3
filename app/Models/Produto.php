@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Produto extends Model
 {
@@ -15,4 +16,14 @@ class Produto extends Model
         'descricao',                     
         'valor'       
     ];
+
+    public function tamanhos(): HasMany
+    {
+        return $this->hasMany(ProdutosTamanhos::class);
+    }
+
+    public function unidades(): HasMany
+    {
+        return $this->hasMany(ProdutosUnidades::class);
+    }
 }

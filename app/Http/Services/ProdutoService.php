@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Models\Produto;
+use App\Models\ProdutosTamanhos;
 use Exception;
 
 class ProdutoService {
@@ -17,7 +18,14 @@ class ProdutoService {
 
             $produto->fill($produtoData);
             $produto->save();
-                                       
+
+            $produto_tamanho_service = new ProdutoTamanhoService();
+            $produto_tamanho_service->AtualizaProdutosTamanhos($produto,$produtoData['tamanhos']);
+
+            $produto_unidade_service = new ProdutoUnidadeService();
+            $produto_unidade_service->AtualizaProdutosUnidades($produto,$produtoData['unidades']);
+
+                                                   
             if ($produto){
                 return ["success" => true, "result" => $produto,"message" => "Produto salvo com sucesso"];     
             }     
@@ -27,7 +35,7 @@ class ProdutoService {
             return ["success" => false, "message" => "Erro ao tentar salvar o Produto. " . $e->getMessage()];      
         }               
     }
-
+   
     public function getAllProdutos(){       
         return Produto::orderby('produto')->get();                            
     }
