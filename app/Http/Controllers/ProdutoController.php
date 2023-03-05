@@ -73,4 +73,11 @@ class ProdutoController extends BaseController
     {
         return view('produto.detalhes-produto');
     }
+
+    public function excluirProduto(Produto $produto){              
+
+        $returnUnidade = $this->produtoService->excluiProduto($produto);    
+
+        return $this->responseData($returnUnidade,'produtos');                   
+    }
 }

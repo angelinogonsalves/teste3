@@ -48,7 +48,7 @@
                                             <td>{{$d->descricao}}</td>                                            
                                             <td>{{$d->valor}}</td>                                                                                        
                                             <td>
-                                            <form action="{{url('unidades/excluir',[$d->id])}}" method="post">
+                                            <form action="{{url('produtos/excluir',[$d->id])}}" method="post">
                                                 @csrf
                                                 <a class="btn btn-primary btn-sm" href="{{url('produtos/cadastro',[$d->id])}}">Ver | Editar</a>                                                
                                                     <input type="submit" value="Delete" class="btn btn-danger btn-sm">                                                    
