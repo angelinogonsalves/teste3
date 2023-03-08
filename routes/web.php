@@ -35,9 +35,10 @@ Route::middleware(['auth'])->group(function () {
   
     //TELA HOME ALUNO
     Route::group(array('prefix' => 'aluno'), function(){
-        Route::get('/home', [AlunoController::class,'inicio'])->name('home');
+        Route::get('/home', [AlunoController::class,'inicio'])->name('home-aluno');
         Route::get('/detalhes-pedido', [AlunoController::class,'detalhesPedido'])->name('detalhes-pedido');
     });
+
 
     //criar os middlewares de admin.------------
     //Route::get('/usuarios', [UserController::class,'index'])->name('users');
@@ -53,8 +54,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [ProdutoController::class,'index'])->name('produtos');
         Route::get('/cadastro/{produto?}', [ProdutoController::class,'verProduto'])->name('criar-produto');
         Route::get('/detalhes', [ProdutoController::class,'detalhes'])->name('detlhes');
-        Route::post('/excluir', [ProdutoController::class,'criar'])->name('produtos');
-        Route::post('/salvar', [ProdutoController::class,'salvarProduto'])->name('produtos');
+        Route::post('/excluir/{produto}', [ProdutoController::class,'excluirProduto'])->name('excluir-produto');
+        Route::post('/salvar', [ProdutoController::class,'salvarProduto'])->name('salvar-produto');
+        Route::get('/listaporunidade/{unidade}', [ProdutoController::class,'listaPorUnidade'])->name('listaporunidade');
     });
 
     Route::group(array('prefix' => 'unidades'), function(){
@@ -65,9 +67,9 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::group(array('prefix' => 'pedidos'), function(){
         Route::get('/', [PedidoController::class,'index'])->name('pedidos');
-        Route::get('/criar', [PedidoController::class,'editPedido'])->name('criar');
+        Route::get('/cadastro/{pedido?}', [PedidoController::class,'verPedido'])->name('verPedido');
         Route::post('/excluir', [PedidoController::class,'excluir'])->name('excluir');
-        Route::post('/salvar', [PedidoController::class,'salvaUnidade'])->name('salvar');
+        Route::post('/salvar', [PedidoController::class,'salvaUnidade'])->name('salvar-pedido');
     });
 });
 

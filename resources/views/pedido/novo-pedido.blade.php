@@ -14,12 +14,12 @@
                         <div class="form-group">
                             <label>Selecione a unidade *</label>
                             <div class="select-purple">
-                                <select class="select-purple form-control" data-placeholder="Selecione unidades"
-                                    style="width: 100%;">
-                                    <option>Selecione...</option>
-                                    <option>Positivo sul</option>
-                                    <option>Positivo Junior</option>
-                                    <option>Positivo Norte</option>
+                            <select name="unidade_id" id="unidade_id" class="form-control" data-placeholder="Selecione as unidades" onchange="buscaProdutos()">                                   
+                                <option value="">Selecione...</option>
+                                @forelse ($lista_unidades as $u)                                  
+                                    <option value="{{$u->id}}" @if ($u->id == $dados->unidade_id) ? 'selected=""' @endif>{{$u->nome_fantasia}}</option>                                                                                                    
+                                @empty
+                                @endforelse                                
                                 </select>
                             </div>
                         </div>
@@ -44,11 +44,9 @@
                         <div class="form-group">
                             <label>Escolha produto para Adcionar aos itens</label>
                             <div class="select-purple">
-                                <select class="select-purple form-control"
+                                <select name="produto" id="produto" class="form-control"
                                     data-placeholder="Selecione unidades"style="width: 100%;">
-                                    <option>Selecione...</option>
-                                    <option>Calção azul faixa lisa - R$20,50</option>
-                                    <option>camiseta pretas positivo R$50,60</option>
+                                    <option value="">Selecione...</option>                                    
                                 </select>
                             </div>
                         </div>
@@ -215,4 +213,37 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function buscaProdutos(){
+            unidade_id = $("#unidade_id").val();            
+
+            if (unidade_id) {            
+                url = '{{url('/produtos/listaporunidade/')}}' +'/'+unidade_id;
+
+                $("#produto").empty().append('<option value="">Selecione...</option>');
+
+                $.ajax({
+                    type: 'GET',   
+                    url: url,              
+                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                    async: true,
+                    success: function (data) {
+                        $.each(data,function(key,value) {
+                            $("#produto").append('<option value=' + value.id + '>' + value.produto+'</option>');
+                        });
+                    },
+                    complete: function () {
+        
+                    },
+                    beforeSend: function () {
+        
+                    },
+                    error: function (data) {
+        
+                    }
+                }); 
+            }
+        }
+    </script>
 @endsection

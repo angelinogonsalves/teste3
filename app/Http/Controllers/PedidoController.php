@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\UnidadeService;
+use App\Models\Pedido;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -12,12 +13,11 @@ class PedidoController extends Controller
         return view('pedido.lista-pedido');
     }
 
-    public function editPedido()
+    public function verPedido(Pedido $pedido)
     {
         $unidadeService = new UnidadeService();
-        $unidades = $unidadeService->getAllUnidades();
-
+        $lista_unidades = $unidadeService->getAllUnidades();
         
-        return view('pedido.novo-pedido',['unidades' => $unidades]);
+        return view('pedido.novo-pedido',['dados' => $pedido,'lista_unidades' => $lista_unidades]);
     }
 }

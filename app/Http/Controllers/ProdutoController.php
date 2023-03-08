@@ -8,6 +8,7 @@ use App\Http\Services\TamanhoService;
 use App\Http\Services\UnidadeService;
 use App\Models\Produto;
 use App\Models\Tamanho;
+use App\Models\Unidade;
 use Illuminate\Http\Request;
 
 class ProdutoController extends BaseController
@@ -79,5 +80,9 @@ class ProdutoController extends BaseController
         $returnUnidade = $this->produtoService->excluiProduto($produto);    
 
         return $this->responseData($returnUnidade,'produtos');                   
+    }
+
+    public function listaPorUnidade(Unidade $unidade) {
+        return $this->produtoService->getProdutosPorUnidade($unidade);        
     }
 }

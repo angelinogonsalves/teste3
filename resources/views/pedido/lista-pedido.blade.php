@@ -24,7 +24,7 @@
                     <!-- /.card -->
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ url('pedidos/criar') }}"class="btn btn btn-primary">Adicionar Novo Pedido</a>
+                            <a href="{{ url('pedidos/cadastro') }}"class="btn btn btn-primary">Adicionar Novo Pedido</a>
                             <a href="{{ url('/pedidos') }}" class="btn btn btn-success float-right">Atualizar dados
                                 Pagamentos </a>
 

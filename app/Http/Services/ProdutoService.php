@@ -4,6 +4,7 @@ namespace App\Http\Services;
 
 use App\Models\Produto;
 use App\Models\ProdutosTamanhos;
+use App\Models\Unidade;
 use Exception;
 
 class ProdutoService {
@@ -47,5 +48,9 @@ class ProdutoService {
         } catch (Exception $e) {    
             return ["success" => false, "message" => "Erro ao tentar excluir o Produto. " . $e->getMessage()];                      
         }
+    }   
+
+    public function getProdutosPorUnidade(Unidade $unidade){         
+        return Produto::orderby('produto')->get();
     }
 }
