@@ -44,7 +44,7 @@
                         <div class="form-group">
                             <label>Escolha produto para Adcionar aos itens</label>
                             <div class="select-purple">
-                                <select name="produto" id="produto" class="form-control"
+                                <select name="add_produto" id="add_produto" class="form-control" onchange="buscaTamanhos()";
                                     data-placeholder="Selecione unidades"style="width: 100%;">
                                     <option value="">Selecione...</option>                                    
                                 </select>
@@ -55,10 +55,12 @@
                         <div class="form-group">
                             <label>Selecione Modalidade (se houver)</label>
                             <div class="select-purple">
-                                <select name="unidade_id" class="form-control" data-placeholder="Selecione Modalidade">
-                                    <option>Selecione...</option>
-                                    <option>Futebol</option>
-                                    <option>Volei</option>
+                                <select name="modalidade_id" class="form-control" data-placeholder="Selecione Modalidade">
+                                    <option value="">Selecione...</option>
+                                    @forelse ($lista_modalidades as $m)                                  
+                                        <option value="{{$m->id}}">{{$m->modalidade}}</option>                                                                                                    
+                                    @empty
+                                    @endforelse                                                               
                                 </select>
                             </div>
                         </div>
@@ -81,31 +83,29 @@
                     </div>
                     <div class="col-12 col-sm-5">
                         <div class="form-group">
-                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <div id="div_tamanhos" class="btn-group" data-toggle="buttons">
+
                                 <label class="btn btn-default text-center">
-                                    <input type="radio" name="color_option" id="color_option_b1" autocomplete="off">
+                                    <input type="radio" name="add_tamanho_id" autocomplete="off">
                                     <span class="text-xl">P</span>
                                 </label>
                                 <label class="btn btn-default text-center">
-                                    <input type="radio" name="color_option" id="color_option_b1" autocomplete="off">
+                                    <input type="radio" name="add_tamanho_id" autocomplete="off">
                                     <span class="text-xl">PP</span>
                                 </label>
                                 <label class="btn btn-default text-center">
-                                    <input type="radio" name="color_option" id="color_option_b2" autocomplete="off">
+                                    <input type="radio" name="color_option" autocomplete="off">
                                     <span class="text-xl">M</span>
                                 </label>
                                 <label class="btn btn-default text-center">
-                                    <input type="radio" name="color_option" id="color_option_b3" autocomplete="off">
+                                    <input type="radio" name="color_option" autocomplete="off">
                                     <span class="text-xl">G</span>
                                 </label>
                                 <label class="btn btn-default text-center">
-                                    <input type="radio" name="color_option" id="color_option_b4" autocomplete="off">
+                                    <input type="radio" name="color_option" autocomplete="off">
                                     <span class="text-xl">GG</span>
                                 </label>
-                                <label class="btn btn-default text-center">
-                                    <input type="radio" name="color_option" id="color_option_b4" autocomplete="off">
-                                    <span class="text-xl">40</span>
-                                </label>
+                             
                                 <label class="btn btn-default text-center">
                                     <input type="radio" name="color_option" id="color_option_b4" autocomplete="off">
                                     <span class="text-xl">12</span>
@@ -218,11 +218,11 @@
         function buscaProdutos(){
             unidade_id = $("#unidade_id").val();            
 
+            $("#add_produto").empty().append('<option value="">Selecione...</option>');
+
             if (unidade_id) {            
                 url = '{{url('/produtos/listaporunidade/')}}' +'/'+unidade_id;
-
-                $("#produto").empty().append('<option value="">Selecione...</option>');
-
+               
                 $.ajax({
                     type: 'GET',   
                     url: url,              
@@ -230,7 +230,7 @@
                     async: true,
                     success: function (data) {
                         $.each(data,function(key,value) {
-                            $("#produto").append('<option value=' + value.id + '>' + value.produto+'</option>');
+                            $("#add_produto").append('<option value=' + value.id + '>' + value.produto+'</option>');
                         });
                     },
                     complete: function () {
@@ -243,6 +243,49 @@
         
                     }
                 }); 
+            }
+        }
+
+        function buscaTamanhos(){
+            produto_id = $("#add_produto").val();            
+
+            if (produto_id) {            
+                url = '{{url('/produtos/listaporunidade/')}}' +'/'+unidade_id;
+
+                $("#div_tamanhos").html(''); 
+                
+                $("#div_tamanhos").append(
+                    ' <label class="btn btn-default text-center">' + 
+                    '   <input type="radio" name="add_tamanho_id" autocomplete="off"> ' + 
+                    '     <span class="text-xl">P</span> ' + 
+                    ' </label> ');
+
+                    $("#div_tamanhos").append(
+                    ' <label class="btn btn-default text-center">' + 
+                    '   <input type="radio" name="add_tamanho_id" autocomplete="off"> ' + 
+                    '     <span class="text-xl">M</span> ' + 
+                    ' </label> ');
+
+/*                $.ajax({
+                    type: 'GET',   
+                    url: url,              
+                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                    async: true,
+                    success: function (data) {
+                        $.each(data,function(key,value) {
+                            $("#produto").append('<option value=' + value.id + '>' + value.produto+'</option>');
+                        });
+                    },
+                    complete: function () {
+
+                    },
+                    beforeSend: function () {
+
+                    },
+                    error: function (data) {
+
+                    }
+                }); */
             }
         }
     </script>

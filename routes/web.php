@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ModalidadeController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\UnidadeController;
@@ -65,11 +66,16 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/excluir/{unidade}', [UnidadeController::class,'excluirUnidade'])->name('excluir-unidade');
         Route::post('/salvar', [UnidadeController::class,'salvaUnidade'])->name('salvar-unidade');
     });
+
     Route::group(array('prefix' => 'pedidos'), function(){
         Route::get('/', [PedidoController::class,'index'])->name('pedidos');
         Route::get('/cadastro/{pedido?}', [PedidoController::class,'verPedido'])->name('verPedido');
         Route::post('/excluir', [PedidoController::class,'excluir'])->name('excluir');
         Route::post('/salvar', [PedidoController::class,'salvaUnidade'])->name('salvar-pedido');
+    });
+
+    Route::group(array('prefix' => 'modalidades'), function(){
+        Route::get('/list', [ModalidadeController::class,'listAllModalidades'])->name('lista-modalidade');
     });
 });
 
