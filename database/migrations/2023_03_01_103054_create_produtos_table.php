@@ -15,8 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('codigo',50);
             $table->string('produto',200);
-            $table->text('descricao')->nullable();            
+            $table->text('descricao')->nullable();          
             $table->decimal('valor',10,2);                    
+            $table->string('imagem1',200);                   
+            $table->string('imagem2',200);                   
+            $table->string('imagem3',200);                   
+            $table->string('imagem_medidas',200);                   
             $table->timestamps();
         });
     }

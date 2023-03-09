@@ -14,7 +14,12 @@ class Produto extends Model
         'codigo',
         'produto',
         'descricao',                     
-        'valor'       
+        'valor',       
+        'imagem1',      
+        'imagem2',      
+        'imagem3',       
+        'imagem_medida'       
+           
     ];
 
     public function tamanhos(): HasMany

@@ -60,13 +60,29 @@ class ProdutoController extends BaseController
 
         return view('produto.novo-produto',['dados' => $produto,'tamanhos_selecionados' =>$tamanhos_selecionados, 'lista_tamanhos' => $lista_tamanhos,'unidades_selecionadas' => $unidades_selecionadas, 'lista_unidades' => $lista_unidades]);
     }
-
+   
     public function salvarProduto(CadastraProdutoRequest $request)    
     {
+
+        //  File Upload
+        if($request->hasFile('imagem1')){
+            $filenameWithExt = $request->file('imagem1')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('imagem1')->getClientOriginalExtension();
+            // Filename to store
+            $nomeImagem = $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('imagem1')->storeAs('public/produtos', $nomeImagem);
+        } else {
+            $nomeImagem = 'noimage.png';
+        }  
+       
         $validatedProduto = $request->validated();
-
-        $returnProduto = $this->produtoService->salvaProduto($validatedProduto);    
-
+        //dd($validatedProduto);
+        $returnProduto = $this->produtoService->salvaProduto($validatedProduto); 
+        
         return $this->responseData($returnProduto,'/produtos/cadastro');     
     }
 
