@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Services\UnidadeService;
+use App\Http\Services\UsuarioService;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AuthController extends Controller
+class AuthController extends BaseController
 {
     public function login()
     {
@@ -33,28 +37,31 @@ class AuthController extends Controller
         Auth::logout();
  
         $request->session()->invalidate();
-     
-        $request->session()->regenerateToken();
-     
+        
         return redirect('/');
     }
     
 
     public function register()
     {
-        return view('auth.register');
+        $unidadeService = new UnidadeService();
+        $unidades = $unidadeService->getAllUnidades();
+
+        return view('auth.register',['unidades' => $unidades]);
     }
 
-    public function cadastrar(Request $request)
+
+    public function registra(RegisterRequest $request)
     {
-     /*   return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'role' => 2,
-            'ra' => $data['ra'],
-            'sexo' => $data['sexo'],
-            'password' => bcrypt($data['password'])
-        ]);*/
+        $validatedUser = $request->validated();
+
+        $validatedUser['tipo_usuario'] = 4;
+
+        $usuarioService = new UsuarioService();
+
+        $returnUsuario = $usuarioService->salvaUser($validatedUser); 
+
+        return $this->responseData($returnUsuario,'/login',false); 
     }
 
     public function recuperarSenha()

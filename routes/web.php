@@ -21,19 +21,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class,'index'])->name('home');
-
 
 Route::get('/login', [AuthController::class,'login'])->name('login');
 
 Route::post('/loga', [AuthController::class,'loga'])->name('loga');
-/*
+
 Route::get('/register', [AuthController::class,'register'])->name('register');
-*/
+
+Route::get('/logout', [AuthController::class,'logout'])->name('logout');
+
+Route::post('/registra', [AuthController::class,'registra'])->name('registra');
+
 Route::get('/recuperar-senha', [AuthController::class,'recuperarSenha'])->name('recuperar-senha');
 
 Route::middleware(['auth'])->group(function () {
-  
+      
+    Route::get('/', [HomeController::class,'index'])->name('home');
+    
+
     //TELA HOME ALUNO
     Route::group(array('prefix' => 'aluno'), function(){
         Route::get('/home', [AlunoController::class,'inicio'])->name('home-aluno');

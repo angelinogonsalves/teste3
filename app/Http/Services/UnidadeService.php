@@ -31,7 +31,7 @@ class UnidadeService {
 
     public function getAllUnidades(){
         
-        if (auth()->user()->tipo_usuario >=3) {
+        if ((auth()->check()) && (auth()->user()->tipo_usuario >=3)) {
             return Unidade::where('unidade_id',auth()->user()->unidade_id)->orderby('nome_fantasia')->get();  
         }   
         return Unidade::orderby('nome_fantasia')->get();                    

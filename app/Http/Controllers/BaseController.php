@@ -8,11 +8,13 @@ use Illuminate\Routing\Route;
 
 class BaseController extends Controller
 {
-    private function responseSuccess(array $response,string $route) : RedirectResponse {
+    private function responseSuccess(array $response,string $route,$addIDRota = true) : RedirectResponse {
         if ($route){        
             $url = $route;
-    
-            $url .= ($response['result']?->id ? '/'.$response['result']->id : '');
+
+            if (($addIDRota) && (isset($response['result']))) {
+                $url .= ($response['result']?->id ? '/'.$response['result']->id : '');
+            }               
              
             return redirect($url)->with('success', $response['message']);              
         } 
@@ -24,9 +26,9 @@ class BaseController extends Controller
         return redirect()->back()->withErrors($response['message']);          
     }   
 
-    public function responseData(array $response,string $route) : RedirectResponse  {      
+    public function responseData(array $response,string $route,$addIDRota = true) : RedirectResponse  {      
         if ($response["success"] === true){
-            return $this->responseSuccess($response,$route);
+            return $this->responseSuccess($response,$route,$addIDRota);
         }
         return $this->responseError($response);
     }

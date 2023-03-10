@@ -27,9 +27,26 @@
             <div class="card-body">
                 <p class="login-box-msg">Realizar cadastro..</p>
 
-                <form action="../../index.html" method="post">
+                @if (Session::has('success'))
+                    <div class="alert alert-success">
+                        {{ Session::get('success') }}
+                        @php
+                            Session::forget('success');
+                        @endphp
+                    </div>
+                @endif
+
+                @if ($errors)
+                    @foreach ($errors->all() as $error)
+                        <div class="alert alert-danger">
+                            {{ $error }}</div>
+                    @endforeach
+                @endif
+                
+                <form action="{{ url('registra') }}" method="post">                
+                    @csrf
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Nome Completo">
+                        <input type="text" name="nome" class="form-control" placeholder="Nome Completo" value="{{old('nome')}}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -37,7 +54,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" placeholder="R.A (Registro Academico)">
+                        <input type="number" name="ra" class="form-control" placeholder="R.A (Registro Academico)" value="{{old('ra')}}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -46,18 +63,18 @@
                     </div>
                     <div class="col-12 col-sm-12">
                         <div class="form-group">
-                            <label>Selecione sua unidade</label>
-                            <div class="select-purple">
-                                <select class="select" multiple="multiple" data-placeholder="selecione sua Unidade"
-                                    data-dropdown-css-class="select2-purple" style="width: 100%;">
-                                    <option>Positivo A</option>
-                                    <option>Positivo B</option>
-                                </select>
-                            </div>
+                            <label>Selecione sua unidade</label>                            
+                            <select class="form-control" name="unidade_id" data-placeholder="selecione sua Unidade" style="width: 100%;">
+                                <option value="">Selecione...</option>
+                                @forelse ($unidades as $u)
+                                    <option value="{{$u->id}}">{{$u->nome_fantasia}}</option>
+                                @empty                                    
+                                @endforelse                              
+                            </select>
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="email" name="email" class="form-control" placeholder="Email" value="{{old('email')}}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -65,7 +82,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Senha">
+                        <input type="password" name="password"  class="form-control" placeholder="Senha" value="{{old('password')}}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -73,24 +90,14 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Repetir senha">
+                        <input type="password" name="password_confirmation"  class="form-control" placeholder="Repetir senha" value="{{old('password_confirmation')}}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-                                <label for="agreeTerms">
-                                    Eu aceito os termos <a href="#">Termo</a>
-                                </label>
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                        <br>
+                    <div class="row">                                            
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
                         </div>

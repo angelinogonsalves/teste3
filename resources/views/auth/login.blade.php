@@ -24,7 +24,8 @@
             <div class="card-header text-center">
                 <a href="/login" class="h1"><b>Razza</b>PRO</a>
             </div>
-            <div class="card-body">
+            <div class="card-body">           
+
                 @if (Session::has('success'))
                     <div class="alert alert-success">
                         {{ Session::get('success') }}

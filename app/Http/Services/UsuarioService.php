@@ -19,7 +19,7 @@ class UsuarioService {
     public function salvaUser(array $userData) : array
     {        
         try {   
-            if ($userData['id']){
+            if (isset($userData['id']) && ($userData['id'])) {
                 $user = User::find($userData['id']);                
             } else {
                 $user = new User();                
