@@ -17,10 +17,8 @@ return new class extends Migration
             $table->string('produto',200);
             $table->text('descricao')->nullable();          
             $table->decimal('valor',10,2);                    
-            $table->string('imagem1',200);                   
-            $table->string('imagem2',200);                   
-            $table->string('imagem3',200);                   
-            $table->string('imagem_medidas',200);                   
+            $table->string('imagem1')->nullable();                   
+            $table->string('imagem_medidas')->nullable();                   
             $table->timestamps();
         });
     }

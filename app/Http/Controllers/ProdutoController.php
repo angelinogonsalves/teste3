@@ -63,7 +63,6 @@ class ProdutoController extends BaseController
    
     public function salvarProduto(CadastraProdutoRequest $request)    
     {
-
         //  File Upload
         if($request->hasFile('imagem1')){
             $filenameWithExt = $request->file('imagem1')->getClientOriginalName();
@@ -74,15 +73,28 @@ class ProdutoController extends BaseController
             // Filename to store
             $nomeImagem = $filename.'_'.time().'.'.$extension;
             // Upload Image
-            $path = $request->file('imagem1')->storeAs('public/produtos', $nomeImagem);
+            $request->file('imagem1')->storeAs('public/produtos', $nomeImagem);
         } else {
             $nomeImagem = 'noimage.png';
-        }  
-       
+        }
+      
+        if($request->hasFile('imgmedidas')){
+            $filenameWithExtMed = $request->file('imgmedidas')->getClientOriginalName();
+            // Get just filename
+            $filenameMed = pathinfo($filenameWithExtMed, PATHINFO_FILENAME);
+            // Get just ext
+            $extensionMed = $request->file('imgmedidas')->getClientOriginalExtension();
+            // Filename to store
+            $nomeImagemMedidas = $filenameMed.'_'.time().'.'.$extension;
+            // Upload Image
+            $request->file('imgmedidas')->storeAs('public/produtos', $nomeImagemMedidas);
+        } else {
+            $nomeImagemMedidas = 'noimagemedidas.png';
+        }
         $validatedProduto = $request->validated();
         //dd($validatedProduto);
-        $returnProduto = $this->produtoService->salvaProduto($validatedProduto); 
-        
+        $returnProduto = $this->produtoService->salvaProduto($validatedProduto, $nomeImagem, $nomeImagemMedidas); 
+        //dd($returnProduto);
         return $this->responseData($returnProduto,'/produtos/cadastro');     
     }
 

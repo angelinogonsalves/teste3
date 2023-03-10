@@ -56,7 +56,7 @@
                             <label>Valor Produto (R$)</label>
                             <input type="text" name="valor" id="valor_unitario" class="form-control"
                                 placeholder="Escreva valor 0,00"
-                                value="{{ number_format(old('valor', $dados->valor), 2, ',', '.') }}">
+                                value="{{ number_format($dados->valor ?? old('valor'), 2, ',', '.') }}">
                         </div>
                     </div>
                     <div class="col-sm-9">
@@ -75,50 +75,36 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12">
-                        <h3 class="timeline-header"><a href="#">Imagens</a> do Produto</h3>
+                    <div class="col-12 col-sm-4">
                         <div class="form-group">
-                            
-                            <div class="timeline-body">
-                                <label>
-                                    <span> <a class="btn btn-secondary">Add img 1
-                                            <i class="fas fa-desktop"></i></a>
-                                    </span>
-                                    <input type="file" id="" name="iamagm1"
-                                        style="display:none" class="custom-file-input">
-                                </label>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-12 col-sm-6">
-                        <div class="form-group">
-                            <div class="timeline-item">
-                                
-                                <div class="col-12 product-image-thumbs">
-                                    <div class="product-image-thumb active"><img src="{{ url("storage/produtos/{$dados->imagem1}") }}"
-                                        class="product-image-thumb"></div>
-                                    <div class="product-image-thumb"><img src="{{ url("storage/produtos/{$dados->imagem2}") }}"
-                                        class="product-image-thumb"></div>
-                                    <div class="product-image-thumb"><img src="{{ url("storage/produtos/{$dados->imagem3}") }}"
-                                        class="product-image-thumb"></div>
+                            <label for="exampleInputFile">Imagem do produto</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" name="imagem1" class="custom-file-input" id="">
+                                    <label class="custom-file-label" for="">Escolher arquivo </label>
+                                </div>
+                                <div class="input-group-append">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-12">
+                        <div class="form-group">
+                            <div class="" >
+                                <img class="rounded mx-auto d-block"
+                                    src="{{ url("storage/produtos/{$dados->imagem1}") }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-4">
                         <div class="form-group">
                             <label for="exampleInputFile">Imagem da de grade do produto</label>
                             <div class="input-group">
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="exampleInputFile">
-                                    <label class="custom-file-label" for="exampleInputFile">Escolher arquivo
-                                        de
-                                        img</label>
+                                    <input type="file" name="imgmedidas" class="custom-file-input" id="">
+                                    <label class="custom-file-label" for="">Escolher arquivo </label>
                                 </div>
                                 <div class="input-group-append">
-                                    <span class="input-group-text">Upload</span>
                                 </div>
                             </div>
                         </div>
@@ -126,10 +112,10 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <div class="timeline-item">
-                                <h3 class="timeline-header"><a href="#">Imagens</a> das medidas do
+                                <h3 class="timeline-header"><a href="#">Imagem</a> das medidas do
                                     produto</h3>
-                                <div class="timeline-body">
-                                    <img src="https://placehold.it/150x100" alt="...">
+                                <div class="">
+                                    <img  class="rounded mx-auto d-block" src="{{ url("storage/produtos/{$dados->imagem_medidas}") }}" alt="...">
                                 </div>
                             </div>
                         </div>

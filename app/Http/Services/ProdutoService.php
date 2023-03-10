@@ -8,7 +8,7 @@ use App\Models\Unidade;
 use Exception;
 
 class ProdutoService {
-    public function salvaProduto(array $produtoData) : array
+    public function salvaProduto(array $produtoData, $NomeImagem, $NomeImgMedidas) : array
     {        
         try {   
             if ($produtoData['id']){
@@ -16,16 +16,18 @@ class ProdutoService {
             } else {
                 $produto = new Produto();
             }
-
+            $produto->imagem1 = $NomeImagem;
+            $produto->imagem_medidas = $NomeImgMedidas;
+            //dd($produto);
             $produto->fill($produtoData);
             $produto->save();
 
             $produto_tamanho_service = new ProdutoTamanhoService();
             $produto_tamanho_service->AtualizaProdutosTamanhos($produto,$produtoData['tamanhos']);
-
+            
             $produto_unidade_service = new ProdutoUnidadeService();
             $produto_unidade_service->AtualizaProdutosUnidades($produto,$produtoData['unidades']);
-
+            
                                                    
             if ($produto){
                 return ["success" => true, "result" => $produto,"message" => "Produto salvo com sucesso"];     
@@ -33,7 +35,9 @@ class ProdutoService {
             return ["success" => false, "message" => "Não foi possível salvar o produto."];              
            
         } catch (Exception $e) {    
-            return ["success" => false, "message" => "Erro ao tentar salvar o Produto. " . $e->getMessage()];      
+    
+            return ["success" => false, "message" => "Erro ao tentar salvar o Produto. " . $e->getMessage()]; 
+
         }               
     }
    
