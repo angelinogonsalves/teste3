@@ -22,7 +22,7 @@ class Produto extends Model
            
     ];
 
-    public function tamanhos(): HasMany
+    public function produtoTamanhos(): HasMany
     {
         return $this->hasMany(ProdutosTamanhos::class);
     }

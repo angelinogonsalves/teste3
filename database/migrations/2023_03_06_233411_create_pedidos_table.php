@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Services\AlunoService;
+use App\Models\Unidade;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,6 +16,13 @@ return new class extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Unidade::class);            
+            $table->foreignIdFor(User::class)->nullable();
+            $table->string('nome_aluno',100)->nullable();              
+            $table->string('ra_aluno',50)->nullable();              
+            $table->integer('status');              
+            $table->decimal('valor',10,2); 
+            $table->string('id_pagseguro',300)->nullable(); 
             $table->timestamps();
         });
     }

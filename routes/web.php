@@ -77,6 +77,10 @@ Route::middleware(['auth'])->group(function () {
     Route::group(array('prefix' => 'modalidades'), function(){
         Route::get('/list', [ModalidadeController::class,'listAllModalidades'])->name('lista-modalidade');
     });
+
+    Route::group(array('prefix' => 'tamanhos'), function(){
+        Route::get('/listaporproduto/{produto}', [TamanhoController::class,'listPorProduto'])->name('lista-tamanho-produto');
+    });
 });
 
 

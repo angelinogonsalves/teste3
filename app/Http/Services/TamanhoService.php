@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+use App\Models\Produto;
 use App\Models\Tamanho;
 use Exception;
 
@@ -11,5 +12,8 @@ class TamanhoService {
         
         return Tamanho::orderby('id')->get();                    
         
+    } 
+    public function listPorProduto(Produto $produto){        
+        return $produto->produtoTamanhos()->get();                    
     } 
 }

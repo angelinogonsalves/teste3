@@ -2,10 +2,10 @@
 
 namespace App\Http\Services;
 
-use App\Models\Unidade;
+use App\Models\Pedido;
 use Exception;
 
-class UnidadeService {
+class PedidoService {
     public function salvaUnidade(array $unidadeData) : array
     {        
         try {   
@@ -28,16 +28,11 @@ class UnidadeService {
         }               
     }
 
-    public function getAllUnidades(){
-        return Unidade::orderby('nome_fantasia')->get();            
+    public function getAllPedidos(){
+        return Pedido::get();            
     }
 
-    public function excluiUnidade(Unidade $unidade){
-        try {
-            $unidade->delete();              
-            return ["success" => true, "result" => null,"message" => "Unidade excluida com sucesso"];                  
-        } catch (Exception $e) {    
-            return ["success" => false, "message" => "Erro ao tentar excluir a Unidade. " . $e->getMessage()];                      
-        }
-    }
+    public function getUltimosPedidos($qtde){
+        return Pedido::orderBy('id', 'desc')->take($qtde)->get();        
+    }    
 }
