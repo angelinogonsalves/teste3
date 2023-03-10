@@ -32,4 +32,9 @@ class PedidoController extends Controller
         
         return view('pedido.novo-pedido',['dados' => $pedido,'lista_unidades' => $lista_unidades,'lista_modalidades' => $lista_modalidades]);
     }
+    // só para ver se está chegando
+    public function salvarPedido(HttpRequest $request)
+    {
+        dd($request->all());
+    }
 }

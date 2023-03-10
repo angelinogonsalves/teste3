@@ -14,12 +14,15 @@
                         <div class="form-group">
                             <label>Selecione a unidade *</label>
                             <div class="select-purple">
-                            <select name="unidade_id" id="unidade_id" class="form-control" data-placeholder="Selecione as unidades" onchange="buscaProdutos()">                                   
-                                <option value="">Selecione...</option>
-                                @forelse ($lista_unidades as $u)                                  
-                                    <option value="{{$u->id}}" @if ($u->id == $dados->unidade_id) ? 'selected=""' @endif>{{$u->nome_fantasia}}</option>                                                                                                    
-                                @empty
-                                @endforelse                                
+                                <select name="unidade_id" id="unidade_id" class="form-control"
+                                    data-placeholder="Selecione as unidades" onchange="buscaProdutos()">
+                                    <option value="">Selecione...</option>
+                                    @forelse ($lista_unidades as $u)
+                                        <option value="{{ $u->id }}"
+                                            @if ($u->id == $dados->unidade_id) ? 'selected=""' @endif>{{ $u->nome_fantasia }}
+                                        </option>
+                                    @empty
+                                    @endforelse
                                 </select>
                             </div>
                         </div>
@@ -27,13 +30,13 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label>Nome Completo do Aluno (Atleta)*</label>
-                            <input type="text" name="nome_aluno" class="form-control" placeholder="informe..">
+                            <input type="text" name="nome_aluno" id="nome_aluno" class="form-control" placeholder="informe..">
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>R.A (Registro academico)*</label>
-                            <input type="text" name="nome_aluno" class="form-control" placeholder="Informe..">
+                            <input type="text" name="registro_academico" id="registro_academico" class="form-control" placeholder="Informe..">
                         </div>
                     </div>
                     <div class="col-12 col-sm-12">
@@ -46,7 +49,7 @@
                             <div class="select-purple">
                                 <select name="add_produto" id="add_produto" class="form-control" onchange="buscaTamanhos()";
                                     data-placeholder="Selecione unidades"style="width: 100%;">
-                                    <option value="">Selecione...</option>                                    
+                                    <option value="">Selecione...</option>
                                 </select>
                             </div>
                         </div>
@@ -55,12 +58,12 @@
                         <div class="form-group">
                             <label>Selecione Modalidade (se houver)</label>
                             <div class="select-purple">
-                                <select name="modalidade_id" class="form-control" data-placeholder="Selecione Modalidade">
+                                <select name="modalidade_id" id="modalidade_id" class="form-control" data-placeholder="Selecione Modalidade">
                                     <option value="">Selecione...</option>
-                                    @forelse ($lista_modalidades as $m)                                  
-                                        <option value="{{$m->id}}">{{$m->modalidade}}</option>                                                                                                    
+                                    @forelse ($lista_modalidades as $m)
+                                        <option value="{{ $m->id }}">{{ $m->modalidade }}</option>
                                     @empty
-                                    @endforelse                                                               
+                                    @endforelse
                                 </select>
                             </div>
                         </div>
@@ -84,30 +87,28 @@
                     <div class="col-12 col-sm-5">
                         <div class="form-group">
                             <div id="div_tamanhos" class="btn-group" data-toggle="buttons">
-
                                 <label class="btn btn-default text-center">
-                                    <input type="radio" name="add_tamanho_id" autocomplete="off">
+                                    <input type="radio" name="add_tamanho_id" value="P" autocomplete="off">
                                     <span class="text-xl">P</span>
                                 </label>
                                 <label class="btn btn-default text-center">
-                                    <input type="radio" name="add_tamanho_id" autocomplete="off">
+                                    <input type="radio" name="add_tamanho_id" value="PP" autocomplete="off">
                                     <span class="text-xl">PP</span>
                                 </label>
                                 <label class="btn btn-default text-center">
-                                    <input type="radio" name="color_option" autocomplete="off">
+                                    <input type="radio" name="add_tamanho_id" value="M" autocomplete="off">
                                     <span class="text-xl">M</span>
                                 </label>
                                 <label class="btn btn-default text-center">
-                                    <input type="radio" name="color_option" autocomplete="off">
+                                    <input type="radio" name="add_tamanho_id" value="G" autocomplete="off">
                                     <span class="text-xl">G</span>
                                 </label>
                                 <label class="btn btn-default text-center">
-                                    <input type="radio" name="color_option" autocomplete="off">
+                                    <input type="radio" name="add_tamanho_id" value="GG" autocomplete="off">
                                     <span class="text-xl">GG</span>
                                 </label>
-                             
                                 <label class="btn btn-default text-center">
-                                    <input type="radio" name="color_option" id="color_option_b4" autocomplete="off">
+                                    <input type="radio" name="add_tamanho_id" value="12" autocomplete="off">
                                     <span class="text-xl">12</span>
                                 </label>
                             </div>
@@ -116,21 +117,21 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Nome Personalizado (se houver)</label>
-                            <input type="text" name="nome_personalizado" class="form-control" placeholder="Informe..">
+                            <input type="text" name="nome_personalizado" id="nome_personalizado" class="form-control" placeholder="Informe..">
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Numero Personalizado (se houver)</label>
-                            <input type="text" name="nome_personalizado" class="form-control" placeholder="Informe..">
+                            <input type="text" name="numero_personalizado" id="numero_personalizado" class="form-control" placeholder="Informe..">
                         </div>
                     </div>
                 </div>
                 <div class="card-footer text-center">
-                    <div class="btn btn-primary btn-sm">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="adicionarItem();">
                         <i class="fas fa-cart-plus fa-lg mr-2"></i>
                         Adcionar item
-                    </div>
+                    </button>
                 </div>
             </form>
 
@@ -140,56 +141,24 @@
                     <div class="card">
                         <!-- /.card-header  usar modelo table que baixa em CSV-->
                         <div class="card-body table-responsive p-0">
-                            <table id="tabela_itens_produto" class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Produto</th>
-                                        <th>Quantidade</th>
-                                        <th>Valor Item</th>
-                                        <th>Tamanho</th>
-                                        <th>Modalidade</th>
-                                        <th>Nome Pers.</th>
-                                        <th>Nº Pers.</th>
-                                        <th>Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><a href="destalhes">Calção Feminino tipo liso</a></td>
-                                        <td><input class="form-control-sm" type="number" value="" min="0"
-                                                max="10" step="0" /></td>
-                                        <td> 50,99 </td>
-                                        <td>M</td>
-                                        <td>Futebol</td>
-                                        <td>Nome personalizado A </td>
-                                        <td>2</td>
-                                        <td> <a href="#" class="btn-sm">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                            <a href="#" class="btn-sm">
-                                                <i class="fas fa-search"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="destalhes">Camiseta uniforme positivos modelo x</a></td>
-                                        <td><input class="form-control-sm" type="number" value="" min="0"
-                                                max="10" step="0" /></td>
-                                        <td> 100,00 </td>
-                                        <td>M</td>
-                                        <td>Futebol</td>
-                                        <td>Nome personalizado A </td>
-                                        <td>2</td>
-                                        <td> <a href="#" class="btn-sm">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                            <a href="#" class="btn-sm">
-                                                <i class="fas fa-search"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        
+                                <table id="tabela_itens_produto" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Produto</th>
+                                            <th>Quantidade</th>
+                                            <th>Valor Item</th>
+                                            <th>Tamanho</th>
+                                            <th>Modalidade</th>
+                                            <th>Nome Pers.</th>
+                                            <th>Nº Pers.</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyitens_produto">
+                                        
+                                    </tbody>
+                                </table>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -200,14 +169,14 @@
                         <table class="table">
                             <tr>
                                 <th style="width:50%">Total de produtos:</th>
-                                <td><strong>R$ 250.30</strong></td>
+                                <td><strong id="totalProdutos"></strong></td>
                             </tr>
                         </table>
                     </div>
                 </div>
             </div>
             <div class="card-footer text-center">
-                <button type="button" class="btn btn-success float-center"><i class="far fa-credit-card"></i>
+                <button onclick="salvar();" type="button" class="btn btn-success float-center" id="fechar-pedido"><i class="far fa-credit-card"></i>
                     Fechar Pedido
                 </button>
             </div>
@@ -215,78 +184,202 @@
     </div>
 
     <script>
-        function buscaProdutos(){
-            unidade_id = $("#unidade_id").val();            
+        function buscaProdutos() {
+            unidade_id = $("#unidade_id").val();
 
             $("#add_produto").empty().append('<option value="">Selecione...</option>');
 
-            if (unidade_id) {            
-                url = '{{url('/produtos/listaporunidade/')}}' +'/'+unidade_id;
-               
+            if (unidade_id) {
+                url = '{{ url('/produtos/listaporunidade/') }}' + '/' + unidade_id;
+
                 $.ajax({
-                    type: 'GET',   
-                    url: url,              
+                    type: 'GET',
+                    url: url,
                     contentType: "application/x-www-form-urlencoded; charset=UTF-8",
                     async: true,
-                    success: function (data) {
-                        $.each(data,function(key,value) {
-                            $("#add_produto").append('<option value=' + value.id + '>' + value.produto+'</option>');
+                    success: function(data) {
+                        $.each(data, function(key, value) {
+                            $("#add_produto").append('<option valor='+ value.valor +' value=' + value.id + '>' + value.produto +
+                                '</option>');
                         });
                     },
-                    complete: function () {
-        
+
+                    complete: function() {
+
                     },
-                    beforeSend: function () {
-        
+                    beforeSend: function() {
+
                     },
-                    error: function (data) {
-        
+                    error: function(data) {
+
                     }
-                }); 
+                });
             }
         }
 
-        function buscaTamanhos(){
-            produto_id = $("#add_produto").val();            
+        function buscaTamanhos() {
+            produto_id = $("#add_produto").val();
 
-            if (produto_id) {            
-                url = '{{url('/produtos/listaporunidade/')}}' +'/'+unidade_id;
+            if (produto_id) {
+                url = '{{ url('/produtos/listaporunidade/') }}' + '/' + unidade_id;
 
-                $("#div_tamanhos").html(''); 
-                
+                $("#div_tamanhos").html('');
+
                 $("#div_tamanhos").append(
-                    ' <label class="btn btn-default text-center">' + 
-                    '   <input type="radio" name="add_tamanho_id" autocomplete="off"> ' + 
-                    '     <span class="text-xl">P</span> ' + 
+                    ' <label class="btn btn-default text-center">' +
+                    '   <input type="radio" name="add_tamanho_id" value="P" autocomplete="off"> ' +
+                    '     <span class="text-xl">P</span> ' +
                     ' </label> ');
 
-                    $("#div_tamanhos").append(
-                    ' <label class="btn btn-default text-center">' + 
-                    '   <input type="radio" name="add_tamanho_id" autocomplete="off"> ' + 
-                    '     <span class="text-xl">M</span> ' + 
+                $("#div_tamanhos").append(
+                    ' <label class="btn btn-default text-center">' +
+                    '   <input type="radio" name="add_tamanho_id" value="M" autocomplete="off"> ' +
+                    '     <span class="text-xl">M</span> ' +
                     ' </label> ');
 
-/*                $.ajax({
-                    type: 'GET',   
-                    url: url,              
-                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                    async: true,
-                    success: function (data) {
-                        $.each(data,function(key,value) {
-                            $("#produto").append('<option value=' + value.id + '>' + value.produto+'</option>');
-                        });
-                    },
-                    complete: function () {
+                /*                $.ajax({
+                                    type: 'GET',   
+                                    url: url,              
+                                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                                    async: true,
+                                    success: function (data) {
+                                        $.each(data,function(key,value) {
+                                            $("#produto").append('<option value=' + value.id + '>' + value.produto+'</option>');
+                                        });
+                                    },
+                                    complete: function () {
 
-                    },
-                    beforeSend: function () {
+                                    },
+                                    beforeSend: function () {
 
-                    },
-                    error: function (data) {
+                                    },
+                                    error: function (data) {
 
-                    }
-                }); */
+                                    }
+                                }); */
             }
+        }
+        
+        function adicionarItem() {
+            let unidade_id           = $('#unidade_id').val();
+            let nome_aluno           = $('#nome_aluno').val();
+            let registro_academico   = $('#registro_academico').val();
+            let produto_id           = $('#add_produto').val();
+            let nome_produto         = $("#add_produto option:selected").text();
+            let valor_produto        = $("#add_produto option:selected").attr('valor');
+            let modalidade_id        = $('#modalidade_id').val();
+            let nome_modalidade      = $("#modalidade_id option:selected").text();
+            let nome_personalizado   = $('#nome_personalizado').val();
+            let numero_personalizado = $('#numero_personalizado').val();
+            let tamanho              = false;
+
+            if (document.querySelector('input[name="add_tamanho_id"]:checked')) {
+                tamanho = document.querySelector('input[name="add_tamanho_id"]:checked').value;
+            }
+
+            let formatter     = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', });
+            valor = formatter.format(valor_produto).substring(3);
+
+            if (unidade_id && nome_aluno && registro_academico && modalidade_id && modalidade_id && tamanho && nome_personalizado && numero_personalizado) {
+                $("#tbodyitens_produto").append("<tr class='itens_produtos' valor_produto="+valor_produto+" registro_academico="+registro_academico+" nome_aluno="+nome_aluno+" unidade_id="+unidade_id+" produto_id="+produto_id+" tamanho="+tamanho+" modalidade_id="+modalidade_id+" nome_personalizado="+nome_personalizado+" numero_personalizado="+numero_personalizado+">"+
+                        "<td>"+nome_produto+"</td>"+
+                        "<td><input class='form-control-sm quantidade' required type='number' value='' min='0'max='10' step='0'/></td>"+
+                        "<td>"+valor+"</td>"+
+                        "<td>"+tamanho+"</td>"+
+                        "<td>"+nome_modalidade+"</td>"+
+                        "<td>"+nome_personalizado+"</td>"+
+                        "<td>"+numero_personalizado+"</td>"+
+                        "<td> <button class='btn btn-sm btn-default excluir' type='button' title='Remover'> <span class='text-danger fas fa-trash-alt'></span> </button></td>"+
+                    "</tr>"
+                );
+
+                excluir();
+                calcularTotal();
+            } else {
+                alert("Preencha todos os campos");
+            }
+        }
+
+        function excluir() {
+            $('.excluir').on('click', function () {
+                $(this).parent().parent().remove();
+
+                calcularTotal();
+            });
+        }
+
+        function calcularTotal() {
+            let total = 0;
+
+            if ($('.itens_produtos').length > 0) {
+                $.each($('.itens_produtos'), function (key, value) {
+                    let valor = $(this).attr('valor_produto')
+
+                    total += parseFloat( valor );
+                });
+
+                let formatter = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', });
+                total         = formatter.format(total).substring(3);
+            }
+            
+            $('#totalProdutos').text('R$ ' + total);
+        }
+
+        function salvar() {
+            let produtos = [];
+
+            if (0 == $('.itens_produtos').length ) {
+                alert('Adicione ao menos um produto');
+
+                return;
+            }
+
+            $.each($('.itens_produtos'), function (key, value) {
+                let unidade_id              = $(this).attr('unidade_id')
+                let nome_aluno              = $(this).attr('nome_aluno')
+                let registro_academico      = $(this).attr('registro_academico')
+                let produto_id              = $(this).attr('produto_id')
+                let modalidade_id           = $(this).attr('modalidade_id');
+                let tamanho                 = $(this).attr('tamanho');
+                let nome_personalizado      = $(this).attr('nome_personalizado');
+                let numero_personalizado    = $(this).attr('numero_personalizado');
+                let quantidade              = $(this).find('.quantidade').val();
+
+                // Verifica se foi informado uma quantidade.
+                if (quantidade == 0 || !quantidade) {
+                    produtos = [];
+
+                    return false;
+                }
+
+                produtos.push({produto_id, quantidade, tamanho, modalidade_id, nome_personalizado, numero_personalizado});
+            });
+
+            if (0 == produtos.length) {
+                alert('Informe uma quantidade para o produto');
+                return;
+            }
+
+            urlSalvar = '{{ url('/pedidos/salvar/') }}';
+
+            $.ajax({
+                url: urlSalvar,
+                type: 'post',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    produtos
+                },
+                success: function (data) {
+                    if (data == 'success') {
+                        window.location.href = "../pedidos";
+                    } else {
+                        alert('Erro ao tentar salvar')
+                    }
+                },
+                error: function (request, status, error) {
+                    alert('Erro ao tentar salvar')
+                }
+            });
         }
     </script>
 @endsection

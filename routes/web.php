@@ -76,7 +76,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [PedidoController::class,'index'])->name('pedidos');
         Route::get('/cadastro/{pedido?}', [PedidoController::class,'verPedido'])->name('verPedido');
         Route::post('/excluir', [PedidoController::class,'excluir'])->name('excluir');
-        Route::post('/salvar', [PedidoController::class,'salvaUnidade'])->name('salvar-pedido');
+        //add salvar pedido
+        Route::post('/salvar', [PedidoController::class,'salvarPedido'])->name('salvar-pedido');
     });
 
     Route::group(array('prefix' => 'modalidades'), function(){
