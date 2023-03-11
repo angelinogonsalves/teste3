@@ -78,6 +78,10 @@ class PedidoService {
     }
 
     public function getUltimosPedidos($qtde){
+        if ((auth()->check()) && (auth()->user()->tipo_usuario ==4)) {
+            return Pedido::where('user_id',auth()->user()->id)->orderBy('id', 'desc')->take($qtde)->get();        
+        }
+
         return Pedido::orderBy('id', 'desc')->take($qtde)->get();        
     }    
 

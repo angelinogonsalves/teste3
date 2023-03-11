@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('status');              
             $table->decimal('valor',10,2); 
             $table->string('id_pagseguro',300)->nullable(); 
+            $table->string('cod_referencia',300)->nullable(); 
             $table->timestamps();
         });
     }

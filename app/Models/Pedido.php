@@ -18,6 +18,7 @@ class Pedido extends Model
         'status',
         'valor',
         'id_pagseguro',
+        'cod_referencia',
         'total'
     ];
 

@@ -4,6 +4,7 @@ use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ModalidadeController;
+use App\Http\Controllers\PagSeguroController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\UnidadeController;
@@ -78,6 +79,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/excluir', [PedidoController::class,'excluir'])->name('excluir');
         //add salvar pedido
         Route::post('/salvar', [PedidoController::class,'salvarPedido'])->name('salvar-pedido');
+        Route::get('/pagseguro/{pedido}',[PagSeguroController::class,'pagseguro']);
     });
 
     Route::group(array('prefix' => 'modalidades'), function(){
