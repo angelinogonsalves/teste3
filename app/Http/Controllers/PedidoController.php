@@ -38,7 +38,7 @@ class PedidoController extends Controller
     // só para ver se está chegando
     public function salvarPedido(CadastraPedidoRequest $request)
     {        
-        $validated_Pedido = $request->validated();    
+        $validated_Pedido = $request->validated();      
         return $this->pedidoService->salvaPedido($validated_Pedido);        
     }
 }

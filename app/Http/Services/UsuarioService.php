@@ -30,6 +30,8 @@ class UsuarioService {
             $user->password = $this->trataPassword($userData,$user);
 
             $user->save();
+
+            $this->checaUsuarioPedido($user);
                                        
             if ($user){
                 return ["success" => true, "result" => $user,"message" => "Usuário salvo com sucesso"];     
@@ -39,6 +41,24 @@ class UsuarioService {
         } catch (Exception $e) {    
             return ["success" => false, "message" => "Erro ao tentar cadastrar o Usuário. " . $e->getMessage()];      
         }               
+    }
+
+    private function checaUsuarioPedido(User $user){
+        if ($user->tipo_usuario == '4') { // aluno
+            $pedidoService = new PedidoService();
+            $pedidos = $pedidoService->getPedidosPorRa($user->ra);
+
+            if ($pedidos){
+                foreach($pedidos as $p){
+                    $p->user_id = $user->id;
+                    $p->save();                    
+                }
+            }            
+        }               
+    }
+
+    public function getUsuarioporRA($ra){
+        return User::where('ra',$ra)->first();
     }
 
     public function getAllUsuarios(){

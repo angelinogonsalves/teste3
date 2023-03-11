@@ -27,7 +27,9 @@ class PedidoService {
 
             if($total > 0) {  
                 $pedido->valor = $total;
-                $pedido->save();                                                  
+                $pedido->save();                                
+                
+                $this->atualizaUsuarioPedido($pedido);
                 return ["success" => true, "result" => $pedido,"message" => "Pedido salvo com sucesso"];                     
             }
             return ["success" => false, "message" => "Não foi possível cadastrar o Pedido."];              
@@ -67,6 +69,10 @@ class PedidoService {
         }   
     }
 
+    public function getPedidosPorRa($ra){
+        return Pedido::where('ra_aluno',$ra)->get();
+    }
+
     public function getAllPedidos(){
         return Pedido::get();            
     }
@@ -74,4 +80,13 @@ class PedidoService {
     public function getUltimosPedidos($qtde){
         return Pedido::orderBy('id', 'desc')->take($qtde)->get();        
     }    
+
+    public function atualizaUsuarioPedido(Pedido $pedido){       
+        if (!$pedido->user_id) {
+            $userService = new UsuarioService();
+            $usuario = $userService->getUsuarioporRA($pedido->ra_aluno);
+            $pedido->user_id = $usuario->id;
+            $pedido->save();
+        }        
+    }
 }

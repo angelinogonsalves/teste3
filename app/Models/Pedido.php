@@ -13,6 +13,7 @@ class Pedido extends Model
     protected $fillable = [
         'unidade_id',
         'user_id',
+        'ra_aluno',
         'nome_aluno',
         'status',
         'valor',
