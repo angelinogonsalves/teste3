@@ -9,7 +9,7 @@
         <div class="card-body">
             <form>
                 <div class="row">
-
+                    <input type="hidden" name="id" id="id" value="{{old('id', $dados->id)}}">
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label>Selecione a unidade *</label>
@@ -36,7 +36,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>R.A (Registro academico)*</label>
-                            <input type="text" name="registro_academico" id="registro_academico" class="form-control" placeholder="Informe..">
+                            <input type="text" name="ra_aluno" id="ra_aluno" class="form-control" placeholder="Informe..">
                         </div>
                     </div>
                     <div class="col-12 col-sm-12">
@@ -227,13 +227,13 @@
 
                 $("#div_tamanhos").append(
                     ' <label class="btn btn-default text-center">' +
-                    '   <input type="radio" name="add_tamanho_id" value="P" autocomplete="off"> ' +
+                    '   <input type="radio" name="add_tamanho_id" value="1" autocomplete="off"> ' +
                     '     <span class="text-xl">P</span> ' +
                     ' </label> ');
 
                 $("#div_tamanhos").append(
                     ' <label class="btn btn-default text-center">' +
-                    '   <input type="radio" name="add_tamanho_id" value="M" autocomplete="off"> ' +
+                    '   <input type="radio" name="add_tamanho_id" value="2" autocomplete="off"> ' +
                     '     <span class="text-xl">M</span> ' +
                     ' </label> ');
 
@@ -263,7 +263,7 @@
         function adicionarItem() {
             let unidade_id           = $('#unidade_id').val();
             let nome_aluno           = $('#nome_aluno').val();
-            let registro_academico   = $('#registro_academico').val();
+            let ra_aluno            = $('#ra_aluno').val();
             let produto_id           = $('#add_produto').val();
             let nome_produto         = $("#add_produto option:selected").text();
             let valor_produto        = $("#add_produto option:selected").attr('valor');
@@ -271,21 +271,22 @@
             let nome_modalidade      = $("#modalidade_id option:selected").text();
             let nome_personalizado   = $('#nome_personalizado').val();
             let numero_personalizado = $('#numero_personalizado').val();
-            let tamanho              = false;
+            let tamanho_id           = false;            
+
 
             if (document.querySelector('input[name="add_tamanho_id"]:checked')) {
-                tamanho = document.querySelector('input[name="add_tamanho_id"]:checked').value;
+                tamanho_id = document.querySelector('input[name="add_tamanho_id"]:checked').value;                
             }
 
             let formatter     = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', });
             valor = formatter.format(valor_produto).substring(3);
 
-            if (unidade_id && nome_aluno && registro_academico && modalidade_id && modalidade_id && tamanho && nome_personalizado && numero_personalizado) {
-                $("#tbodyitens_produto").append("<tr class='itens_produtos' valor_produto="+valor_produto+" registro_academico="+registro_academico+" nome_aluno="+nome_aluno+" unidade_id="+unidade_id+" produto_id="+produto_id+" tamanho="+tamanho+" modalidade_id="+modalidade_id+" nome_personalizado="+nome_personalizado+" numero_personalizado="+numero_personalizado+">"+
+            if (unidade_id && nome_aluno && ra_aluno && modalidade_id && modalidade_id && tamanho_id && nome_personalizado && numero_personalizado) {
+                $("#tbodyitens_produto").append("<tr class='itens_produtos' valor_produto="+valor_produto+" ra_aluno="+ra_aluno+" nome_aluno="+nome_aluno+" unidade_id="+unidade_id+" produto_id="+produto_id+" tamanho_id="+tamanho_id+" modalidade_id="+modalidade_id+" nome_personalizado="+nome_personalizado+" numero_personalizado="+numero_personalizado+">"+
                         "<td>"+nome_produto+"</td>"+
                         "<td><input class='form-control-sm quantidade' required type='number' value='' min='0'max='10' step='0'/></td>"+
                         "<td>"+valor+"</td>"+
-                        "<td>"+tamanho+"</td>"+
+                        "<td>"+tamanho_id+"</td>"+
                         "<td>"+nome_modalidade+"</td>"+
                         "<td>"+nome_personalizado+"</td>"+
                         "<td>"+numero_personalizado+"</td>"+
@@ -334,13 +335,16 @@
                 return;
             }
 
+            let unidade_id = $('#unidade_id').val();
+            let nome_aluno = $('#nome_aluno').val();
+            let ra_aluno = $('#ra_aluno').val();   
+            let id = $('#id').val();               
+
             $.each($('.itens_produtos'), function (key, value) {
-                let unidade_id              = $(this).attr('unidade_id')
-                let nome_aluno              = $(this).attr('nome_aluno')
-                let registro_academico      = $(this).attr('registro_academico')
+               
                 let produto_id              = $(this).attr('produto_id')
                 let modalidade_id           = $(this).attr('modalidade_id');
-                let tamanho                 = $(this).attr('tamanho');
+                let tamanho_id              = 1; // só para salvar, depois arrumar o front
                 let nome_personalizado      = $(this).attr('nome_personalizado');
                 let numero_personalizado    = $(this).attr('numero_personalizado');
                 let quantidade              = $(this).find('.quantidade').val();
@@ -351,8 +355,10 @@
 
                     return false;
                 }
+                console.log('nome_personalizado',nome_personalizado);
+                console.log('tamanho_id',tamanho_id);
 
-                produtos.push({produto_id, quantidade, tamanho, modalidade_id, nome_personalizado, numero_personalizado});
+                produtos.push({produto_id, quantidade, tamanho_id, modalidade_id, nome_personalizado, numero_personalizado});
             });
 
             if (0 == produtos.length) {
@@ -362,18 +368,30 @@
 
             urlSalvar = '{{ url('/pedidos/salvar/') }}';
 
+            console.log('nome_personalizado',nome_personalizado);
+            console.log('unidade_id',unidade_id);
+            console.log('nome_aluno',nome_aluno);
+            console.log('ra_aluno',ra_aluno);
+            console.log('produtos',produtos);
+
             $.ajax({
                 url: urlSalvar,
                 type: 'post',
                 data: {
                     _token: "{{ csrf_token() }}",
+                    id,
+                    unidade_id,
+                    nome_aluno,
+                    ra_aluno,                                   
                     produtos
                 },
                 success: function (data) {
-                    if (data == 'success') {
+                    console.log(data);
+                    if (data.success) {
+                        alert('Pedido Realizado com sucesso');
                         window.location.href = "../pedidos";
                     } else {
-                        alert('Erro ao tentar salvar')
+                        alert('Falha ao realizado Pedido');
                     }
                 },
                 error: function (request, status, error) {

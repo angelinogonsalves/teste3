@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CadastraPedidoRequest;
 use App\Http\Services\ModalidadeService;
 use App\Http\Services\PedidoService;
 use App\Http\Services\UnidadeService;
 use App\Models\Pedido;
+use Illuminate\Http\Request;
 
 class PedidoController extends Controller
 {
@@ -32,9 +34,11 @@ class PedidoController extends Controller
         
         return view('pedido.novo-pedido',['dados' => $pedido,'lista_unidades' => $lista_unidades,'lista_modalidades' => $lista_modalidades]);
     }
+    
     // só para ver se está chegando
-    public function salvarPedido(HttpRequest $request)
-    {
-        dd($request->all());
+    public function salvarPedido(CadastraPedidoRequest $request)
+    {        
+        $validated_Pedido = $request->validated();    
+        return $this->pedidoService->salvaPedido($validated_Pedido);        
     }
 }

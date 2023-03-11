@@ -57,4 +57,8 @@ class ProdutoService {
     public function getProdutosPorUnidade(Unidade $unidade){         
         return Produto::orderby('produto')->get();
     }
+
+    public function getProdutoDataById($id) {
+        return Produto::find($id);
+    }
 }
