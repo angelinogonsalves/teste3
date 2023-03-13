@@ -35,9 +35,9 @@ class PagSeguroController extends Controller
         $msg = '';      
       // depois mudar pra pegar do banco
         $ambiente = 'H';
-        $pagseguro_token = '1234567';
-        $pagseguro_email = 'mail@user.com';
-        $email_comprador_teste = 'mail@comprador.com';
+        $pagseguro_token = 'A4E6E0AFA50F4C6F9C7BB4D18667F887';
+        $pagseguro_email = 'cooperanet.br@gmail.com';
+        $email_comprador_teste = 'c46643784810296169657@sandbox.pagseguro.com.br';
 
         if ($pedido)
         {

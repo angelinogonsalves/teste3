@@ -40,7 +40,7 @@
                             <label>Tamanhos disponiveis</label>
                             <div class="select2-purple">
                                 <select name="tamanhos[]" class="selectpicker bs-select form-control" multiple=""
-                                    data-live-search="true" data-placeholder="Selecione tamanhos">
+                                    data-live-search="true" data-placeholder="Selecione ">
                                     @forelse ($lista_tamanhos as $t)
                                         <option value="{{ $t->id }}"
                                             {{ in_array($t->id, $tamanhos_selecionados) ? 'selected=""' : '' }}>
@@ -64,7 +64,7 @@
                             <label>Produtos disponiveis nas seguintes unidades</label>
                             <div class="select2-purple">
                                 <select name="unidades[]" class="selectpicker bs-select form-control" multiple=""
-                                    data-live-search="true" data-placeholder="Selecione as unidades">
+                                    data-live-search="true" data-placeholder="Selecione as  ">
                                     @forelse ($lista_unidades as $u)
                                         <option value="{{ $u->id }}"
                                             {{ in_array($u->id, $unidades_selecionadas) ? 'selected=""' : '' }}>
@@ -80,7 +80,7 @@
                             <label for="exampleInputFile">Imagem do produto</label>
                             <div class="input-group">
                                 <div class="custom-file">
-                                    <input type="file" name="imagem1" class="custom-file-input" id="">
+                                    <input type="file" value="{{ old('imagem1', $dados->imagem1) }}" name="imagem1" class="custom-file-input" id="">
                                     <label class="custom-file-label" for="">Escolher arquivo </label>
                                 </div>
                                 <div class="input-group-append">
@@ -101,7 +101,7 @@
                             <label for="exampleInputFile">Imagem da de grade do produto</label>
                             <div class="input-group">
                                 <div class="custom-file">
-                                    <input type="file" name="imgmedidas" class="custom-file-input" id="">
+                                    <input type="file" value="{{ old('imagem_medidas', $dados->imgmedidas) }}" name="imgmedidas" class="custom-file-input" id="">
                                     <label class="custom-file-label" for="">Escolher arquivo </label>
                                 </div>
                                 <div class="input-group-append">
@@ -136,162 +136,5 @@
         </div>
     </div>
 
-    <div id="uploadimagebannerModal" class="modal" role="dialog" data-backdrop="static">
-
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Editar Imagem</h5>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="text-center">
-
-                                <input type="hidden" id="destino_imagem" value="">
-
-
-                                <div id="image_demo"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row text-center">
-                        <div class="col-md-12">
-                            <button class="btn btn-common" id="cortarbanner">Cortar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        $(document).ready(function() {
-
-
-            // $("#valor_unitario").maskMoney({
-            //     prefix: "",
-            //     decimal: ",",
-            //     thousands: "."
-            // });
-            alert('teste pag pro');
-            $largura = 400; //horizontal   
-            $altura = 650;
-
-            //$largura = 650; //vertical   
-            //$altura  = 400;
-
-
-            $image_crop_banner = $('#image_demo').croppie({
-                enableExif: true,
-                viewport: {
-                    width: $largura - 50,
-                    height: $altura - 50,
-                    type: 'square' //circle
-                },
-                boundary: {
-                    width: $largura,
-                    height: $altura
-                }
-            });
-
-
-            $('#fu_imagem_principal').on('change', function() {
-
-                var n = $("#imagem_principal img").length;
-
-                if (n >= 3) {
-                    sweetAlert("São Permitidas até 3 Imagens");
-                } else {
-                    $('#destino_imagem').val('imagem_principal');
-
-                    var reader = new FileReader();
-                    reader.onload = function(event) {
-                        $image_crop_banner.croppie('bind', {
-                            url: event.target.result
-                        }).then(function() {
-                            //         console.log('jQuery bind complete');
-                        });
-                    }
-                    reader.readAsDataURL(this.files[0]);
-                    $('#uploadimagebannerModal').modal('show');
-                }
-                this.value = null;
-            });
-
-
-
-            $('#fu_imagem_tamanhos').on('change', function() {
-
-                $('#destino_imagem').val('imagem_tamanhos');
-
-                var reader = new FileReader();
-                reader.onload = function(event) {
-                    $image_crop_banner.croppie('bind', {
-                        url: event.target.result
-                    }).then(function() {
-                        //         console.log('jQuery bind complete');
-                    });
-                }
-                reader.readAsDataURL(this.files[0]);
-                $('#uploadimagebannerModal').modal('show');
-
-                this.value = null;
-            });
-
-            $('#cortarbanner').click(function(event) {
-
-
-                $image_crop_banner.croppie('result', {
-                    type: 'canvas',
-                    size: 'viewport'
-                }).then(function(response) {
-                    $.ajax({
-                        url: '{{ url('/produtos/corta') }}',
-                        type: "POST",
-                        data: {
-                            _token: CSRF_TOKEN,
-                            "pasta": "anuncio",
-                            "image": response
-                        },
-
-                        async: true,
-                        success: function(data) {
-                            $('#uploadimagebannerModal').modal('hide');
-
-                            var destino = $('#destino_imagem').val();
-
-                            if (destino == 'imagem_tamanhos') {
-                                $('#imagem_tamanhos').html(data);
-                            } else {
-                                $('#imagem_principal').append(data);
-                            }
-
-                            swal('Imagem Adicionada', {
-                                icon: "success",
-                            });
-                        },
-                        complete: function() {
-
-                        },
-                        beforeSend: function() {
-                            swal('Processando...', {
-                                icon: "info",
-                                buttons: false
-                            })
-                        },
-                        error: function(data) {}
-                    });
-                })
-            });
-        });
-
-
-        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
-        function excluiimagem(elem) {
-            $(elem).parents('.imguniforme').remove();
-        };
-    </script>
+   
 @endsection

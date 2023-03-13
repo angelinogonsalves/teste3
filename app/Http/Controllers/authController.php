@@ -23,8 +23,7 @@ class AuthController extends BaseController
         $validatedUser = $request->validated();
         if (Auth::attempt($validatedUser)) {
             $request->session()->regenerate();
- 
-            return redirect()->intended('/');
+                return redirect()->intended('/');
         }
  
         return back()->withErrors([

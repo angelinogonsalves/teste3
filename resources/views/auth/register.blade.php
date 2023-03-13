@@ -61,17 +61,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-sm-12">
-                        <div class="form-group">
-                            <label>Selecione sua unidade</label>                            
-                            <select class="form-control" name="unidade_id" data-placeholder="selecione sua Unidade" style="width: 100%;">
-                                <option value="">Selecione...</option>
-                                @forelse ($unidades as $u)
-                                    <option value="{{$u->id}}">{{$u->nome_fantasia}}</option>
-                                @empty                                    
-                                @endforelse                              
-                            </select>
-                        </div>
+                    <div class="input-group mb-3">
+                        <select class="form-control select2" name="unidade_id" data-placeholder="selecione sua Unidade" style="width: 100%;">
+                            <option value="">Selecione Unidade..</option>
+                            @forelse ($unidades as $u)
+                                <option value="{{$u->id}}">{{$u->nome_fantasia}}</option>
+                            @empty                                    
+                            @endforelse                              
+                        </select>
                     </div>
                     <div class="input-group mb-3">
                         <input type="email" name="email" class="form-control" placeholder="Email" value="{{old('email')}}">

@@ -22,7 +22,7 @@
                         <!-- text input -->
                         <div class="form-group">
                             <label>RA (caso seja tipo aluno)</label>
-                            <input type="text" name="nome" class="form-control" placeholder="Digite..." value="{{old('nome', $dados->ra)}}">
+                            <input type="text" name="ra" class="form-control" placeholder="Digite..." value="{{old('nome', $dados->ra)}}">
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -114,8 +114,10 @@
                             <select class="form-control select" style="width: 100%;" name="uf">
                                 <option value="">Selecione..</option>
                                 <option value="PR" {{old('uf', $dados->uf) == "PR" ? 'selected' : '' }}>PR</option>
+                                <option value="SC" {{old('uf', $dados->uf) == "SC" ? 'selected' : '' }}>SC</option>
                                 <option value="SP" {{old('uf', $dados->uf) == "SP" ? 'selected' : '' }}>SP</option>
-                                <option value="SC" {{old('uf', $dados->uf) == "SC" ? 'selected' : '' }}>SC</option>                               
+                                <option value="RS" {{old('uf', $dados->uf) == "RS" ? 'selected' : '' }}>RS</option>
+                                                               
                             </select>
                         </div>
                     </div>

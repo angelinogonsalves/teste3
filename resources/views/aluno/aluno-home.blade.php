@@ -110,7 +110,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td><a href="{{ url('produtos/detalhes') }}">OR9842</a></td>
+                                                        <td><a href="{{ url('produtos/detalhes') }}">1</a></td>
                                                         <td>22/10/2000</td>
                                                         <td>
                                                             <div class="sparkbar" data-color="#00a65a" data-height="20">

@@ -92,31 +92,31 @@
                         <a href="#" class="d-block">Painel admin</a>
                     </div>
                 </div>
-
-                <!-- Sidebar Menu -->
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
-                        <li class="nav-header">Cadastros</li>
-                        <li class="nav-item">
-                            <a href="{{ url('/usuarios') }}" class="nav-link">
-                                <i class="nav-icon fas fa-user"></i>
-                                <p>
-                                    Usuários
-                                    <span class="right badge badge-primary">New</span>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('unidades') }}" class="nav-link">
-                                <i class="nav-icon fas fa-columns"></i>
-                                <p>
-                                    Unidades
-                                    <span class="right badge badge-info">New</span>
-                                </p>
-                            </a>
-                        </li>
-                        {{-- <li class="nav-item">
+                @if (auth()->user()->tipo_usuario == 1)
+                    <!-- Sidebar Menu -->
+                    <nav class="mt-2">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                            data-accordion="false">
+                            <li class="nav-header">Cadastros</li>
+                            <li class="nav-item">
+                                <a href="{{ url('/usuarios') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>
+                                        Usuários
+                                        <span class="right badge badge-primary">New</span>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('unidades') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-columns"></i>
+                                    <p>
+                                        Unidades
+                                        <span class="right badge badge-info">New</span>
+                                    </p>
+                                </a>
+                            </li>
+                            {{-- <li class="nav-item">
                           <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-table"></i>
                             <p>
@@ -139,42 +139,43 @@
                             </li>
                           </ul>
                         </li> --}}
-                        <li class="nav-item">
-                            <a href="{{ url('produtos') }}" class="nav-link">
-                                <i class="nav-icon far fa-image"></i>
-                                <p>
-                                    Produtos
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-header">Fazer Pedido</li>
-                        <li class="nav-item">
-                            <a href="{{ url('/pedidos') }}" class="nav-link">
-                                <i class="far fa-plus-square nav-icon"></i>
-                                <p>Pedidos</p>
-                            </a>
-                        </li>
-                        <li class="nav-header">Relatórios</li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-calendar-alt"></i>
-                                <p>
-                                    Relatórios
-                                    <span class="badge badge-info right">1</span>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-header">Cadastros</li>
-                        <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fas fa-cog"></i>
-                                <p>
-                                    Configurações
-                                    <span class="right badge badge-warning">!</span>
-                                </p>
-                            </a>
-                        </li>
-                    </ul>
+                @endif
+                <li class="nav-item">
+                    <a href="{{ url('produtos') }}" class="nav-link">
+                        <i class="nav-icon far fa-image"></i>
+                        <p>
+                            Produtos
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-header">Fazer Pedido</li>
+                <li class="nav-item">
+                    <a href="{{ url('/pedidos') }}" class="nav-link">
+                        <i class="far fa-plus-square nav-icon"></i>
+                        <p>Pedidos</p>
+                    </a>
+                </li>
+                <li class="nav-header">Relatórios</li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-calendar-alt"></i>
+                        <p>
+                            Relatórios
+                            <span class="badge badge-info right">1</span>
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-header">Cadastros</li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-cog"></i>
+                        <p>
+                            Configurações
+                            <span class="right badge badge-warning">!</span>
+                        </p>
+                    </a>
+                </li>
+                </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>
