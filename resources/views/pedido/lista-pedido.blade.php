@@ -44,71 +44,47 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            1231
-                                        </td>
-                                        <td>25/05/1585</td>
-                                        <td>
-                                            Alnuo Zé Silva -
-                                            <small class="text-success mr-3">
-                                                1234565
-                                            </small>
-                                        </td>
-                                        <td>
-                                            R$ 255,33
-                                        </td>
-                                        <td><span class="badge badge-success">Pago</span></td>
-                                        <td>
-                                            Unidade Positivo Junior
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-info  btn-sm">Ver | Editar</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            1231
-                                        </td>
-                                        <td>25/05/1585</td>
-                                        <td>
-                                            Alnuo Zé Silva -
-                                            <small class="text-success mr-3">
-                                                1234565
-                                            </small>
-                                        </td>
-                                        <td>
-                                            R$ 255,33
-                                        </td>
-                                        <td><span class="badge badge-danger">Pagamento Pendente</span></td>
-                                        <td>
-                                            Unidade Positivo Junior
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-primary btn-sm">Ver | Editar</a>
-                                        </td>
-                                    <tr>
-                                        <td>
-                                            1231
-                                        </td>
-                                        <td>25/05/1585</td>
-                                        <td>
-                                            Alnuo Zé Silva -
-                                            <small class="text-success mr-3">
-                                                1234565
-                                            </small>
-                                        </td>
-                                        <td>
-                                            R$ 255,33
-                                        </td>
-                                        <td><span class="badge badge-primary">Em produção</span></td>
-                                        <td>
-                                            Unidade Positivo Junior
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-primary btn-sm">Ver | Editar</a>
-                                        </td>
-                                    </tr>
+                                    @forelse($dados as $p)
+                                        <tr>
+                                            <td>{{ $p->id }}</td>
+                                            <td><?php echo date('d/m/Y H:i', strtotime($p->created_at)); ?></td>
+                                            <td>{{ $p->nome_aluno }} - {{ $p->ra_aluno }}</td>
+                                            <td>{{ $p->valor }}</td>
+                                            <td>
+                                                @if ($p->status == 0)
+                                                    Pendente
+                                                @elseif ($p->status_pedido == 1)
+                                                    Aguardando Pagamento
+                                                @elseif ($p->status_pedido == 2)
+                                                    Processando Pagamento
+                                                @elseif ($p->status_pedido == 3)
+                                                    Pagamento Aprovado
+                                                @elseif ($p->status_pedido == 4)
+                                                    Pagamento Rejeitado
+                                                @elseif ($p->status_pedido == 5)
+                                                    Em Produção
+                                                @elseif ($p->status_pedido == 6)
+                                                    Pedido Finalizado
+                                                @elseif ($p->status_pedido == 7)
+                                                    Entregue
+                                                @endif
+                                            </td>
+                                            <td>{{ $p->unidade }} </td>
+                                            <td>
+                                                <form action="{{ url('pedidos/excluir', [$p->id]) }}" method="post">
+                                                    @csrf
+                                                    <a class="btn btn-primary btn-sm"
+                                                        href="{{ url('pedidos/cadastro', [$p->id]) }}">Ver | Editar</a>
+                                                    <input type="submit" value="Excluir" class="btn btn-danger btn-sm">
+                                                </form>
+                                            </td>
+
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="5" class="text-center">Não foram encontrados Produtos</td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>

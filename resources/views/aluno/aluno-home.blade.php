@@ -55,7 +55,7 @@
                 <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
                     <!-- Messages Dropdown Menu -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="#">
+                        <a class="nav-link" href="{{ url('logout/') }}">
                             <i class="fas fa-circle"></i>
                             <span class="badge badge-danger navbar-badge">Sair</span>
                         </a>
@@ -146,7 +146,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <div class="card card-primary card-outline">
                                 <div class="card-body">
                                     <h5 class="card-title">Meus dados</h5>
@@ -156,17 +156,6 @@
                                     <a href="#" class="btn btn-primary">Atualizar</a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="card card-primary card-outline">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-
-                                    <p class="card-text">
-                                        Painel de orientações
-                                    </p>
-                                </div>
-                            </div><!-- /.card -->
                         </div>
                     </div>
                 </div>

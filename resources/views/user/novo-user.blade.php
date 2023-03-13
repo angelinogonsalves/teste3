@@ -11,26 +11,33 @@
                 @csrf
                 <input type="hidden" name="id" value="{{old('id', $dados->id)}}">
                 <div class="row">
-                    <div class="col-sm-5">
+                    <div class="col-sm-4">
                         <!-- text input -->
                         <div class="form-group">
                             <label>Nome Completo</label>
                             <input type="text" name="nome" class="form-control" placeholder="Digite..." value="{{old('nome', $dados->nome)}}">
                         </div>
                     </div>
-                    <div class="col-sm-7">
+                    <div class="col-sm-2">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label>RA (caso seja tipo aluno)</label>
+                            <input type="text" name="nome" class="form-control" placeholder="Digite..." value="{{old('nome', $dados->ra)}}">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
                         <div class="form-group">
                             <label>E-mail</label>
                             <input type="text" name="email" class="form-control" placeholder="Digite..."  value="{{old('email', $dados->email)}}">
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <div class="form-group">
                             <label>Senha</label>
                             <input type="text" name="password" class="form-control" placeholder="Digite..." value="{{old('password')}}">
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <div class="form-group">
                             <label>Repetir senha</label>
                             <input type="text" name="password_confirmation" class="form-control" placeholder="Digite..." value="{{old('password_confirmation')}}">

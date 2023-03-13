@@ -29,7 +29,7 @@
 -->
 
 <body class="hold-transition sidebar-mini">
-<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
     <div class="wrapper">
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -41,30 +41,33 @@
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="{{ url('/') }}" class="nav-link">Início</a>
-
                 </li>
             </ul>
-
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-
-                <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-user"></i>
                         <span class="badge badge-warning navbar-badge"></span>
                     </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <span class="dropdown-item dropdown-header">Sair do Sistema</span>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{ url('logout/') }}" class="dropdown-item">
+                            <i class="fas fa-circle mr-2"></i> Sair
+                        </a>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                         <i class="fas fa-th-large"></i>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -75,7 +78,7 @@
             <a href="{{ url('/') }}" class="brand-link">
                 {{-- <img src="{{ asset('img/LogoRazza.png') }}" alt="Razza PRO"
                     class="brand-image img" style="opacity: .8"> --}}
-                <span class="brand-text font-weight-light">Sitema Razza PRO</span>
+                <span class="brand-text font-weight-light">Sistema Razza PRO</span>
             </a>
 
             <!-- Sidebar -->
@@ -86,7 +89,7 @@
                         <img src="{{ asset('img/user1-128x128.jpg') }}" class="img-circle elevation-2" alt="User Image">
                     </div> --}}
                     <div class="info">
-                        <a href="#" class="d-block">User: Marlon Gross</a>
+                        <a href="#" class="d-block">Painel admin</a>
                     </div>
                 </div>
 
@@ -214,7 +217,7 @@
 
         <!-- Main Footer -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2023 <a href="#">M.C.G</a>.</strong>
+            <strong>Copyright &copy; 2023 <a href="#">Razza</a>.</strong>
             Todos direitos reservados.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 3.2.0
@@ -241,7 +244,7 @@
     <script src="{{ asset('js/pages/dashboard3.js') }}"></script>
     <!-- Bootstrap select -->
     <script src="{{ asset('plugins/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
-    
+
     <script>
         $.ajaxSetup({
             headers: {
