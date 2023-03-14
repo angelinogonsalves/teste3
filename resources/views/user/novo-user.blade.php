@@ -17,15 +17,15 @@
                             <select class="form-control select" id="tipo_usuario" style="width: 100%;" name="tipo_usuario" onchange="exibir_ocultar(this)">
                                 <option value="">Selecione...</option>
                                 <option value="1"
-                                    {{ old('tipo_usuario', $dados->tipo_usuario) == 1 ? 'selected' : '' }}>Admin</option>
+                                    {{ old('tipo_usuario', $dados->tipo_usuario) == 1 ? 'selected' : '' }}>1 - Admin</option>
                                 <option value="2"
-                                    {{ old('tipo_usuario', $dados->tipo_usuario) == 2 ? 'selected' : '' }}>Funcionário
+                                    {{ old('tipo_usuario', $dados->tipo_usuario) == 2 ? 'selected' : '' }}>2- Funcionário
                                 </option>
                                 <option value="3"
-                                    {{ old('tipo_usuario', $dados->tipo_usuario) == 3 ? 'selected' : '' }}>Coordenador
+                                    {{ old('tipo_usuario', $dados->tipo_usuario) == 3 ? 'selected' : '' }}>3- Coordenador
                                 </option>
                                 <option value="4"
-                                    {{ old('tipo_usuario', $dados->tipo_usuario) == 4 ? 'selected' : '' }}>Aluno</option>
+                                    {{ old('tipo_usuario', $dados->tipo_usuario) == 4 ? 'selected' : '' }}>4- Aluno</option>
                             </select>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                                 value="{{ old('nome', $dados->nome) }}">
                         </div>
                     </div>
-                    <div class="col-sm-2" id="ra">
+                    <div class="col-sm-2" id="ra" style="display: none">
                         <!-- text input -->
                         <div class="form-group">
                             <label>RA (caso seja tipo aluno)</label>
@@ -48,7 +48,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>E-mail</label>
-                            <input type="text" name="email" class="form-control" placeholder="Digite..."
+                            <input type="text" id="ra" name="email" class="form-control" placeholder="Digite..."
                                 value="{{ old('email', $dados->email) }}">
                         </div>
                     </div>
@@ -68,11 +68,11 @@
                     </div>
 
                     <!-- condi;áo pra mstrar escola caso seja cordenador-->
-                    <div class="col-12 col-sm-12" id="unidade">
+                    <div class="col-12 col-sm-12" id="unidade" style="display: none">
                         <div class="form-group">
                             <label>Vincular unidade do Aluno</label>
                             <div class="select-purple">
-                                <select name="unidade_id" class="form-control" data-placeholder="Selecione unidade">
+                                <select name="unidade_id" id="unidade" class="form-control"  data-placeholder="Selecione unidade">
                                     <option value="">Selecione...</option>
                                     @forelse($unidades as $u)
                                         <option value="{{ $u->id }}"
@@ -167,7 +167,6 @@
             if (tipo_usuario == 4) {
                 document.getElementById('ra').style.display = 'block';
                 document.getElementById('unidade').style.display = 'block';
-
             } else {
                 document.getElementById('unidade').style.display = 'none';
                 document.getElementById('ra').style.display = 'none';
