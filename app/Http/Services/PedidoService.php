@@ -88,8 +88,13 @@ class PedidoService {
     public function atualizaUsuarioPedido(Pedido $pedido){       
         if (!$pedido->user_id) {
             $userService = new UsuarioService();
+
             $usuario = $userService->getUsuarioporRA($pedido->ra_aluno);
-            $pedido->user_id = $usuario->id;
+            
+            if (!empty($usuario->id)) {
+                $pedido->user_id = $usuario->id;
+            }
+
             $pedido->save();
         }        
     }

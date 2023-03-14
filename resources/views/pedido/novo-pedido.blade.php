@@ -284,7 +284,7 @@
             if (unidade_id && nome_aluno && ra_aluno && modalidade_id && modalidade_id && tamanho_id && nome_personalizado && numero_personalizado) {
                 $("#tbodyitens_produto").append("<tr class='itens_produtos' valor_produto="+valor_produto+" ra_aluno="+ra_aluno+" nome_aluno="+nome_aluno+" unidade_id="+unidade_id+" produto_id="+produto_id+" tamanho_id="+tamanho_id+" modalidade_id="+modalidade_id+" nome_personalizado="+nome_personalizado+" numero_personalizado="+numero_personalizado+">"+
                         "<td>"+nome_produto+"</td>"+
-                        "<td><input class='form-control-sm quantidade' required type='number' value='' min='0'max='10' step='0'/></td>"+
+                        "<td><input class='form-control-sm quantidade' required type='number' value='1' min='0'max='10' step='0'/></td>"+
                         "<td>"+valor+"</td>"+
                         "<td>"+tamanho_id+"</td>"+
                         "<td>"+nome_modalidade+"</td>"+
@@ -296,6 +296,7 @@
 
                 excluir();
                 calcularTotal();
+                adicionarQuantidade();
             } else {
                 alert("Preencha todos os campos");
             }
@@ -314,7 +315,11 @@
 
             if ($('.itens_produtos').length > 0) {
                 $.each($('.itens_produtos'), function (key, value) {
-                    let valor = $(this).attr('valor_produto')
+                    let valor = $(this).attr('valor_produto');
+
+                    if ($(this).find('.quantidade').val().length > 0) {
+                        valor *= $(this).find('.quantidade').val();
+                    }
 
                     total += parseFloat( valor );
                 });
@@ -324,6 +329,12 @@
             }
             
             $('#totalProdutos').text('R$ ' + total);
+        }
+
+        function adicionarQuantidade() {
+            $('.quantidade').on('keyup', function () {
+                calcularTotal();
+            });
         }
 
         function salvar() {
@@ -355,8 +366,6 @@
 
                     return false;
                 }
-                console.log('nome_personalizado',nome_personalizado);
-                console.log('tamanho_id',tamanho_id);
 
                 produtos.push({produto_id, quantidade, tamanho_id, modalidade_id, nome_personalizado, numero_personalizado});
             });
@@ -367,12 +376,6 @@
             }
 
             urlSalvar = '{{ url('/pedidos/salvar/') }}';
-
-            console.log('nome_personalizado',nome_personalizado);
-            console.log('unidade_id',unidade_id);
-            console.log('nome_aluno',nome_aluno);
-            console.log('ra_aluno',ra_aluno);
-            console.log('produtos',produtos);
 
             $.ajax({
                 url: urlSalvar,
@@ -386,7 +389,6 @@
                     produtos
                 },
                 success: function (data) {
-                    console.log(data);
                     if (data.success) {
                         alert('Pedido Realizado com sucesso');
                         window.location.href = "../pedidos";

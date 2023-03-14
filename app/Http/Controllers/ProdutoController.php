@@ -74,10 +74,7 @@ class ProdutoController extends BaseController
             $nomeImagem = $filename.'_'.time().'.'.$extension;
             // Upload Image
             $request->file('imagem1')->storeAs('public/produtos', $nomeImagem);
-        } else {
-            $nomeImagem = 'noimage.png';
-        }
-      
+        }       
         if($request->hasFile('imgmedidas')){
             $filenameWithExtMed = $request->file('imgmedidas')->getClientOriginalName();
             // Get just filename
