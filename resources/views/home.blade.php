@@ -50,14 +50,12 @@
         <!-- /.col -->
         <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
-                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-
+                <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-cog"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">Alunos Cadastrados</span>
-                    <span class="info-box-number">300
-                        <small>Alunos já Cadastrados</small>
+                    <span class="info-box-text">Pedidos Em produção</span>
+                    <span class="info-box-number">0
+                        <small>Produzindo</small>
                     </span>
-
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -93,74 +91,41 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                            <td>22/10/200:20:25:25</td>
-                            <td>
-                                Alnuo Zé Silva -
-                                <small class="text-success mr-3">
-                                    1234565
-                                </small>
-                            </td>
-                            <td>
-                                <div class="sparkbar" data-color="#00a65a" data-height="20">1222,22</div>
-                            </td>
-                            <td><span class="badge badge-success">Pago</span></td>
-                            <td>
-                                Unidade Positivo Junior
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                            <td>22/10/200:20:25:25</td>
-                            <td>
-                                Alnuo Zé Silva -
-                                <small class="text-success mr-3">
-                                    1234565
-                                </small>
-                            </td>
-                            <td>
-                                <div class="sparkbar" data-color="#f39c12" data-height="20"></div>
-                            </td>
-                            <td><span class="badge badge-danger">Pagamento pendente</span></td>
-                            <td>
-                                Unidade Positivo Junior
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                            <td>22/10/200:20:25:25</td>
-                            <td>
-                                Alnuo Zé Silva -
-                                <small class="text-success mr-3">
-                                    1234565
-                                </small>
-                            </td>
-                            <td>
-                                <div class="sparkbar" data-color="#f56954" data-height="20">8855,5</div>
-                            </td>
-                            <td><span class="badge badge-white">Cancelado</span></td>
-                            <td>
-                                Unidade Positivo Junior
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                            <td>22/10/200:20:25:25</td>
-                            <td>
-                                Alnuo Zé Silva -
-                                <small class="text-success mr-3">
-                                    1234565
-                                </small>
-                            </td>
-                            <td>
-                                <div class="sparkbar" data-color="#f56954" data-height="20">90,55</div>
-                            </td>
-                            <td><span class="badge badge-primary">Em produção</span></td>
-                            <td>
-                                Unidade Positivo Junior
-                            </td>
-                        </tr>
+                        @foreach ($pedidos as $p)
+                            <tr>
+                                <td><a href="#">{{ $p->id }}</a></td>
+                                <td>{{ $p->created_at }}</td>
+                                <td>
+                                    {{ $p->nome_aluno }}
+                                    <small class="text-success mr-3">
+                                        {{ $p->ra_aluno }}
+                                    </small>
+                                </td>
+                                <td>
+                                    <div class="sparkbar" data-color="#00a65a" data-height="20">{{ $p->valor }}</div>
+                                </td>
+                                <td> {{-- <td>  REGRA DOS STATUS AQUI NESTA TELA  --}}
+                                    @if ($p->status == 0)
+                                        <span class="badge badge-white">Cancelado</span>
+                                    @elseif ($p->status == 1)
+                                        <span class="badge badge-danger">Aguardando Pagamento</span>
+                                    @elseif ($p->status == 2)
+                                        <span class="badge badge-warning">Processando Pagamento</span>
+                                    @elseif ($p->status == 3)
+                                        <span class="badge badge-success">Pagamento Aprovado</span>
+                                    @elseif ($p->status == 4)
+                                        <span class="badge badge-dark">Em Produção</span>
+                                    @elseif ($p->status == 5)
+                                        <span class="badge badge-info">Pedido Finalizado</span>
+                                    @elseif ($p->status == 6)
+                                        <span class="badge badge-primary">Pedido Entregue</span>
+                                    @endif
+                                <td>
+                                     Puxar uinidade {{ $p->unidade }}
+                                </td>
+                            </tr>
+                        @endforeach
+
                     </tbody>
                 </table>
             </div>

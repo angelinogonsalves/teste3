@@ -84,12 +84,13 @@
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                     <div class="image">
+                    <div class="image">
                         <img src="{{ asset('img/perfil.jpg') }}" class="img-circle elevation-2" alt="User Image">
                     </div>
-                    
+
                     <div class="info">
-                        <a href="#" class="d-block"><span class="badge badge-primary">{{ (auth()->user()->nome) }}</span> </a>
+                        <a href="#" class="d-block"><span
+                                class="badge badge-primary">{{ auth()->user()->nome }}</span> </a>
                     </div>
                 </div>
                 <!-- Sidebar Menu -->
@@ -176,7 +177,6 @@
                                     </p>
                                 </a>
                             </li>
-
                         @endif
                     </ul>
                 </nav>
@@ -248,6 +248,20 @@
     <script src="{{ asset('js/pages/dashboard3.js') }}"></script>
     <!-- Bootstrap select -->
     <script src="{{ asset('plugins/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
+
+    <!-- DataTables  & Plugins -->
+    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
+    <script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('plugins/pdfmake/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 
     <script>
         $.ajaxSetup({
