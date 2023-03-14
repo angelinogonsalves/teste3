@@ -52,30 +52,29 @@
                                             <td>{{ $p->valor }}</td>
                                             <td>
                                                 @if ($p->status == 0)
-                                                    Pendente
-                                                @elseif ($p->status_pedido == 1)
-                                                    Aguardando Pagamento
-                                                @elseif ($p->status_pedido == 2)
-                                                    Processando Pagamento
-                                                @elseif ($p->status_pedido == 3)
-                                                    Pagamento Aprovado
-                                                @elseif ($p->status_pedido == 4)
-                                                    Pagamento Rejeitado
-                                                @elseif ($p->status_pedido == 5)
-                                                    Em Produção
-                                                @elseif ($p->status_pedido == 6)
-                                                    Pedido Finalizado
-                                                @elseif ($p->status_pedido == 7)
-                                                    Entregue
+                                                    <span class="badge badge-white">Cancelado</span>
+                                                @elseif ($p->status == 1)
+                                                    <span class="badge badge-danger">Aguardando Pagamento</span>
+                                                @elseif ($p->status == 2)
+                                                    <span class="badge badge-warning">Processando Pagamento</span>
+                                                @elseif ($p->status == 3)
+                                                    <span class="badge badge-success">Pagamento Aprovado</span>
+                                                @elseif ($p->status == 4)
+                                                    <span class="badge badge-dark">Em Produção</span>
+                                                @elseif ($p->status == 5)
+                                                    <span class="badge badge-info">Pedido Finalizado</span>
+                                                @elseif ($p->status == 6)
+                                                    <span class="badge badge-primary">Pedido Entregue</span>
                                                 @endif
                                             </td>
-                                            <td>{{ $p->unidade }} </td>
+                                            <td> Puxar uinidade {{ $p->unidade }} </td>
                                             <td>
-                                                <form action="{{ url('pedidos/excluir', [$p->id]) }}" method="post">
+                                                <form action="{{ url('pedidos/mudar-status', [$p->id]) }}" method="post">
                                                     @csrf
                                                     <a class="btn btn-primary btn-sm"
                                                         href="{{ url('pedidos/cadastro', [$p->id]) }}">Ver | Editar</a>
-                                                    <input type="submit" value="Excluir" class="btn btn-danger btn-sm">
+                                                    {{-- <input type="submit" value="Excluir" class="btn btn-danger btn-sm"> --}}
+                                                        <input type="submit" value="Mudar Status" class="btn btn-info btn-sm">
                                                 </form>
                                             </td>
 
@@ -97,4 +96,22 @@
             <!-- /.row -->
         </div>
     </section>
+
+    <script>
+        $(function () {
+          $("#tabela_itens_produto").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+          }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+          $('#tabela_itens_produto').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+          });
+        });
+      </script>
 @endsection
