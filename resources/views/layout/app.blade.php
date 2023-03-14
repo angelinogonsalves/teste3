@@ -76,27 +76,28 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="{{ url('/') }}" class="brand-link">
-                {{-- <img src="{{ asset('img/LogoRazza.png') }}" alt="Razza PRO"
-                    class="brand-image img" style="opacity: .8"> --}}
-                <span class="brand-text font-weight-light">Sistema Razza PRO</span>
+                <!-- <img src="{{ asset('img/LogoRazza.png') }}" alt="Razza PRO"
+                    class="brand-image img" style="">-->
+                <span class="brand-text font-weight-light"> Razza PRO</span>
             </a>
-
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    {{-- <div class="image">
-                        <img src="{{ asset('img/user1-128x128.jpg') }}" class="img-circle elevation-2" alt="User Image">
-                    </div> --}}
+                     <div class="image">
+                        <img src="{{ asset('img/perfil.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                    </div>
+                    
                     <div class="info">
-                        <a href="#" class="d-block">Painel admin</a>
+                        <a href="#" class="d-block"><span class="badge badge-primary">{{ (auth()->user()->nome) }}</span> </a>
                     </div>
                 </div>
-                @if (auth()->user()->tipo_usuario == 1)
-                    <!-- Sidebar Menu -->
-                    <nav class="mt-2">
-                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                            data-accordion="false">
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+
+                        @if (auth()->user()->tipo_usuario == 1)
                             <li class="nav-header">Cadastros</li>
                             <li class="nav-item">
                                 <a href="{{ url('/usuarios') }}" class="nav-link">
@@ -117,65 +118,67 @@
                                 </a>
                             </li>
                             {{-- <li class="nav-item">
-                          <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-table"></i>
-                            <p>
-                              Cadastro do Produto
-                              <i class="fas fa-angle-left right"></i>
-                            </p>
-                          </a>
-                          <ul class="nav nav-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-table"></i>
+                                <p>
+                                Cadastro do Produto
+                                <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                <a href="pages/tables/simple.html" class="nav-link">
+                                    <i class="far fa-plus-square nav-icon"></i>
+                                    <p>Tamanhos</p>
+                                </a>
+                                </li>
+                                <li class="nav-item">
+                                <a href="pages/tables/data.html" class="nav-link">
+                                    <i class="far fa-dot-circle nav-icon"></i>
+                                    <p>Modalidades</p>
+                                </a>
+                                </li>
+                            </ul>
+                            </li> --}}
                             <li class="nav-item">
-                              <a href="pages/tables/simple.html" class="nav-link">
+                                <a href="{{ url('produtos') }}" class="nav-link">
+                                    <i class="nav-icon far fa-image"></i>
+                                    <p>
+                                        Produtos
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
+                        <li class="nav-header">Fazer Pedido</li>
+                        <li class="nav-item">
+                            <a href="{{ url('/pedidos') }}" class="nav-link">
                                 <i class="far fa-plus-square nav-icon"></i>
-                                <p>Tamanhos</p>
-                              </a>
-                            </li>
+                                <p>Pedidos</p>
+                            </a>
+                        </li>
+                        <li class="nav-header">Relatórios</li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-calendar-alt"></i>
+                                <p>
+                                    Relatórios
+                                    <span class="badge badge-info right">1</span>
+                                </p>
+                            </a>
+                        </li>
+                        @if (auth()->user()->tipo_usuario == 1)
                             <li class="nav-item">
-                              <a href="pages/tables/data.html" class="nav-link">
-                                <i class="far fa-dot-circle nav-icon"></i>
-                                <p>Modalidades</p>
-                              </a>
+                                <a href="" class="nav-link">
+                                    <i class="nav-icon fas fa-cog"></i>
+                                    <p>
+                                        Configurações
+                                        <span class="right badge badge-warning">!</span>
+                                    </p>
+                                </a>
                             </li>
-                          </ul>
-                        </li> --}}
-                @endif
-                <li class="nav-item">
-                    <a href="{{ url('produtos') }}" class="nav-link">
-                        <i class="nav-icon far fa-image"></i>
-                        <p>
-                            Produtos
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-header">Fazer Pedido</li>
-                <li class="nav-item">
-                    <a href="{{ url('/pedidos') }}" class="nav-link">
-                        <i class="far fa-plus-square nav-icon"></i>
-                        <p>Pedidos</p>
-                    </a>
-                </li>
-                <li class="nav-header">Relatórios</li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-calendar-alt"></i>
-                        <p>
-                            Relatórios
-                            <span class="badge badge-info right">1</span>
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-header">Cadastros</li>
-                <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="nav-icon fas fa-cog"></i>
-                        <p>
-                            Configurações
-                            <span class="right badge badge-warning">!</span>
-                        </p>
-                    </a>
-                </li>
-                </ul>
+
+                        @endif
+                    </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>
