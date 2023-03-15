@@ -13,7 +13,7 @@ class PedidoService {
                 $pedido = Pedido::find($pedidoData['id']);                
             } else {             
                 $pedido = new Pedido();
-                $pedidoData['status'] = 0;
+                $pedidoData['status'] = 1; // pedido realizado começa em 1
                 $pedidoData['valor'] = 0;
             }            
 

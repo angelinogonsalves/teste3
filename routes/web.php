@@ -45,6 +45,7 @@ Route::middleware(['auth'])->group(function () {
     Route::group(array('prefix' => 'aluno'), function(){        
       //  Route::get('/home', [AlunoController::class,'inicio'])->name('home-aluno');
         Route::get('/detalhes-pedido/{pedido}', [AlunoController::class,'detalhesPedido'])->name('detalhes-pedido');
+        
     });
 
 
@@ -80,6 +81,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/excluir', [PedidoController::class,'excluir'])->name('excluir');
         //add salvar pedido
         Route::post('/salvar', [PedidoController::class,'salvarPedido'])->name('salvar-pedido');
+        Route::get('/detalhes-pedido-print/{pedido}', [PedidoController::class,'detalhesPedidoPrint'])->name('detalhes-pedido-print');
         Route::get('/pagseguro/{pedido}',[PagSeguroController::class,'pagseguro']);
     });
 

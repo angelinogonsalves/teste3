@@ -42,9 +42,7 @@
                 <div class="collapse navbar-collapse order-3" id="navbarCollapse">
                     <!-- Left navbar links -->
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a href="index3.html" class="nav-link">Home</a>
-                        </li>
+
                         <li class="nav-item">
                             <a href="#" class="nav-link">Contato</a>
                         </li>
@@ -106,7 +104,7 @@
                                         <strong>Razza Esportes</strong><br>
                                         Av. 7 de Abril, Centro<br>
                                         Palmeira-PR, CEP 8413-000<br>
-                                        Telefone: (804) 123-5432<br>
+                                        Telefone: (42)3252-2609<br>
                                         Email: contato@razzaesportes.com.br
                                     </address>
                                 </div>
@@ -114,17 +112,18 @@
                                 <div class="col-sm-4 invoice-col">
                                     Para:
                                     <address>
-                                        <strong>{{$pedido->user->nome}}</strong><br>
-                                        {{$pedido->user->endereco}}, {{$pedido->user->numero}} - {{$pedido->user->bairro}} <br>
-                                        {{$pedido->user->cidade}} / {{$pedido->user->uf}}<br>                                     
-                                        Telefone: {{$pedido->user->telefone}}<br>
-                                        Email: {{$pedido->user->email}}                                        
+                                        <strong>{{ $pedido->user->nome }}</strong><br>
+                                        {{ $pedido->user->endereco }}, {{ $pedido->user->numero }} -
+                                        {{ $pedido->user->bairro }} <br>
+                                        {{ $pedido->user->cidade }} / {{ $pedido->user->uf }}<br>
+                                        Telefone: {{ $pedido->user->telefone }}<br>
+                                        Email: {{ $pedido->user->email }}
                                     </address>
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-sm-4 invoice-col">
-                                    <b>Id Pedido: #{{$pedido->id}}</b><br>                                
-                                    <b>Id Pagamento:</b> {{$pedido->id_pagseguro}}<br>
+                                    <b>Id Pedido: #{{ $pedido->id }}</b><br>
+                                    <b>Id Pagamento:</b> {{ $pedido->id_pagseguro }}<br>
                                     <b>Data Pagamento:</b> @datetime($pedido->created_at)<br>
                                     <b>Status:</b> @statusPedido($pedido->status)
                                 </div>
@@ -150,18 +149,18 @@
                                         </thead>
                                         <tbody>
                                             @forelse ($pedido->itens as $i)
-                                            <tr>
-                                                <td><a href="destalhes">{{$i->produto->produto}}</a></td>
-                                                <td>{{$i->quantidade}}</td>
-                                                <td>@money($i->valor_unitario)</td>
-                                                <td>{{$i->tamanho->tamanho}}</td>
-                                                <td>{{$i->modalidade->modalidade}}</td>
-                                                <td>{{$i->nome_personalizado}}</td>
-                                                <td>{{$i->numero_personalizado}}</td>   
-                                                <td>@money($i->valor_unitario * $i->quantidade)</td>                                                                                                                                     
-                                            </tr>
-                                            <tr>
-                                            @empty
+                                                <tr>
+                                                    <td><a href="destalhes">{{ $i->produto->produto }}</a></td>
+                                                    <td>{{ $i->quantidade }}</td>
+                                                    <td>@money($i->valor_unitario)</td>
+                                                    <td>{{ $i->tamanho->tamanho }}</td>
+                                                    <td>{{ $i->modalidade->modalidade }}</td>
+                                                    <td>{{ $i->nome_personalizado }}</td>
+                                                    <td>{{ $i->numero_personalizado }}</td>
+                                                    <td>@money($i->valor_unitario * $i->quantidade)</td>
+                                                </tr>
+                                                <tr>
+                                                @empty
                                             @endforelse
                                         </tbody>
                                     </table>
@@ -182,7 +181,8 @@
 
                                     <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
                                         Pagamento via cartões de créditos ou PIX.
-                                        Para Ver detalhes do produto como: Descrição, Tamanho com tabela de medidas clique em cima do produto para abrir informções.
+                                        Para Ver detalhes do produto como: Descrição, Tamanho com tabela de medidas
+                                        clique em cima do produto para abrir informções.
                                     </p>
                                 </div>
                                 <!-- /.col -->
@@ -192,7 +192,7 @@
                                     <div class="table-responsive">
                                         <table class="table">
                                             <tr>
-                                                <th style="width:50%">Subtotal:</th>                                                
+                                                <th style="width:50%">Subtotal:</th>
                                                 <td>@money($pedido->valor)</td>
                                             </tr>
                                             <tr>
@@ -213,12 +213,16 @@
                             <!-- this row will not appear when printing -->
                             <div class="row no-print">
                                 <div class="col-12">
-                                    <a href="" rel="noopener" target="_blank"
-                                        class="btn btn-default"><i class="fas fa-print"></i> Imprimir</a>
-                                    <button type="button" class="btn btn-success float-right" onclick="pagseguro()"><i
-                                            class="far fa-credit-card"></i> Pagar Pedido
-                                    </button>
-                                    
+                                    {{-- <a href="{{ url('aluno/detalhes-pedido-print', [$pedido->id]) }}" rel="noopener" target="_blank"
+                                        class="btn btn-default"><i class="fas fa-print"></i> Imprimir</a> --}}
+                                    @if ($pedido->status == 0)
+                                        <p class="float-right">| Não é possível realizar pagamento. Pedido cancelado</p>
+                                    @else
+                                        <button type="button" class="btn btn-success float-right"
+                                            onclick="pagseguro()"><i class="far fa-credit-card"></i> Pagar Pedido via
+                                            PagSeguro
+                                        </button>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -265,22 +269,22 @@
             }
         });
 
-        function pagseguro(id){
-            var url = "{{ url('pedidos/pagseguro',[$pedido->id]) }}";            
+        function pagseguro(id) {
+            var url = "{{ url('pedidos/pagseguro', [$pedido->id]) }}";
             $.ajax({
                 type: "GET",
-                url: url,           
+                url: url,
                 success: function(data) {
-                    if (data.success) {                         
-                        console.log(data);                                                     
-                        window.open(data.url, '_blank');                       
+                    if (data.success) {
+                        console.log(data);
+                        window.open(data.url, '_blank');
                     } else {
                         alert(data.msg_erro);
-                   }                                                                    
-                },            
-                error: function(data) {             
-                    alert(data.msg_erro);              
-                }            
+                    }
+                },
+                error: function(data) {
+                    alert(data.msg_erro);
+                }
             });
         }
     </script>
