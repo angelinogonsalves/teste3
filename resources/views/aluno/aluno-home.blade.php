@@ -111,7 +111,7 @@
                                                 <tbody>
                                                     @forelse ($pedidos as $p)
                                                         <tr>
-                                                            <td><a href="{{ url('produtos/detalhes') }}"></a>{{$p->id}}</td>
+                                                            <td><a href="{{ url('aluno/detalhes-pedido',[$p->id]) }}">{{$p->id}}</a></td>
                                                             <td>@datetime($p->created_at)</td>
                                                             <td>
                                                                 <div class="sparkbar" data-color="#00a65a" data-height="20">
