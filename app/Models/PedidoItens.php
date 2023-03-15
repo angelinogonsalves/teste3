@@ -25,5 +25,20 @@ class PedidoItens extends Model
     {
         return $this->belongsTo(Pedido::class);
     }
+
+    public function produto(): BelongsTo
+    {
+        return $this->belongsTo(Produto::class);
+    }
+
+    public function tamanho(): BelongsTo
+    {
+        return $this->belongsTo(Tamanho::class);
+    }
+
+    public function modalidade(): BelongsTo
+    {
+        return $this->belongsTo(Modalidade::class);
+    }
  
 }

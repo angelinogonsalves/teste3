@@ -42,8 +42,8 @@ Route::middleware(['auth'])->group(function () {
 
     //TELA HOME ALUNO
     Route::group(array('prefix' => 'aluno'), function(){
-        Route::get('/home', [AlunoController::class,'inicio'])->name('home-aluno');
-        Route::get('/detalhes-pedido', [AlunoController::class,'detalhesPedido'])->name('detalhes-pedido');
+      //  Route::get('/home', [AlunoController::class,'inicio'])->name('home-aluno');
+        Route::get('/detalhes-pedido/{pedido}', [AlunoController::class,'detalhesPedido'])->name('detalhes-pedido');
     });
 
 

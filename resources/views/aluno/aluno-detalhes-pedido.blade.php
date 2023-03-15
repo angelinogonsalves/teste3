@@ -93,7 +93,7 @@
                                 <div class="col-12">
                                     <h4>
                                         <i class="fas fa-globe"></i> Razza Esportes.
-                                        <small class="float-right">Data do pedido: {{ '01/03/2023' }}</small>
+                                        <small class="float-right">Data do pedido: @date($pedido->created_at)</small>
                                     </h4>
                                 </div>
                                 <!-- /.col -->
@@ -114,20 +114,19 @@
                                 <div class="col-sm-4 invoice-col">
                                     Para:
                                     <address>
-                                        <strong>Aluno Silva</strong><br>
-                                        795 Folsom Ave, Suite 600<br>
-                                        San Francisco, CA 94107<br>
-                                        Phone: (555) 539-1037<br>
-                                        Email: john.doe@example.com
+                                        <strong>{{$pedido->user->nome}}</strong><br>
+                                        {{$pedido->user->endereco}}, {{$pedido->user->numero}} - {{$pedido->user->bairro}} <br>
+                                        {{$pedido->user->cidade}} / {{$pedido->user->uf}}<br>                                     
+                                        Telefone: {{$pedido->user->telefone}}<br>
+                                        Email: {{$pedido->user->email}}                                        
                                     </address>
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-sm-4 invoice-col">
-                                    <b>Id Pedido: #007612</b><br>
-                                    <br>
-                                    <b>Id Pagamento:</b> 4F3S8J<br>
-                                    <b>Data Pagamento:</b> 2/22/2014<br>
-                                    <b>Status:</b> Pago
+                                    <b>Id Pedido: #{{$pedido->id}}</b><br>                                
+                                    <b>Id Pagamento:</b> {{$pedido->id_pagseguro}}<br>
+                                    <b>Data Pagamento:</b> @datetime($pedido->created_at)<br>
+                                    <b>Status:</b> @statusPedido($pedido->status)
                                 </div>
                                 <!-- /.col -->
                             </div>
@@ -150,26 +149,20 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @forelse ($pedido->itens as $i)
                                             <tr>
-                                                <td><a href="destalhes">Calção Feminino tipo liso</a></td>
-                                                <td>2</td>
-                                                <td> 50,99 </td>
-                                                <td>M</td>
-                                                <td>Futebol</td>
-                                                <td>Nome personalizado A </td>
-                                                <td>2</td>
-                                                <td>100,00</td>
+                                                <td><a href="destalhes">{{$i->produto->produto}}</a></td>
+                                                <td>{{$i->quantidade}}</td>
+                                                <td>@money($i->valor_unitario)</td>
+                                                <td>{{$i->tamanho->tamanho}}</td>
+                                                <td>{{$i->modalidade->modalidade}}</td>
+                                                <td>{{$i->nome_personalizado}}</td>
+                                                <td>{{$i->numero_personalizado}}</td>   
+                                                <td>@money($i->valor_unitario * $i->quantidade)</td>                                                                                                                                     
                                             </tr>
                                             <tr>
-                                                <td><a href="destalhes">Camiseta uniforme positivos modelo x</a></td>
-                                                <td>1</td>
-                                                <td> 100,00 </td>
-                                                <td>M</td>
-                                                <td>Futebol</td>
-                                                <td>Nome personalizado A </td>
-                                                <td>2</td>
-                                                <td> 100,00</td>
-                                            </tr>
+                                            @empty
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>
@@ -194,13 +187,13 @@
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-6">
-                                    <p class="lead">Valores do Pedido Data: 2/22/2023</p>
+                                    <p class="lead">Valores do Pedido Data: @date($pedido->created_at)</p>
 
                                     <div class="table-responsive">
                                         <table class="table">
                                             <tr>
-                                                <th style="width:50%">Subtotal:</th>
-                                                <td>R$250.30</td>
+                                                <th style="width:50%">Subtotal:</th>                                                
+                                                <td>@money($pedido->valor)</td>
                                             </tr>
                                             <tr>
                                                 <th>Frete</th>
@@ -208,7 +201,7 @@
                                             </tr>
                                             <tr>
                                                 <th>Total:</th>
-                                                <td>R$265.24</td>
+                                                <td>@money($pedido->valor)</td>
                                             </tr>
                                         </table>
                                     </div>

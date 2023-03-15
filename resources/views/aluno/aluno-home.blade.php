@@ -133,8 +133,9 @@
                                                                 @elseif ($p->status == 6)
                                                                     <span class="badge badge-primary">Pedido Entregue</span>
                                                                 @endif</td>
-                                                            <td>
-                                                            <a href="{{ url('aluno/detalhes-pedido') }}" class="btn btn-info  btn-sm">Ver Pedido</a>
+                                                            <td>                                                        
+
+                                                            <a href="{{ url('aluno/detalhes-pedido',[$p->id]) }}" class="btn btn-info  btn-sm">Ver Pedido</a>
                                                         </td>
                                                         </tr>
                                                     @empty

@@ -33,4 +33,9 @@ class Pedido extends Model
     {
         return $this->belongsTo(Unidade::class);
     }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }
