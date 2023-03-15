@@ -14,17 +14,15 @@ class HomeController extends Controller
     }
 
     public function index()
-    {
-      
+    {                
+      $pedidoService = new PedidoService();
+      $pedidos = $pedidoService->getUltimosPedidos(5);    
+
       if (auth()->user()->tipo_usuario == 4){
         
-        return redirect('/aluno/home');
+        return view('aluno.aluno-home',['pedidos' => $pedidos]);
       
-      }else{
-        
-        $pedidoService = new PedidoService();
-        $pedidos = $pedidoService->getUltimosPedidos(5);      
-
+      }else{      
         $alunoService = new AlunoService();
         $qtde_alunos = $alunoService->getQtdeAlunos();
         

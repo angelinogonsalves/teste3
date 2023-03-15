@@ -94,7 +94,7 @@
                         @foreach ($pedidos as $p)
                             <tr>
                                 <td><a href="#">{{ $p->id }}</a></td>
-                                <td>{{ $p->created_at }}</td>
+                                <td>@datetime($p->created_at)</td>
                                 <td>
                                     {{ $p->nome_aluno }}
                                     <small class="text-success mr-3">

@@ -109,33 +109,36 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td><a href="{{ url('produtos/detalhes') }}">1</a></td>
-                                                        <td>22/10/2000</td>
-                                                        <td>
-                                                            <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                                R$1222,22</div>
+                                                    @forelse ($pedidos as $p)
+                                                        <tr>
+                                                            <td><a href="{{ url('produtos/detalhes') }}"></a>{{$p->id}}</td>
+                                                            <td>@datetime($p->created_at)</td>
+                                                            <td>
+                                                                <div class="sparkbar" data-color="#00a65a" data-height="20">
+                                                                @money($p->valor)</div>
+                                                            </td>
+                                                            <td>  
+                                                                @if ($p->status == 0)
+                                                                <span class="badge badge-white">Cancelado</span>
+                                                                @elseif ($p->status == 1)
+                                                                    <span class="badge badge-danger">Aguardando Pagamento</span>
+                                                                @elseif ($p->status == 2)
+                                                                    <span class="badge badge-warning">Processando Pagamento</span>
+                                                                @elseif ($p->status == 3)
+                                                                    <span class="badge badge-success">Pagamento Aprovado</span>
+                                                                @elseif ($p->status == 4)
+                                                                    <span class="badge badge-dark">Em Produção</span>
+                                                                @elseif ($p->status == 5)
+                                                                    <span class="badge badge-info">Pedido Finalizado</span>
+                                                                @elseif ($p->status == 6)
+                                                                    <span class="badge badge-primary">Pedido Entregue</span>
+                                                                @endif</td>
+                                                            <td>
+                                                            <a href="{{ url('aluno/detalhes-pedido') }}" class="btn btn-info  btn-sm">Ver Pedido</a>
                                                         </td>
-                                                        <td><span class="badge badge-success">Pago</span></td>
-                                                        <td>
-                                                         <a href="{{ url('aluno/detalhes-pedido') }}" class="btn btn-info  btn-sm">Ver Pedido</a>
-                                                     </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><a href="aluno/detalhes-pedido">OR1848</a></td>
-                                                        <td>22/10/2005</td>
-                                                        <td>
-                                                            <div class="sparkbar" data-color="#f39c12" data-height="20">
-                                                               R$150,50
-                                                            </div>
-                                                        </td>
-                                                        <td><span class="badge badge-danger">Pagamento pendente</span>
-                                                        </td>
-                                                        <td>
-                                                         <a  href="{{ url('aluno/aluno-detalhes-pedido') }}" class="btn btn-info  btn-sm">Ver Pedido</a>
-                                                     </td>
-                                                    </tr>
-                                                   
+                                                        </tr>
+                                                    @empty
+                                                    @endforelse                                                                                                      
                                                 </tbody>
                                             </table>
                                         </div>
