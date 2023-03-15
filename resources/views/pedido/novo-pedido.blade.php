@@ -3,7 +3,8 @@
 @section('content')
     <div class="card card-secondary">
         <div class="card-header">
-            <h3 class="card-title">Incluindo pedidos.. </h3>
+            <h3 class="card-title">Pedidos.. </h3>
+            <b class="float-right">Status: @statusPedido($dados->status)</b> 
         </div>
 
         <div class="card-body">
@@ -62,7 +63,7 @@
                             <div class="select-purple">
                                 <select name="modalidade_id" id="modalidade_id" class="form-control"
                                     data-placeholder="Selecione Modalidade">
-                                    <option value="">Selecione...</option>
+                                    <option value=""></option>
                                     @forelse ($lista_modalidades as $m)
                                         <option value="{{ $m->id }}">{{ $m->modalidade }}</option>
                                     @empty
@@ -234,14 +235,26 @@
 
                 $("#div_tamanhos").append(
                     ' <label class="btn btn-default text-center">' +
-                    '   <input type="radio" name="add_tamanho_id" value="1" autocomplete="off"> ' +
+                    '   <input type="radio" name="add_tamanho_id" value="P" autocomplete="off"> ' +
                     '     <span class="text-xl">P</span> ' +
                     ' </label> ');
 
                 $("#div_tamanhos").append(
                     ' <label class="btn btn-default text-center">' +
-                    '   <input type="radio" name="add_tamanho_id" value="2" autocomplete="off"> ' +
+                    '   <input type="radio" name="add_tamanho_id" value="M" autocomplete="off"> ' +
                     '     <span class="text-xl">M</span> ' +
+                    ' </label> ');
+
+                $("#div_tamanhos").append(
+                    ' <label class="btn btn-default text-center">' +
+                    '   <input type="radio" name="add_tamanho_id" value="G" autocomplete="off"> ' +
+                    '     <span class="text-xl">G</span> ' +
+                    ' </label> ');
+
+                $("#div_tamanhos").append(
+                    ' <label class="btn btn-default text-center">' +
+                    '   <input type="radio" name="add_tamanho_id" value="GG" autocomplete="off"> ' +
+                    '     <span class="text-xl">GG</span> ' +
                     ' </label> ');
 
                 /*                $.ajax({
@@ -293,6 +306,7 @@
 
             if (unidade_id && nome_aluno && ra_aluno && modalidade_id && modalidade_id && tamanho_id &&
                 nome_personalizado && numero_personalizado) {
+            //if (unidade_id && nome_aluno && ra_aluno) {
                 $("#tbodyitens_produto").append("<tr class='itens_produtos' valor_produto=" + valor_produto + " ra_aluno=" +
                     ra_aluno + " nome_aluno=" + nome_aluno + " unidade_id=" + unidade_id + " produto_id=" + produto_id +
                     " tamanho_id=" + tamanho_id + " modalidade_id=" + modalidade_id + " nome_personalizado=" +
