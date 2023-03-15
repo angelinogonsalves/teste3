@@ -27,7 +27,7 @@
         @if (auth()->user()->tipo_usuario == 4)
             <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
                 <div class="container">
-                    <a href="/aluno/home" class="navbar-brand">
+                    <a href="/" class="navbar-brand">
                         <img src="{{ asset('/img/LogoRazza.png') }}" alt="Logo" class="brand-image img "
                             style="opacity:1">
                         <span class="brand-text font-weight-light">Razza PRO</span>
@@ -129,7 +129,7 @@
                                 </div>
                             @else
                                 <div class="mt-4">
-                                    <a href="{{ url('aluno/home') }}"class="btn btn btn-primary">Voltar para meus pedidos</a>
+                                    <a href="{{ url('aluno') }}"class="btn btn btn-primary">Voltar para meus pedidos</a>
                                 </div>
                             @endif
                         </div>

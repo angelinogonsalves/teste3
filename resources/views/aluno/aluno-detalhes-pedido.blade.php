@@ -27,7 +27,7 @@
 
         <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
             <div class="container">
-                <a href="/aluno/home" class="navbar-brand">
+                <a href="/" class="navbar-brand">
                     <img src="{{ asset('/img/LogoRazza.png') }}" alt="Logo" class="brand-image img "
                         style="opacity:1">
                     <span class="brand-text font-weight-light">Razza PRO</span>
@@ -215,7 +215,7 @@
                                 <div class="col-12">
                                     <a href="" rel="noopener" target="_blank"
                                         class="btn btn-default"><i class="fas fa-print"></i> Imprimir</a>
-                                    <button type="button" class="btn btn-success float-right"><i
+                                    <button type="button" class="btn btn-success float-right" onclick="pagseguro()"><i
                                             class="far fa-credit-card"></i> Pagar Pedido
                                     </button>
                                     
@@ -264,6 +264,25 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+        function pagseguro(id){
+            var url = "{{ url('pedidos/pagseguro',[$pedido->id]) }}";            
+            $.ajax({
+                type: "GET",
+                url: url,           
+                success: function(data) {
+                    if (data.success) {                         
+                        console.log(data);                                                     
+                        window.open(data.url, '_blank');                       
+                    } else {
+                        alert(data.msg_erro);
+                   }                                                                    
+                },            
+                error: function(data) {             
+                    alert(data.msg_erro);              
+                }            
+            });
+        }
     </script>
 </body>
 

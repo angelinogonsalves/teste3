@@ -27,7 +27,7 @@
 
         <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
             <div class="container">
-                <a href="/aluno/home" class="navbar-brand">
+                <a href="/" class="navbar-brand">
                     <img src="{{ asset('/img/LogoRazza.png') }}" alt="Logo" class="brand-image img "
                         style="opacity:1">
                     <span class="brand-text font-weight-light">Razza PRO</span>
