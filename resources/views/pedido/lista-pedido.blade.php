@@ -67,14 +67,19 @@
                                                     <span class="badge badge-primary">Pedido Entregue</span>
                                                 @endif
                                             </td>
-                                            <td> Puxar uinidade {{ $p->unidade }} </td>
+                                            <td> {{ $p->unidade->nome_fantasia}} </td>
                                             <td>
                                                 <form action="{{ url('pedidos/mudar-status', [$p->id]) }}" method="post">
                                                     @csrf
                                                     <a class="btn btn-primary btn-sm"
                                                         href="{{ url('pedidos/cadastro', [$p->id]) }}">Ver | Editar</a>
+
+                                                        <a href="{{ url('pedidos/detalhes-pedido-print', [$p->id]) }}" rel="noopener" target="_blank"
+                                                            class="btn btn-default btn-sm"><i class="fas fa-print"></i> Imprimir</a>
+
                                                     {{-- <input type="submit" value="Excluir" class="btn btn-danger btn-sm"> --}}
                                                         <input type="submit" value="Mudar Status" class="btn btn-info btn-sm">
+
                                                 </form>
                                             </td>
 
