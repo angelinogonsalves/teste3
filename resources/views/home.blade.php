@@ -121,7 +121,7 @@
                                         <span class="badge badge-primary">Pedido Entregue</span>
                                     @endif
                                 <td>
-                                     Puxar uinidade {{ $p->unidade }}
+                                    {{ $p->unidade->nome_fantasia}}
                                 </td>
                             </tr>
                         @endforeach
