@@ -47,7 +47,7 @@
                     </div>
                     <div class="col-sm-8">
                         <div class="form-group">
-                            <label>Escolha produto para Adcionar aos itens</label>
+                            <label>Escolha produto para Adicionar aos itens</label>
                             <div class="select-purple">
                                 <select name="add_produto" id="add_produto" class="form-control" onchange="buscaTamanhos()";
                                     data-placeholder="Selecione unidades"style="width: 100%;">
@@ -89,31 +89,7 @@
                     </div>
                     <div class="col-12 col-sm-5">
                         <div class="form-group">
-                            <div id="div_tamanhos" class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-default text-center">
-                                    <input type="radio" name="add_tamanho_id" value="P" autocomplete="off">
-                                    <span class="text-xl">P</span>
-                                </label>
-                                <label class="btn btn-default text-center">
-                                    <input type="radio" name="add_tamanho_id" value="PP" autocomplete="off">
-                                    <span class="text-xl">PP</span>
-                                </label>
-                                <label class="btn btn-default text-center">
-                                    <input type="radio" name="add_tamanho_id" value="M" autocomplete="off">
-                                    <span class="text-xl">M</span>
-                                </label>
-                                <label class="btn btn-default text-center">
-                                    <input type="radio" name="add_tamanho_id" value="G" autocomplete="off">
-                                    <span class="text-xl">G</span>
-                                </label>
-                                <label class="btn btn-default text-center">
-                                    <input type="radio" name="add_tamanho_id" value="GG" autocomplete="off">
-                                    <span class="text-xl">GG</span>
-                                </label>
-                                <label class="btn btn-default text-center">
-                                    <input type="radio" name="add_tamanho_id" value="12" autocomplete="off">
-                                    <span class="text-xl">12</span>
-                                </label>
+                            <div id="div_tamanhos" class="btn-group" data-toggle="buttons">                                
                             </div>
                         </div>
                     </div>
@@ -135,7 +111,7 @@
                 <div class="card-footer text-center">
                     <button type="button" class="btn btn-primary btn-sm" onclick="adicionarItem();">
                         <i class="fas fa-cart-plus fa-lg mr-2"></i>
-                        Adcionar item
+                        Adicionar item
                     </button>
                 </div>
             </form>
@@ -225,45 +201,28 @@
         }
 
         function buscaTamanhos() {
+            $("#div_tamanhos").html('');
+
             produto_id = $("#add_produto").val();
 
             if (produto_id) {
-                url = '{{ url('/produtos/listaporunidade/') }}' + '/' + unidade_id;
-
-                $("#div_tamanhos").html('');
-
-                $("#div_tamanhos").append(
-                    ' <label class="btn btn-default text-center">' +
-                    '   <input type="radio" name="add_tamanho_id" value="1" autocomplete="off"> ' +
-                    '     <span class="text-xl">P</span> ' +
-                    ' </label> ');
-
-                $("#div_tamanhos").append(
-                    ' <label class="btn btn-default text-center">' +
-                    '   <input type="radio" name="add_tamanho_id" value="2" autocomplete="off"> ' +
-                    '     <span class="text-xl">M</span> ' +
-                    ' </label> ');
-
-                /*                $.ajax({
-                                    type: 'GET',   
-                                    url: url,              
-                                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                                    async: true,
-                                    success: function (data) {
-                                        $.each(data,function(key,value) {
-                                            $("#produto").append('<option value=' + value.id + '>' + value.produto+'</option>');
-                                        });
-                                    },
-                                    complete: function () {
-
-                                    },
-                                    beforeSend: function () {
-
-                                    },
-                                    error: function (data) {
-
-                                    }
-                                }); */
+                url = '{{ url('/tamanhos/listaporproduto/') }}' + '/' + produto_id;
+             
+                $.ajax({
+                    type: 'GET',   
+                    url: url,              
+                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                    async: true,
+                    success: function (data) {
+                        $.each(data,function(key,value) {
+                            $("#div_tamanhos").append(
+                                ' <label class="btn btn-default text-center">' +
+                                '   <input type="radio" name="add_tamanho_id" value="'+value.id+'" autocomplete="off"> ' +
+                                '     <span class="text-xl">'+value.tamanho+'</span> ' +
+                                ' </label> ');                            
+                        });
+                    },                    
+                });                       
             }
         }
 

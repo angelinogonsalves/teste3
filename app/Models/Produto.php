@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Produto extends Model
@@ -25,6 +26,11 @@ class Produto extends Model
     public function produtoTamanhos(): HasMany
     {
         return $this->hasMany(ProdutosTamanhos::class);
+    }
+
+    public function tamanhos(): BelongsToMany
+    {
+        return $this->belongsToMany(Tamanho::class,'produtos_tamanhos');
     }
 
     public function unidades(): HasMany
