@@ -19,7 +19,7 @@
                                     <option value="">Selecione...</option>
                                     @forelse ($lista_unidades as $u)
                                         <option value="{{ $u->id }}"
-                                            @if ($u->id == $dados->unidade_id) ? 'selected=""' @endif>{{ $u->nome_fantasia }}
+                                            @if ($u->id == $dados->unidade_id) selected="" @endif>{{ $u->nome_fantasia }}
                                         </option>
                                     @empty
                                     @endforelse
@@ -31,14 +31,14 @@
                         <div class="form-group">
                             <label>Nome Completo do Aluno (Atleta)*</label>
                             <input type="text" name="nome_aluno" id="nome_aluno" class="form-control"
-                                placeholder="informe..">
+                                placeholder="informe.." value="{{$dados->nome_aluno}}">
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>R.A (Registro academico)*</label>
                             <input type="text" name="ra_aluno" id="ra_aluno" class="form-control"
-                                placeholder="Informe..">
+                                placeholder="Informe.." value="{{$dados->ra_aluno}}">
                         </div>
                     </div>
                     <div class="col-12 col-sm-12">

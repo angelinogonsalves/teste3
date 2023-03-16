@@ -33,7 +33,7 @@ class PedidoController extends Controller
 
         $modalidadeService = new ModalidadeService();
         $lista_modalidades = $modalidadeService->getAllModalidades();
-        
+
         return view('pedido.novo-pedido',['dados' => $pedido,'lista_unidades' => $lista_unidades,'lista_modalidades' => $lista_modalidades]);
     }
 
