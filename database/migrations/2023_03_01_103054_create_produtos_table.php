@@ -18,7 +18,8 @@ return new class extends Migration
             $table->text('descricao')->nullable();          
             $table->decimal('valor',10,2);                    
             $table->string('imagem1')->nullable();                   
-            $table->string('imagem_medidas')->nullable();                   
+            $table->string('imagem_medidas')->nullable();         
+            $table->string('produto',200);          
             $table->timestamps();
         });
     }

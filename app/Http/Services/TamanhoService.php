@@ -13,7 +13,8 @@ class TamanhoService {
         return Tamanho::orderby('id')->get();                    
         
     } 
-    public function listPorProduto(Produto $produto){        
-        return $produto->produtoTamanhos()->get();                    
+    public function listPorProduto(Produto $produto){   
+
+        return $produto->tamanhos()->get();                    
     } 
 }

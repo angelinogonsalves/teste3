@@ -3,8 +3,7 @@
 @section('content')
     <div class="card card-secondary">
         <div class="card-header">
-            <h3 class="card-title">Pedidos.. </h3>
-            <b class="float-right">Status: @statusPedido($dados->status)</b> 
+            <h3 class="card-title">Incluindo pedidos.. </h3>
         </div>
 
         <div class="card-body">
@@ -20,7 +19,7 @@
                                     <option value="">Selecione...</option>
                                     @forelse ($lista_unidades as $u)
                                         <option value="{{ $u->id }}"
-                                            @if ($u->id == $dados->unidade_id) ? 'selected=""' @endif>{{ $u->nome_fantasia }}
+                                            @if ($u->id == $dados->unidade_id) selected="" @endif>{{ $u->nome_fantasia }}
                                         </option>
                                     @empty
                                     @endforelse
@@ -32,14 +31,14 @@
                         <div class="form-group">
                             <label>Nome Completo do Aluno (Atleta)*</label>
                             <input type="text" name="nome_aluno" id="nome_aluno" class="form-control"
-                                placeholder="informe..">
+                                placeholder="informe.." value="{{$dados->nome_aluno}}">
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>R.A (Registro academico)*</label>
                             <input type="text" name="ra_aluno" id="ra_aluno" class="form-control"
-                                placeholder="Informe..">
+                                placeholder="Informe.." value="{{$dados->ra_aluno}}">
                         </div>
                     </div>
                     <div class="col-12 col-sm-12">
@@ -48,7 +47,7 @@
                     </div>
                     <div class="col-sm-8">
                         <div class="form-group">
-                            <label>Escolha produto para Adcionar aos itens</label>
+                            <label>Escolha produto para Adicionar aos itens</label>
                             <div class="select-purple">
                                 <select name="add_produto" id="add_produto" class="form-control" onchange="buscaTamanhos()";
                                     data-placeholder="Selecione unidades"style="width: 100%;">
@@ -63,7 +62,7 @@
                             <div class="select-purple">
                                 <select name="modalidade_id" id="modalidade_id" class="form-control"
                                     data-placeholder="Selecione Modalidade">
-                                    <option value=""></option>
+                                    <option value="">Selecione...</option>
                                     @forelse ($lista_modalidades as $m)
                                         <option value="{{ $m->id }}">{{ $m->modalidade }}</option>
                                     @empty
@@ -90,31 +89,7 @@
                     </div>
                     <div class="col-12 col-sm-5">
                         <div class="form-group">
-                            <div id="div_tamanhos" class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-default text-center">
-                                    <input type="radio" name="add_tamanho_id" value="P" autocomplete="off">
-                                    <span class="text-xl">P</span>
-                                </label>
-                                <label class="btn btn-default text-center">
-                                    <input type="radio" name="add_tamanho_id" value="PP" autocomplete="off">
-                                    <span class="text-xl">PP</span>
-                                </label>
-                                <label class="btn btn-default text-center">
-                                    <input type="radio" name="add_tamanho_id" value="M" autocomplete="off">
-                                    <span class="text-xl">M</span>
-                                </label>
-                                <label class="btn btn-default text-center">
-                                    <input type="radio" name="add_tamanho_id" value="G" autocomplete="off">
-                                    <span class="text-xl">G</span>
-                                </label>
-                                <label class="btn btn-default text-center">
-                                    <input type="radio" name="add_tamanho_id" value="GG" autocomplete="off">
-                                    <span class="text-xl">GG</span>
-                                </label>
-                                <label class="btn btn-default text-center">
-                                    <input type="radio" name="add_tamanho_id" value="12" autocomplete="off">
-                                    <span class="text-xl">12</span>
-                                </label>
+                            <div id="div_tamanhos" class="btn-group" data-toggle="buttons">                                
                             </div>
                         </div>
                     </div>
@@ -136,7 +111,7 @@
                 <div class="card-footer text-center">
                     <button type="button" class="btn btn-primary btn-sm" onclick="adicionarItem();">
                         <i class="fas fa-cart-plus fa-lg mr-2"></i>
-                        Adcionar item
+                        Adicionar item
                     </button>
                 </div>
             </form>
@@ -226,57 +201,28 @@
         }
 
         function buscaTamanhos() {
+            $("#div_tamanhos").html('');
+
             produto_id = $("#add_produto").val();
 
             if (produto_id) {
-                url = '{{ url('/produtos/listaporunidade/') }}' + '/' + unidade_id;
-
-                $("#div_tamanhos").html('');
-
-                $("#div_tamanhos").append(
-                    ' <label class="btn btn-default text-center">' +
-                    '   <input type="radio" name="add_tamanho_id" value="P" autocomplete="off"> ' +
-                    '     <span class="text-xl">P</span> ' +
-                    ' </label> ');
-
-                $("#div_tamanhos").append(
-                    ' <label class="btn btn-default text-center">' +
-                    '   <input type="radio" name="add_tamanho_id" value="M" autocomplete="off"> ' +
-                    '     <span class="text-xl">M</span> ' +
-                    ' </label> ');
-
-                $("#div_tamanhos").append(
-                    ' <label class="btn btn-default text-center">' +
-                    '   <input type="radio" name="add_tamanho_id" value="G" autocomplete="off"> ' +
-                    '     <span class="text-xl">G</span> ' +
-                    ' </label> ');
-
-                $("#div_tamanhos").append(
-                    ' <label class="btn btn-default text-center">' +
-                    '   <input type="radio" name="add_tamanho_id" value="GG" autocomplete="off"> ' +
-                    '     <span class="text-xl">GG</span> ' +
-                    ' </label> ');
-
-                /*                $.ajax({
-                                    type: 'GET',   
-                                    url: url,              
-                                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                                    async: true,
-                                    success: function (data) {
-                                        $.each(data,function(key,value) {
-                                            $("#produto").append('<option value=' + value.id + '>' + value.produto+'</option>');
-                                        });
-                                    },
-                                    complete: function () {
-
-                                    },
-                                    beforeSend: function () {
-
-                                    },
-                                    error: function (data) {
-
-                                    }
-                                }); */
+                url = '{{ url('/tamanhos/listaporproduto/') }}' + '/' + produto_id;
+             
+                $.ajax({
+                    type: 'GET',   
+                    url: url,              
+                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                    async: true,
+                    success: function (data) {
+                        $.each(data,function(key,value) {
+                            $("#div_tamanhos").append(
+                                ' <label class="btn btn-default text-center">' +
+                                '   <input type="radio" name="add_tamanho_id" value="'+value.id+'" autocomplete="off"> ' +
+                                '     <span class="text-xl">'+value.tamanho+'</span> ' +
+                                ' </label> ');                            
+                        });
+                    },                    
+                });                       
             }
         }
 
@@ -306,7 +252,6 @@
 
             if (unidade_id && nome_aluno && ra_aluno && modalidade_id && modalidade_id && tamanho_id &&
                 nome_personalizado && numero_personalizado) {
-            //if (unidade_id && nome_aluno && ra_aluno) {
                 $("#tbodyitens_produto").append("<tr class='itens_produtos' valor_produto=" + valor_produto + " ra_aluno=" +
                     ra_aluno + " nome_aluno=" + nome_aluno + " unidade_id=" + unidade_id + " produto_id=" + produto_id +
                     " tamanho_id=" + tamanho_id + " modalidade_id=" + modalidade_id + " nome_personalizado=" +

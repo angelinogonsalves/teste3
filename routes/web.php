@@ -7,6 +7,7 @@ use App\Http\Controllers\ModalidadeController;
 use App\Http\Controllers\PagSeguroController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\TamanhoController;
 use App\Http\Controllers\UnidadeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;

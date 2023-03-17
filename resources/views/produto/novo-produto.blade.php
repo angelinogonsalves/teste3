@@ -43,8 +43,7 @@
                                     data-live-search="true" data-placeholder="Selecione ">
                                     @forelse ($lista_tamanhos as $t)
                                         <option value="{{ $t->id }}"
-                                            {{ in_array($t->id, $tamanhos_selecionados) ? 'selected=""' : '' }}>
-                                            {{ $t->tamanho }}</option>
+                                        @if ($dados->tamanhos->find($t->id)) selected="" @endif> {{ $t->tamanho }}</option>
                                     @empty
                                     @endforelse
                                 </select>
@@ -67,14 +66,50 @@
                                     data-live-search="true" data-placeholder="Selecione as  ">
                                     @forelse ($lista_unidades as $u)
                                         <option value="{{ $u->id }}"
-                                            {{ in_array($u->id, $unidades_selecionadas) ? 'selected=""' : '' }}>
-                                            {{ $u->nome_fantasia }}</option>
+                                            @if ($dados->unidades->find($u->id)) selected="" @endif> {{ $u->nome_fantasia }}</option>
                                     @empty
                                     @endforelse
                                 </select>
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label>Personaliza Nome</label>
+                            <div class="select2-purple">
+                                <select name="personaliza_nome" class="form-control">
+                                    <option value="0" @if ($dados->personaliza_nome != 1) ?  selected="" @endif>Não</option>
+                                    <option value="1" @if ($dados->personaliza_nome == 1) ?  selected="" @endif>Sim</option>                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label>Personaliza Numero</label>
+                            <div class="select2-purple">
+                                <select name="personaliza_numero" class="form-control">
+                                    <option value="0" @if ($dados->personaliza_numero != 1) ?  selected="" @endif>Não</option>
+                                    <option value="1" @if ($dados->personaliza_numero == 1) ?  selected="" @endif>Sim</option>                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label>Personaliza Modalidade</label>
+                            <div class="select2-purple">
+                                <select name="personaliza_modalidade" class="form-control">
+                                    <option value="0" @if ($dados->personaliza_modalidade != 1) ?  selected="" @endif>Não</option>
+                                    <option value="1" @if ($dados->personaliza_modalidade == 1) ?  selected="" @endif>Sim</option>                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="col-12 col-sm-4">
                         <div class="form-group">
                             <label for="exampleInputFile">Imagem do produto</label>

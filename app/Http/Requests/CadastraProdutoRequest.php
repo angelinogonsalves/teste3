@@ -36,7 +36,10 @@ class CadastraProdutoRequest extends FormRequest
             'descricao' => 'nullable|max:500',                        
             'valor' => 'required|numeric',   
             'tamanhos' => 'required',
-            'unidades' => 'required'            
+            'unidades' => 'required',
+            'personaliza_nome' => 'required',
+            'personaliza_numero' => 'required',
+            'personaliza_modalidade' => 'required'
         ];
     }
 }
