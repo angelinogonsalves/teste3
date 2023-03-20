@@ -31,23 +31,23 @@
                         <div class="form-group">
                             <label>Nome Completo do Aluno (Atleta)*</label>
                             <input type="text" name="nome_aluno" id="nome_aluno" class="form-control"
-                                placeholder="informe.." value="{{$dados->nome_aluno}}">
+                                placeholder="informe.." value="{{ $dados->nome_aluno }}">
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>R.A (Registro academico)*</label>
                             <input type="text" name="ra_aluno" id="ra_aluno" class="form-control"
-                                placeholder="Informe.." value="{{$dados->ra_aluno}}">
+                                placeholder="Informe.." value="{{ $dados->ra_aluno }}">
                         </div>
                     </div>
                     <div class="col-12 col-sm-12">
                         <h4 class="mt-12"><small>Esolha o produto e adicione aos itens</small></h4>
                         <hr>
                     </div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-5">
                         <div class="form-group">
-                            <label>Escolha produto para Adicionar aos itens</label>
+                            <label>Escolha produto para Adicionar aos itens *</label>
                             <div class="select-purple">
                                 <select name="add_produto" id="add_produto" class="form-control" onchange="buscaTamanhos()";
                                     data-placeholder="Selecione unidades"style="width: 100%;">
@@ -56,7 +56,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-sm-3">
+
+                    <div class="col-12 col-sm-12">
+                        <label>Selecione um tamanho para o produto *</label>
+                    </div>
+                    <div class="col-12 col-sm-12">
+                        <div class="form-group">
+                            <div id="div_tamanhos" class="btn-group" data-toggle="buttons">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-4">
                         <div class="form-group">
                             <label>Selecione Modalidade (se houver)</label>
                             <div class="select-purple">
@@ -71,42 +82,24 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="col-sm-2">
-                        <div class="form-group">
-                            <label>Tamanhos disponiveis</label>
-                            <div class="select-purple">
-                                <select name="tamanho" class="form-control" data-placeholder="Selecione tamanhos">
-                                    <option>P</option>
-                                    <option>M</option>
-                                    <option>G</option>
-                                    <option>GG</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div> --}}
-                    <div class="col-12 col-sm-12">
-                        <h5 class="mt-12"><small>Selecione um tamanho para o produto</small></h5>
-                    </div>
-                    <div class="col-12 col-sm-5">
-                        <div class="form-group">
-                            <div id="div_tamanhos" class="btn-group" data-toggle="buttons">                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <div class="form-group">
                             <label>Nome Personalizado (se houver)</label>
                             <input type="text" name="nome_personalizado" id="nome_personalizado" class="form-control"
                                 placeholder="Informe..">
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <div class="form-group">
                             <label>Numero Personalizado (se houver)</label>
-                            <input type="text" name="numero_personalizado" id="numero_personalizado"
-                                class="form-control" placeholder="Informe..">
+                            <input type="text" name="numero_personalizado" id="numero_personalizado" class="form-control"
+                                placeholder="Informe..">
                         </div>
                     </div>
+                </div>
+                <div class="col-12 col-sm-12">
+                    <h5 class="mt-12 text-center"><small>Confira os itens do pedido na tabela abaixo</small></h5>
+                    <hr>
                 </div>
                 <div class="card-footer text-center">
                     <button type="button" class="btn btn-primary btn-sm" onclick="adicionarItem();">
@@ -138,21 +131,27 @@
                                 </thead>
                                 <tbody id="tbodyitens_produto">
                                     @forelse ($dados->itens as $p)
-                                    <tr class='itens_produtos' valor_produto="{{$p->valor_unitario}}" unidade_id="{{$p->unidade_id}}" produto_id="{{$p->produto_id}}"
-                                        tamanho_id="{{$p->tamanho_id}}" modalidade_id="{{$p->modalidade_id}}" nome_personalizado="{{$p->nome_personalizado}}" 
-                                        numero_personalizado="{{$p->numero_personalizado}}">
-                                        <td>{{$p->produto->produto}}</td>
-                                        <td><input class='form-control-sm quantidade' required type='number' value='{{$p->quantidade}}' min='0'max='10' step='0'/></td>
-                                        <td>@money($p->valor_unitario)</td>
-                                        <td>{{$p->tamanho->tamanho}}</td>
-                                        <td>{{$p->modalidade->modalidade}}</td>
-                                        <td>{{$p->modalidade->nome_personalizado}}</td>
-                                        <td>{{$p->modalidade->numero_personalizado}}</td>
-                                        <td> 
-                                            <button class='btn btn-sm btn-default excluir' type='button' title='Remover'> <span class='text-danger fas fa-trash-alt'></span> </button>
-                                        </td>
+                                        <tr class='itens_produtos' valor_produto="{{ $p->valor_unitario }}"
+                                            unidade_id="{{ $p->unidade_id }}" produto_id="{{ $p->produto_id }}"
+                                            tamanho_id="{{ $p->tamanho_id }}" modalidade_id="{{ $p->modalidade_id }}"
+                                            nome_personalizado="{{ $p->nome_personalizado }}"
+                                            numero_personalizado="{{ $p->numero_personalizado }}">
+                                            <td>{{ $p->produto->produto }}</td>
+                                            <td><input class='form-control-sm quantidade' required type='number'
+                                                    value='{{ $p->quantidade }}' min='0'max='10'
+                                                    step='0' /></td>
+                                            <td>@money($p->valor_unitario)</td>
+                                            <td>{{ $p->tamanho->tamanho }}</td>
+                                            <td>{{ $p->modalidade->modalidade }}</td>
+                                            <td>{{ $p->modalidade->nome_personalizado }}</td>
+                                            <td>{{ $p->modalidade->numero_personalizado }}</td>
+                                            <td>
+                                                <button class='btn btn-sm btn-default excluir' type='button'
+                                                    title='Remover'> <span class='text-danger fas fa-trash-alt'></span>
+                                                </button>
+                                            </td>
                                         </tr>
-                                        @empty
+                                    @empty
                                     @endforelse
                                 </tbody>
                             </table>
@@ -182,8 +181,7 @@
     </div>
 
     <script>
-
-        $( document ).ready(function() {
+        $(document).ready(function() {
             calcularTotal();
             $('.excluir').on('click', function() {
                 $(this).parent().parent().remove();
@@ -233,22 +231,23 @@
 
             if (produto_id) {
                 url = '{{ url('/tamanhos/listaporproduto/') }}' + '/' + produto_id;
-             
+
                 $.ajax({
-                    type: 'GET',   
-                    url: url,              
+                    type: 'GET',
+                    url: url,
                     contentType: "application/x-www-form-urlencoded; charset=UTF-8",
                     async: true,
-                    success: function (data) {
-                        $.each(data,function(key,value) {
+                    success: function(data) {
+                        $.each(data, function(key, value) {
                             $("#div_tamanhos").append(
                                 ' <label class="btn btn-default text-center">' +
-                                '   <input type="radio" name="add_tamanho_id" value="'+value.id+'" autocomplete="off"> ' +
-                                '     <span class="text-xl">'+value.tamanho+'</span> ' +
-                                ' </label> ');                            
+                                '   <input type="radio" name="add_tamanho_id" value="' + value.id +
+                                '" autocomplete="off"> ' +
+                                '     <span class="text-xl">' + value.tamanho + '</span> ' +
+                                ' </label> ');
                         });
-                    },                    
-                });                       
+                    },
+                });
             }
         }
 
@@ -302,7 +301,7 @@
         }
 
         function excluir() {
-          
+
         }
 
         function calcularTotal() {
