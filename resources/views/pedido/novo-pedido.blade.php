@@ -137,7 +137,23 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tbodyitens_produto">
-
+                                    @forelse ($dados->itens as $p)
+                                    <tr class='itens_produtos' valor_produto="{{$p->valor_unitario}}" unidade_id="{{$p->unidade_id}}" produto_id="{{$p->produto_id}}"
+                                        tamanho_id="{{$p->tamanho_id}}" modalidade_id="{{$p->modalidade_id}}" nome_personalizado="{{$p->nome_personalizado}}" 
+                                        numero_personalizado="{{$p->numero_personalizado}}">
+                                        <td>{{$p->produto->produto}}</td>
+                                        <td><input class='form-control-sm quantidade' required type='number' value='{{$p->quantidade}}' min='0'max='10' step='0'/></td>
+                                        <td>@money($p->valor_unitario)</td>
+                                        <td>{{$p->tamanho->tamanho}}</td>
+                                        <td>{{$p->modalidade->modalidade}}</td>
+                                        <td>{{$p->modalidade->nome_personalizado}}</td>
+                                        <td>{{$p->modalidade->numero_personalizado}}</td>
+                                        <td> 
+                                            <button class='btn btn-sm btn-default excluir' type='button' title='Remover'> <span class='text-danger fas fa-trash-alt'></span> </button>
+                                        </td>
+                                        </tr>
+                                        @empty
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
@@ -166,6 +182,16 @@
     </div>
 
     <script>
+
+        $( document ).ready(function() {
+            calcularTotal();
+            $('.excluir').on('click', function() {
+                $(this).parent().parent().remove();
+                calcularTotal();
+            });
+
+        });
+
         function buscaProdutos() {
             unidade_id = $("#unidade_id").val();
 
@@ -276,11 +302,7 @@
         }
 
         function excluir() {
-            $('.excluir').on('click', function() {
-                $(this).parent().parent().remove();
-
-                calcularTotal();
-            });
+          
         }
 
         function calcularTotal() {
