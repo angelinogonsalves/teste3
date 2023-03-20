@@ -150,7 +150,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-12">
+                        {{-- <div class="col-lg-12">
                             <div class="card card-primary card-outline">
                                 <div class="card-body">
                                     <h5 class="card-title">Meus dados</h5>
@@ -160,7 +160,7 @@
                                     <a href="#" class="btn btn-primary">Atualizar</a>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <!-- /.col-md-6 -->
