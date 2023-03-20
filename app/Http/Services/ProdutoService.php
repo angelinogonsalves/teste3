@@ -8,17 +8,14 @@ use App\Models\Unidade;
 use Exception;
 
 class ProdutoService {
-    public function salvaProduto(array $produtoData, $NomeImagem, $NomeImgMedidas) : array
+public function salvaProduto(array $produtoData) : array
     {        
         try {   
             if ($produtoData['id']){
                 $produto = Produto::find($produtoData['id']);
             } else {
                 $produto = new Produto();
-            }
-            $produto->imagem1 = $NomeImagem;
-            $produto->imagem_medidas = $NomeImgMedidas;
-            //dd($produto);
+            }                  
             $produto->fill($produtoData);
             $produto->save();
 
@@ -26,9 +23,11 @@ class ProdutoService {
             $produto_tamanho_service->AtualizaProdutosTamanhos($produto,$produtoData['tamanhos']);
             
             $produto_unidade_service = new ProdutoUnidadeService();
-            $produto_unidade_service->AtualizaProdutosUnidades($produto,$produtoData['unidades']);
-            
-                                                   
+            $produto_unidade_service->AtualizaProdutosUnidades($produto,$produtoData['unidades']);    
+
+            $produto_imagem_service = new ProdutoImagemService();
+            $produto_imagem_service->AtualizaProdutosImagens($produto,$produtoData);
+                                                               
             if ($produto){
                 return ["success" => true, "result" => $produto,"message" => "Produto salvo com sucesso"];     
             }     

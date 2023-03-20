@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImagemController;
 use App\Http\Controllers\ModalidadeController;
 use App\Http\Controllers\PagSeguroController;
 use App\Http\Controllers\PedidoController;
@@ -93,6 +94,10 @@ Route::middleware(['auth'])->group(function () {
     Route::group(array('prefix' => 'tamanhos'), function(){
         Route::get('/listaporproduto/{produto}', [TamanhoController::class,'listPorProduto'])->name('lista-tamanho-produto');
     });
+
+    Route::get('/link-imagem', [ImagemController::class,'criaLink']);
+
+    Route::post('/imagem/corta', [ImagemController::class,'corta']);
 });
 
 

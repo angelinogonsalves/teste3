@@ -39,7 +39,9 @@ class CadastraProdutoRequest extends FormRequest
             'unidades' => 'required',
             'personaliza_nome' => 'required',
             'personaliza_numero' => 'required',
-            'personaliza_modalidade' => 'required'
+            'personaliza_modalidade' => 'required',
+            'foto_produto' => 'nullable',
+            'foto_tamanho' => 'nullable',
         ];
     }
 }

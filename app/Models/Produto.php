@@ -39,4 +39,9 @@ class Produto extends Model
     {
         return $this->belongsToMany(Unidade::class,'produtos_unidades');
     }
+
+    public function imagens(): HasMany 
+    {
+        return $this->hasMany(ProdutoImagem::class);
+    }
 }

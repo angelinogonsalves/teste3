@@ -40,42 +40,21 @@ class ProdutoController extends BaseController
         $lista_tamanhos = $tamanhoService->getAllTamanhos();   
 
         $unidadeService = new UnidadeService();
-        $lista_unidades = $unidadeService->getAllUnidades();                
+        $lista_unidades = $unidadeService->getAllUnidades(); 
+        
+           
+        $imagens = $produto->imagens->map(function($imagem) {
+            $imagem->url =  url('/img/produtos') . '/' .$imagem->imagem;
+            return $imagem;
+        });
 
         return view('produto.novo-produto',['dados' => $produto,'lista_tamanhos' => $lista_tamanhos,'lista_unidades' => $lista_unidades]);
     }
    
     public function salvarProduto(CadastraProdutoRequest $request)    
     {
-        //  File Upload
-        if($request->hasFile('imagem1')){
-            $filenameWithExt = $request->file('imagem1')->getClientOriginalName();
-            // Get just filename
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get just ext
-            $extension = $request->file('imagem1')->getClientOriginalExtension();
-            // Filename to store
-            $nomeImagem = $filename.'_'.time().'.'.$extension;
-            // Upload Image
-            $request->file('imagem1')->storeAs('public/produtos', $nomeImagem);
-        }       
-        if($request->hasFile('imgmedidas')){
-            $filenameWithExtMed = $request->file('imgmedidas')->getClientOriginalName();
-            // Get just filename
-            $filenameMed = pathinfo($filenameWithExtMed, PATHINFO_FILENAME);
-            // Get just ext
-            $extensionMed = $request->file('imgmedidas')->getClientOriginalExtension();
-            // Filename to store
-            $nomeImagemMedidas = $filenameMed.'_'.time().'.'.$extension;
-            // Upload Image
-            $request->file('imgmedidas')->storeAs('public/produtos', $nomeImagemMedidas);
-        } else {
-            $nomeImagemMedidas = 'noimagemedidas.png';
-        }
         $validatedProduto = $request->validated();
-        //dd($validatedProduto);
-        $returnProduto = $this->produtoService->salvaProduto($validatedProduto, $nomeImagem, $nomeImagemMedidas); 
-        //dd($returnProduto);
+        $returnProduto = $this->produtoService->salvaProduto($validatedProduto); 
         return $this->responseData($returnProduto,'/produtos/cadastro');     
     }
 

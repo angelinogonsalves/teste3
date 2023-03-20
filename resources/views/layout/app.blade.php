@@ -17,6 +17,11 @@
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
     <!-- bootstrap select -->
     <link rel="stylesheet" href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.min.css') }}">
+    <!-- jQuery -->
+    
+    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/croppie.css') }}">
+    <script src="{{ asset('js/croppie.js') }}"></script>
 </head>
 <!--
 `body` tag options:
@@ -232,9 +237,6 @@
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
-
-    <!-- jQuery -->
-    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap -->
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE -->
@@ -262,6 +264,7 @@
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ asset('plugins/jquery-mask/jquery.mask.min.js') }}"></script>
 
     <script>
         $.ajaxSetup({
