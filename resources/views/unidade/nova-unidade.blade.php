@@ -15,7 +15,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label> CNPJ Unidade</label>
-                            <input type="text" name="cnpj" class="form-control" placeholder="Digite..." value="{{old('cnpj', $dados->cnpj)}}">
+                            <input type="text" name="cnpj" maxlength="14" class="form-control" placeholder="Digite..." value="{{old('cnpj', $dados->cnpj)}}">
                         </div>
                     </div>
                     <div class="col-sm-5">

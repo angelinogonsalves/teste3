@@ -26,7 +26,7 @@ class CadastraUnidadeRequest extends FormRequest
             'razao_social' => 'string|required|max:100',
             'nome_fantasia' => 'string|required|max:100',
             'email' => 'string|nullable|max:100',
-            'cnpj' => 'integer|nullable|digits:14',                        
+            'cnpj' => 'string|nullable|digits:14',                        
             'telefone' => 'integer|nullable|digits_between:10,12',                                                
             'endereco' => 'string|nullable|max:150',                                                
             'numero' => 'string|nullable|max:10',                                                
