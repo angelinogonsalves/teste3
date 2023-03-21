@@ -47,7 +47,7 @@
                                     @forelse($dados as $p)
                                         <tr>
                                             <td>{{ $p->id }}</td>
-                                            <td><?php echo date('d/m/Y H:i', strtotime($p->created_at)); ?></td>
+                                            <td><?php echo date('d/m/Y', strtotime($p->created_at)); ?></td>
                                             <td>{{ $p->nome_aluno }} - {{ $p->ra_aluno }}</td>
                                             <td>{{ $p->valor }}</td>
                                             <td>
@@ -77,8 +77,8 @@
                                                         <a href="{{ url('pedidos/detalhes-pedido-print', [$p->id]) }}" rel="noopener" target="_blank"
                                                             class="btn btn-default btn-sm"><i class="fas fa-print"></i> Imprimir</a>
 
-                                                    {{-- <input type="submit" value="Excluir" class="btn btn-danger btn-sm"> --}}
-                                                        <input type="submit" value="Mudar Status" class="btn btn-info btn-sm">
+                                                        {{-- <input type="submit" value="Excluir" class="btn btn-danger btn-sm"> --}}
+                                                        {{-- <input type="submit" value="Mudar Status" class="btn btn-info btn-sm"> --}}
 
                                                 </form>
                                             </td>
@@ -102,19 +102,19 @@
         </div>
     </section>
 
-    <script>
-        $(function () {
-          $("#tabela_itens_produto").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-          }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    <script>       
+         $(function () {
+        //   $("#tabela_itens_produto").DataTable({
+        //     "responsive": true, "lengthChange": false, "autoWidth": false,
+        //     "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        //   }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
           $('#tabela_itens_produto').DataTable({
             "paging": true,
             "lengthChange": false,
             "searching": false,
             "ordering": true,
             "info": true,
-            "autoWidth": false,
+            "autoWidth": true,
             "responsive": true,
           });
         });
