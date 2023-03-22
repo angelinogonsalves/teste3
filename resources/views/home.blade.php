@@ -9,7 +9,7 @@
                 <div class="info-box-content">
                     <span class="info-box-text">Total de Pedidos</span>
                     <span class="info-box-number">
-                        300
+                        {{$qtde_pedidos}}
                         <small>Pedidos</small>
                     </span>
                 </div>
@@ -24,7 +24,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Pagamentos pedentes</span>
-                    <span class="info-box-number">100</span>
+                    <span class="info-box-number">{{$qtde_pedidos_pendentes}}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -41,7 +41,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Pedidos Pagos</span>
-                    <span class="info-box-number">200</span>
+                    <span class="info-box-number">{{$qtde_pedidos_pagos}}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -53,7 +53,7 @@
                 <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-cog"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Pedidos Em produção</span>
-                    <span class="info-box-number">0
+                    <span class="info-box-number">{{$qtde_pedidos_producao}}
                         <small>Produzindo</small>
                     </span>
                 </div>

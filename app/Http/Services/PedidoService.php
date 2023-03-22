@@ -77,8 +77,18 @@ class PedidoService {
         return Pedido::get();            
     }
 
+    public function getQtdePedidos($status = null)
+    {
+        if ($status){
+            return Pedido::where('status',$status)->count();
+        } 
+        return Pedido::count();
+        
+    }
+  
+
     public function getUltimosPedidos($qtde){
-        if ((auth()->check()) && (auth()->user()->tipo_usuario ==4)) {
+        if (auth()->user()->tipo_usuario ==4) {
             return Pedido::where('user_id',auth()->user()->id)->orderBy('id', 'desc')->take($qtde)->get();        
         }
 
