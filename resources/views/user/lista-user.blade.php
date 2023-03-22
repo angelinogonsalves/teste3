@@ -31,7 +31,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="usuarios" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -76,4 +76,13 @@
         </div>
         <!-- /.container-fluid -->
     </section>
+    <script>
+        $(document).ready(function () {         
+            var table = new DataTable('#usuarios', {
+                language: {
+                    url: "{{asset('plugins/datatables/datatable-pt-BR.json')}}"
+                },
+             });
+        });
+    </script>
 @endsection

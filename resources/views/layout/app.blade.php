@@ -22,6 +22,9 @@
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/croppie.css') }}">
     <script src="{{ asset('js/croppie.js') }}"></script>
+    <link href="https://cdn.datatables.net/v/bs4/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
+ 
+    <script src="https://cdn.datatables.net/v/bs4/dt-1.13.4/datatables.min.js"></script>
 </head>
 <!--
 `body` tag options:
@@ -251,13 +254,7 @@
     <!-- Bootstrap select -->
     <script src="{{ asset('plugins/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
 
-    <!-- DataTables  & Plugins -->
-    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+    <!-- DataTables  & Plugins -->    
     <script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
     <script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
     <script src="{{ asset('plugins/pdfmake/vfs_fonts.js') }}"></script>
@@ -272,6 +269,8 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+    
     </script>
 </body>
 

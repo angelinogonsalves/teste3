@@ -28,7 +28,7 @@
                                 <i class="nav-icon far fa-plus-square"> </i> </a>
                         </div>
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="produtos" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -73,4 +73,14 @@
         <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
+    <script>
+        $(document).ready(function () {         
+            var table = new DataTable('#produtos', {
+                language: {
+                    url: "{{asset('plugins/datatables/datatable-pt-BR.json')}}"
+                },
+             });
+
+        });
+    </script>
 @endsection

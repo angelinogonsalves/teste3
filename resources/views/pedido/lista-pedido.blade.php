@@ -104,19 +104,11 @@
 
     <script>       
          $(function () {
-        //   $("#tabela_itens_produto").DataTable({
-        //     "responsive": true, "lengthChange": false, "autoWidth": false,
-        //     "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        //   }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-          $('#tabela_itens_produto').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": true,
-            "responsive": true,
-          });
+            var table = new DataTable('#tabela_itens_produto', {
+                language: {
+                    url: "{{asset('plugins/datatables/datatable-pt-BR.json')}}"
+                },
+             });       
         });
       </script>
 @endsection
