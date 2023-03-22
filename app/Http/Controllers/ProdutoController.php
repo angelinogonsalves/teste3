@@ -41,8 +41,7 @@ class ProdutoController extends BaseController
 
         $unidadeService = new UnidadeService();
         $lista_unidades = $unidadeService->getAllUnidades(); 
-        
-           
+                   
         $imagens = $produto->imagens->map(function($imagem) {
             $imagem->url =  url('/img/produtos') . '/' .$imagem->imagem;
             return $imagem;
@@ -58,9 +57,15 @@ class ProdutoController extends BaseController
         return $this->responseData($returnProduto,'/produtos/cadastro');     
     }
 
-    public function detalhes()
-    {
-        return view('produto.detalhes-produto');
+    public function detalhes(Produto $produto)        
+    {        
+      
+        $produto->imagens->map(function($imagem) {
+            $imagem->url =  url('/img/produtos') . '/' .$imagem->imagem;
+            return $imagem;
+        });        
+       
+        return view('produto.detalhes-produto',['dados' => $produto]);
     }
 
     public function excluirProduto(Produto $produto){              

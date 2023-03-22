@@ -64,7 +64,7 @@ Route::middleware(['auth'])->group(function () {
     Route::group(array('prefix' => 'produtos'), function(){
         Route::get('/', [ProdutoController::class,'index'])->name('produtos');
         Route::get('/cadastro/{produto?}', [ProdutoController::class,'verProduto'])->name('criar-produto');
-        Route::get('/detalhes', [ProdutoController::class,'detalhes'])->name('detlhes');
+        Route::get('/detalhes/{produto}', [ProdutoController::class,'detalhes'])->name('detalhes');
         Route::post('/excluir/{produto}', [ProdutoController::class,'excluirProduto'])->name('excluir-produto');
         Route::post('/salvar', [ProdutoController::class,'salvarProduto'])->name('salvar-produto');
         Route::get('/listaporunidade/{unidade}', [ProdutoController::class,'listaPorUnidade'])->name('listaporunidade');

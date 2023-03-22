@@ -136,7 +136,7 @@
                                             tamanho_id="{{ $p->tamanho_id }}" modalidade_id="{{ $p->modalidade_id }}"
                                             nome_personalizado="{{ $p->nome_personalizado }}"
                                             numero_personalizado="{{ $p->numero_personalizado }}">
-                                            <td>{{ $p->produto->produto }}</td>
+                                            <td><a target="blank" href="{{ url('/produtos/detalhes',[$p->produto_id]) }}">{{ $p->produto->produto }}</a></td>
                                             <td><input class='form-control-sm quantidade' required type='number'
                                                     value='{{ $p->quantidade }}' min='0'max='10'
                                                     step='0' /></td>
