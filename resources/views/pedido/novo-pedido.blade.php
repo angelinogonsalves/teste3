@@ -139,7 +139,7 @@
                                             <td><a target="blank" href="{{ url('/produtos/detalhes',[$p->produto_id]) }}">{{ $p->produto->produto }}</a></td>
                                             <td><input class='form-control-sm quantidade' required type='number'
                                                     value='{{ $p->quantidade }}' min='0'max='10'
-                                                    step='0' /></td>
+                                                    step='0' onchange='calcularTotal()'/></td>
                                             <td>@money($p->valor_unitario)</td>
                                             <td>{{ $p->tamanho->tamanho }}</td>
                                             <td>{{ $p->modalidade->modalidade }}</td>
@@ -282,7 +282,7 @@
                     " tamanho_id=" + tamanho_id + " modalidade_id=" + modalidade_id + " nome_personalizado=" +
                     nome_personalizado + " numero_personalizado=" + numero_personalizado + ">" +
                     "<td>" + nome_produto + "</td>" +
-                    "<td><input class='form-control-sm quantidade' required type='number' value='1' min='0'max='10' step='0'/></td>" +
+                    "<td><input class='form-control-sm quantidade' required type='number' value='1' min='0' max='10' step='0'/ onchange='calcularTotal()'></td>" +
                     "<td>" + valor + "</td>" +
                     "<td>" + tamanho_id + "</td>" +
                     "<td>" + nome_modalidade + "</td>" +
