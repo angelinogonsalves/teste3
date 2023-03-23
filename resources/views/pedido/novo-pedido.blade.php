@@ -45,7 +45,7 @@
                         <h4 class="mt-12"><small>Esolha o produto e adicione aos itens</small></h4>
                         <hr>
                     </div>
-                    <div class="col-sm-5">
+                    <div class="col-sm-4">
                         <div class="form-group">
                             <label>Escolha produto para Adicionar aos itens *</label>
                             <div class="select-purple">
@@ -56,7 +56,11 @@
                             </div>
                         </div>
                     </div>
-
+                    {{-- <div class="col-md-4">
+                        <div class="col-md-4  d-flex ">
+                            <img src="{{ asset('img/perfil.jpg') }}" class="img-thumbnail" alt="produto">
+                        </div>
+                    </div> --}}
                     <div class="col-12 col-sm-12">
                         <label>Selecione um tamanho para o produto *</label>
                     </div>
@@ -136,10 +140,12 @@
                                             tamanho_id="{{ $p->tamanho_id }}" modalidade_id="{{ $p->modalidade_id }}"
                                             nome_personalizado="{{ $p->nome_personalizado }}"
                                             numero_personalizado="{{ $p->numero_personalizado }}">
-                                            <td><a target="blank" href="{{ url('/produtos/detalhes',[$p->produto_id]) }}">{{ $p->produto->produto }}</a></td>
+                                            <td><a target="blank"
+                                                    href="{{ url('/produtos/detalhes', [$p->produto_id]) }}">{{ $p->produto->produto }}</a>
+                                            </td>
                                             <td><input class='form-control-sm quantidade' required type='number'
                                                     value='{{ $p->quantidade }}' min='0'max='10'
-                                                    step='0' onchange='calcularTotal()'/></td>
+                                                    step='0' onchange='calcularTotal()' /></td>
                                             <td>@money($p->valor_unitario)</td>
                                             <td>{{ $p->tamanho->tamanho }}</td>
                                             <td>{{ $p->modalidade->modalidade }}</td>
