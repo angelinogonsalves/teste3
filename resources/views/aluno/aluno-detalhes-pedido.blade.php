@@ -150,7 +150,7 @@
                                         <tbody>
                                             @forelse ($pedido->itens as $i)
                                                 <tr>
-                                                    <td><a href="destalhes">{{ $i->produto->produto }}</a></td>
+                                                    <td><a href="{{ url('produtos/detalhes', [$i->produto->id]) }}">{{ $i->produto->produto }}</a></td>
                                                     <td>{{ $i->quantidade }}</td>
                                                     <td>@money($i->valor_unitario)</td>
                                                     <td>{{ $i->tamanho->tamanho }}</td>
@@ -209,20 +209,34 @@
                                 <!-- /.col -->
                             </div>
                             <!-- /.row -->
-
                             <!-- this row will not appear when printing -->
                             <div class="row no-print">
                                 <div class="col-12">
-                                    {{-- <a href="{{ url('aluno/detalhes-pedido-print', [$pedido->id]) }}" rel="noopener" target="_blank"
-                                        class="btn btn-default"><i class="fas fa-print"></i> Imprimir</a> --}}
                                     @if ($pedido->status == 0)
+                                        <span class="badge badge-white">Cancelado</span>
                                         <p class="float-right">| Não é possível realizar pagamento. Pedido cancelado</p>
-                                    @else
+                                    @elseif ($pedido->status == 1)
+                                        <span class="badge badge-danger">Aguardando Pagamento</span>
                                         <button type="button" class="btn btn-success float-right"
                                             onclick="pagseguro()"><i class="far fa-credit-card"></i> Pagar Pedido via
                                             PagSeguro
                                         </button>
+                                    @elseif ($pedido->status == 2)
+                                        <span class="badge badge-warning">Processando Pagamento</span>
+                                        <button type="button" class="btn btn-success float-right"
+                                            onclick="pagseguro()"><i class="far fa-credit-card"></i> Pagar Pedido via
+                                            PagSeguro
+                                        </button>
+                                    @elseif ($pedido->status == 3)
+                                        <span class="badge badge-success">Pagamento Aprovado</span>
+                                    @elseif ($pedido->status == 4)
+                                        <span class="badge badge-dark">Em Produção</span>
+                                    @elseif ($pedido->status == 5)
+                                        <span class="badge badge-info">Pedido Finalizado</span>
+                                    @elseif ($pedido->status == 6)
+                                        <span class="badge badge-primary">Pedido Entregue</span>
                                     @endif
+
                                 </div>
                             </div>
                         </div>
@@ -234,10 +248,10 @@
         <!-- /.content -->
         <!-- Main Footer -->
         <footer class="footer">
-            <strong>Copyright &copy; 2023 <a href="#">M.C.G Soluções</a>.</strong>
+            <strong>Copyright &copy; 2023 <a href="#">Razza</a>.</strong>
             Todos direitos reservados.
             <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 3.2.0
+                <b>Version</b> 1.0
             </div>
         </footer>
         <!-- /.content-wrapper -->

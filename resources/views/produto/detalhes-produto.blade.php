@@ -65,49 +65,44 @@
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <h1>Detalhes do Produto</h1>
                     </div>
                 </div>
-            </div><!-- /.container-fluid -->
-        </section>
-
-        <section class="content">
-            <div class="card card-solid">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">                        
-                            <div class="row">
+                        <div class="col-md-9">
                             @forelse ($dados->imagens as $i)
-                                <div class="col-md-6  d-flex justify-content-center">
-                                    <img src="{{$i->url}}" class="img-thumbnail"
-                                        class="product-image" alt="Product Image">
+                                <div class="col-md-3  d-flex justify-content-center">
+                                    <img src="{{ $i->url }}" class="img-thumbnail" alt="produto">
                                 </div>
                             @empty
-                            @endforelse                           
-                            </div>
+                            @endforelse
                         </div>
-                        <div class="col-12 col-sm-6">
-                            <h3 class="my-3">{{$dados->produto}}</h3>
-                            <p>{{$dados->descricao}}</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-12">
+                            <h3 class="my-3">{{ $dados->produto }}</h3>
+                            <p>{{ $dados->descricao }}</p>
                             <hr>
                             <h4 class="mt-3">Tamanhos disponíves <small></small></h4>
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-
-                                @forelse($dados->tamanhos as $t) 
-                                <label class="btn btn-default text-center">
-                                    <input type="radio" name="color_option" id="color_option_b1" autocomplete="off">
-                                    <span class="text-xl">{{$t->tamanho}}</span>
-                                </label>
+                                @forelse($dados->tamanhos as $t)
+                                    <label class="btn btn-default text-center">
+                                        <input type="radio" name="color_option" id="color_option_b1"
+                                            autocomplete="off">
+                                        <span class="text-xl">{{ $t->tamanho }}</span>
+                                    </label>
                                 @empty
-                                @endforelse                               
+                                @endforelse
                             </div>
-
-                            <div class="bg-gray py-2 px-3 mt-4">
-                                <h2 class="mb-0">
-                                    @money($dados->valor)
-                                </h2>
-                            </div>                          
+                        </div>
+                    </div>
+                    <div class="col-6  col-sm-6">
+                        <div class="bg-gray py-2 px-3 mt-4">
+                            <h2 class="mb-0">
+                                @money($dados->valor)
+                            </h2>
                         </div>
                     </div>
                 </div>
