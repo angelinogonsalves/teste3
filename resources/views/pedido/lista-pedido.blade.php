@@ -30,7 +30,7 @@
 
                         </div>
                         <!-- /.card-header  usar modelo table que baixa em CSV-->
-                        <div class="card-body table-responsive p-0">
+                        <div class="card-body table-responsive p-2">
                             <table id="tabela_itens_produto" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>

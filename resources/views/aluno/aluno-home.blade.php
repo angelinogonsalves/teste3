@@ -24,133 +24,150 @@
 
 <body class="hold-transition layout-top-nav">
     <div class="wrapper">
+        <div class="visible-xs">
 
-        <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
-            <div class="container">
-                <a href="/" class="navbar-brand">
-                    <img src="{{ asset('/img/LogoRazza.png') }}" alt="Logo" class="brand-image img "
-                        style="opacity:1">
-                    <span class="brand-text font-weight-light">Razza PRO</span>
-                </a>
+            <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+                <div class="container">
+                    <a href="/" class="navbar-brand">
+                        <img src="{{ asset('/img/LogoRazza.png') }}" alt="Logo" class="brand-image img "
+                            style="opacity:1">
+                        <span class="brand-text font-weight-light">RazzaPRO - inicio</span>
+                    </a>
 
-                <button class="navbar-toggler order-1" type="button" data-toggle="collapse"
-                    data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                    <button class="navbar-toggler order-1" type="button" data-toggle="collapse"
+                        data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                <div class="collapse navbar-collapse order-3" id="navbarCollapse">
-                    <!-- Left navbar links -->
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a href="index3.html" class="nav-link">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Contato</a>
+                    <div class="collapse navbar-collapse order-3" id="navbarCollapse">
+                        <!-- Left navbar links -->
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a href="https://www.razzaesportes.com.br/" target="_blank" class="nav-link">Site
+                                    Razza</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Right navbar links -->
+                    <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+                        <!-- Messages Dropdown Menu -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="{{ url('logout/') }}">
+                                <i class="fas fa-circle"></i>
+                                <span class="badge badge-danger navbar-badge">Sair</span>
+                            </a>
                         </li>
                     </ul>
                 </div>
+            </nav>
+            <!-- /.navbar -->
 
-                <!-- Right navbar links -->
-                <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-                    <!-- Messages Dropdown Menu -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="{{ url('logout/') }}">
-                            <i class="fas fa-circle"></i>
-                            <span class="badge badge-danger navbar-badge">Sair</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <!-- /.navbar -->
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h2 class="m-2"> Painel do Cliente </h2>
+                            </div><!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item m-2"><a href="#">Home</a></li>
+                                </ol>
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
 
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0"> Painel do Cliente <small> - Acompanhe seus pedidos</small></h1>
-                        </div><!-- /.col -->
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            </ol>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
-            </div>
-            <!-- /.content-header -->
-
-            <!-- Main content -->
-            <div class="content">
-                <div class="container">
-                    <div class="row">
-
-                        <!-- /.col-md-6 -->
-                        <div class="col-lg-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title m-0">Meus Pedidos</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="card-body p-0">
-                                        <div class="table-responsive">
-                                            <table class="table m-0">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Id</th>
-                                                        <th>Data Pedido</th>
-                                                        <th>Valor Pedido</th>
-                                                        <th>Status</th>
-                                                        <th>Ações</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @forelse ($pedidos as $p)
-                                                        <tr>
-                                                            <td><a href="{{ url('aluno/detalhes-pedido',[$p->id]) }}">{{$p->id}}</a></td>
-                                                            <td>@datetime($p->created_at)</td>
-                                                            <td>
-                                                                <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                                @money($p->valor)</div>
-                                                            </td>
-                                                            <td>  
-                                                                @if ($p->status == 0)
-                                                                <span class="badge badge-white">Cancelado</span>
-                                                                @elseif ($p->status == 1)
-                                                                    <span class="badge badge-danger">Aguardando Pagamento</span>
-                                                                @elseif ($p->status == 2)
-                                                                    <span class="badge badge-warning">Processando Pagamento</span>
-                                                                @elseif ($p->status == 3)
-                                                                    <span class="badge badge-success">Pagamento Aprovado</span>
-                                                                @elseif ($p->status == 4)
-                                                                    <span class="badge badge-dark">Em Produção</span>
-                                                                @elseif ($p->status == 5)
-                                                                    <span class="badge badge-info">Pedido Finalizado</span>
-                                                                @elseif ($p->status == 6)
-                                                                    <span class="badge badge-primary">Pedido Entregue</span>
-                                                                @endif</td>
-                                                            <td>                                                        
-
-                                                            <a href="{{ url('aluno/detalhes-pedido',[$p->id]) }}" class="btn btn-info  btn-sm">Ver Pedido</a>
-                                                        </td>
-                                                        </tr>
-                                                    @empty
-                                                    @endforelse                                                                                                      
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.table-responsive -->
-                                    </div>
-
-                                </div>
-                            </div>
+                        <div class="callout callout-info">
+                            <h5><i class="fas fa-info"></i> Atenção!</h5>
+                            Aqui você visualiza os pedidos feito pelo coordenador ou responsável de sua instituição.
                         </div>
 
-                        {{-- <div class="col-lg-12">
+                    </div><!-- /.container-fluid -->
+                </div>
+                <!-- /.content-header -->
+
+                <!-- Main content -->
+                <div class="content-wrapper">
+                    <div class="container">
+                        <div class="row">
+
+                            <!-- /.col-md-6 -->
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title m-0">Meus Pedidos</h5>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div class="card-body p-0">
+                                            <div class="table-responsive">
+                                                <table class="table m-0 ">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Id</th>
+                                                            <th>Data Pedido</th>
+                                                            <th>Valor Pedido</th>
+                                                            <th>Status</th>
+                                                            <th>Ações</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @forelse ($pedidos as $p)
+                                                            <tr>
+                                                                <td><a
+                                                                        href="{{ url('aluno/detalhes-pedido', [$p->id]) }}">{{ $p->id }}</a>
+                                                                </td>
+                                                                <td><?php echo date('d/m/Y', strtotime($p->created_at)); ?></td>
+                                                                <td>
+                                                                    <div class="sparkbar" data-color="#00a65a"
+                                                                        data-height="20">
+                                                                        @money($p->valor)</div>
+                                                                </td>
+                                                                <td>
+                                                                    @if ($p->status == 0)
+                                                                        <span class="badge badge-white">Cancelado</span>
+                                                                    @elseif ($p->status == 1)
+                                                                        <span class="badge badge-danger">Aguardando
+                                                                            Pagamento</span>
+                                                                    @elseif ($p->status == 2)
+                                                                        <span class="badge badge-warning">Processando
+                                                                            Pagamento</span>
+                                                                    @elseif ($p->status == 3)
+                                                                        <span class="badge badge-success">Pagamento
+                                                                            Aprovado</span>
+                                                                    @elseif ($p->status == 4)
+                                                                        <span class="badge badge-dark">Em
+                                                                            Produção</span>
+                                                                    @elseif ($p->status == 5)
+                                                                        <span class="badge badge-info">Pedido
+                                                                            Finalizado</span>
+                                                                    @elseif ($p->status == 6)
+                                                                        <span class="badge badge-primary">Pedido
+                                                                            Entregue</span>
+                                                                    @endif
+                                                                </td>
+                                                                <td>
+
+                                                                    <a href="{{ url('aluno/detalhes-pedido', [$p->id]) }}"
+                                                                        class="btn btn-info  btn-sm">Ver Pedido</a>
+                                                                </td>
+                                                            </tr>
+                                                        @empty
+                                                        @endforelse
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- /.table-responsive -->
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- <div class="col-lg-12">
                             <div class="card card-primary card-outline">
                                 <div class="card-body">
                                     <h5 class="card-title">Meus dados</h5>
@@ -161,12 +178,13 @@
                                 </div>
                             </div>
                         </div> --}}
+                        </div>
                     </div>
+                    <!-- /.col-md-6 -->
                 </div>
-                <!-- /.col-md-6 -->
-            </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
     </div>
     <!-- /.content -->
 
@@ -183,7 +201,7 @@
             razzapro.com.br
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2023 <a href="">MCG Soluções</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2023 <a href="">Razza</a>.</strong> All rights reserved.
     </footer>
 
     <!-- REQUIRED SCRIPTS -->
