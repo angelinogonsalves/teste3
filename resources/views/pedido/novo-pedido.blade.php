@@ -279,6 +279,7 @@
             let personaliza_nome = $("#add_produto option:selected").attr('personaliza_nome');
             let personaliza_numero = $("#add_produto option:selected").attr('personaliza_numero');
             let personaliza_modalidade = $("#add_produto option:selected").attr('personaliza_modalidade');
+            let url_imagem = $("#add_produto option:selected").attr('url');
 
             let tamanho_id = false;
 
@@ -304,7 +305,7 @@
                         ra_aluno + " nome_aluno=" + nome_aluno + " unidade_id=" + unidade_id + " produto_id=" + produto_id +
                         " tamanho_id=" + tamanho_id + " modalidade_id=" + modalidade_id + " nome_personalizado=" +
                         nome_personalizado + " numero_personalizado=" + numero_personalizado + ">" +
-                        "<td><img width='50px' src='{{$p->url}}' class='img-thumbnail' alt='produto'>"+
+                        "<td><img width='50px' src='"+url_imagem+"' class='img-thumbnail' alt='produto'>"+
                         "<a target='blank' href=''>  " + nome_produto + "</a></td>" +
                         "<td><input class='form-control-sm quantidade' required type='number' value='1' min='0' max='10' step='0'/ onchange='calcularTotal()'></td>" +
                         "<td>" + valor + "</td>" +
