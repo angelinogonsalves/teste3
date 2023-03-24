@@ -150,7 +150,8 @@
                                         <tbody>
                                             @forelse ($pedido->itens as $i)
                                                 <tr>
-                                                    <td><a href="{{ url('produtos/detalhes', [$i->produto->id]) }}">{{ $i->produto->produto }}</a></td>
+                                                    <td><img width="50px" src="{{$i->url}}" class="img-thumbnail" alt="produto">
+                                                        <a href="{{ url('produtos/detalhes', [$i->produto->id]) }}"> {{ $i->produto->produto }}</a></td>
                                                     <td>{{ $i->quantidade }}</td>
                                                     <td>@money($i->valor_unitario)</td>
                                                     <td>{{ $i->tamanho->tamanho }}</td>
