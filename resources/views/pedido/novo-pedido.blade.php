@@ -140,18 +140,19 @@
                                             tamanho_id="{{ $p->tamanho_id }}" modalidade_id="{{ $p->modalidade_id }}"
                                             nome_personalizado="{{ $p->nome_personalizado }}"
                                             numero_personalizado="{{ $p->numero_personalizado }}">
-                                            <td><a target="blank"
-                                                    href="{{ url('/produtos/detalhes', [$p->produto_id]) }}">{{ $p->produto->produto }}</a>
+                                            <td><img width="50px" src="{{$p->url}}" class="img-thumbnail" alt="produto">
+                                            <a target="blank"
+                                                    href="{{ url('/produtos/detalhes', [$p->produto_id]) }}"> {{ $p->produto->produto }}</a>
                                             </td>
-                                            <td><input class='form-control-sm quantidade' required type='number'
+                                            <td class="align-middle"><input class='form-control-sm quantidade' required type='number'
                                                     value='{{ $p->quantidade }}' min='0'max='10'
                                                     step='0' onchange='calcularTotal()' /></td>
-                                            <td>@money($p->valor_unitario)</td>
-                                            <td>{{ $p->tamanho->tamanho }}</td>
-                                            <td>{{ $p->modalidade->modalidade }}</td>
-                                            <td>{{ $p->modalidade->nome_personalizado }}</td>
-                                            <td>{{ $p->modalidade->numero_personalizado }}</td>
-                                            <td>
+                                            <td class="align-middle">@money($p->valor_unitario)</td>
+                                            <td class="align-middle">{{ $p->tamanho->tamanho }}</td>
+                                            <td class="align-middle">{{ $p->modalidade->modalidade }}</td>
+                                            <td class="align-middle">{{ $p->modalidade->nome_personalizado }}</td>
+                                            <td class="align-middle">{{ $p->modalidade->numero_personalizado }}</td>
+                                            <td class="align-middle">
                                                 <button class='btn btn-sm btn-default excluir' type='button'
                                                     title='Remover'> <span class='text-danger fas fa-trash-alt'></span>
                                                 </button>
@@ -188,6 +189,7 @@
 
     <script>
         $(document).ready(function() {
+            buscaProdutos();
             calcularTotal();
             $('.excluir').on('click', function() {
                 $(this).parent().parent().remove();
@@ -210,8 +212,14 @@
                     contentType: "application/x-www-form-urlencoded; charset=UTF-8",
                     async: true,
                     success: function(data) {
+                        console.log(data);
                         $.each(data, function(key, value) {
-                            $("#add_produto").append('<option valor=' + value.valor + ' value=' + value
+                            $("#add_produto").append('<option '+
+                                ' personaliza_nome='+value.personaliza_nome+
+                                ' personaliza_numero='+value.personaliza_numero+
+                                ' personaliza_modalidade='+value.personaliza_modalidade+
+                                ' url='+value.url+
+                                ' valor=' + value.valor + ' value=' + value
                                 .id + '>' + value.produto +
                                 '</option>');
                         });
@@ -268,8 +276,11 @@
             let nome_modalidade = $("#modalidade_id option:selected").text();
             let nome_personalizado = $('#nome_personalizado').val();
             let numero_personalizado = $('#numero_personalizado').val();
-            let tamanho_id = false;
+            let personaliza_nome = $("#add_produto option:selected").attr('personaliza_nome');
+            let personaliza_numero = $("#add_produto option:selected").attr('personaliza_numero');
+            let personaliza_modalidade = $("#add_produto option:selected").attr('personaliza_modalidade');
 
+            let tamanho_id = false;
 
             if (document.querySelector('input[name="add_tamanho_id"]:checked')) {
                 tamanho_id = document.querySelector('input[name="add_tamanho_id"]:checked').value;
@@ -280,27 +291,35 @@
                 currency: 'BRL',
             });
             valor = formatter.format(valor_produto).substring(3);
+         
+            if (unidade_id && nome_aluno && ra_aluno && tamanho_id) {
+                if (personaliza_nome == 1 && nome_personalizado == ''){
+                    alert("Preencha o Nome personalizado");
+                } else if (personaliza_numero == 1 && numero_personalizado == '') {
+                    alert("Preencha o Número personalizado");
+                } else if (personaliza_modalidade == 1 && modalidade_id == '') {
+                    alert("Preencha a Modalidade");
+                } else {
+                    $("#tbodyitens_produto").append("<tr class='itens_produtos' valor_produto=" + valor_produto + " ra_aluno=" +
+                        ra_aluno + " nome_aluno=" + nome_aluno + " unidade_id=" + unidade_id + " produto_id=" + produto_id +
+                        " tamanho_id=" + tamanho_id + " modalidade_id=" + modalidade_id + " nome_personalizado=" +
+                        nome_personalizado + " numero_personalizado=" + numero_personalizado + ">" +
+                        "<td><img width='50px' src='{{$p->url}}' class='img-thumbnail' alt='produto'>"+
+                        "<a target='blank' href=''>  " + nome_produto + "</a></td>" +
+                        "<td><input class='form-control-sm quantidade' required type='number' value='1' min='0' max='10' step='0'/ onchange='calcularTotal()'></td>" +
+                        "<td>" + valor + "</td>" +
+                        "<td>" + tamanho_id + "</td>" +
+                        "<td>" + nome_modalidade + "</td>" +
+                        "<td>" + nome_personalizado + "</td>" +
+                        "<td>" + numero_personalizado + "</td>" +
+                        "<td> <button class='btn btn-sm btn-default excluir' type='button' title='Remover'> <span class='text-danger fas fa-trash-alt'></span> </button></td>" +
+                        "</tr>"
+                    );
 
-            if (unidade_id && nome_aluno && ra_aluno && modalidade_id && modalidade_id && tamanho_id &&
-                nome_personalizado && numero_personalizado) {
-                $("#tbodyitens_produto").append("<tr class='itens_produtos' valor_produto=" + valor_produto + " ra_aluno=" +
-                    ra_aluno + " nome_aluno=" + nome_aluno + " unidade_id=" + unidade_id + " produto_id=" + produto_id +
-                    " tamanho_id=" + tamanho_id + " modalidade_id=" + modalidade_id + " nome_personalizado=" +
-                    nome_personalizado + " numero_personalizado=" + numero_personalizado + ">" +
-                    "<td>" + nome_produto + "</td>" +
-                    "<td><input class='form-control-sm quantidade' required type='number' value='1' min='0' max='10' step='0'/ onchange='calcularTotal()'></td>" +
-                    "<td>" + valor + "</td>" +
-                    "<td>" + tamanho_id + "</td>" +
-                    "<td>" + nome_modalidade + "</td>" +
-                    "<td>" + nome_personalizado + "</td>" +
-                    "<td>" + numero_personalizado + "</td>" +
-                    "<td> <button class='btn btn-sm btn-default excluir' type='button' title='Remover'> <span class='text-danger fas fa-trash-alt'></span> </button></td>" +
-                    "</tr>"
-                );
-
-                excluir();
-                calcularTotal();
-                adicionarQuantidade();
+                    excluir();
+                    calcularTotal();
+                    adicionarQuantidade();
+                }
             } else {
                 alert("Preencha todos os campos");
             }
@@ -401,7 +420,7 @@
                 success: function(data) {
                     if (data.success) {
                         alert('Pedido Realizado com sucesso');
-                        window.location.href = "../pedidos";
+                        window.location.href = "{{url('pedidos')}}";
                     } else {
                         alert('Falha ao realizado Pedido');
                     }

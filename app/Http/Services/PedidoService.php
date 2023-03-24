@@ -41,6 +41,7 @@ class PedidoService {
 
     private function salvaItensPedido(Pedido $pedido, $itensData){
         $total = 0;
+    
         try {  
             $this->excluirItensPedido($pedido);
          
@@ -57,13 +58,12 @@ class PedidoService {
             return $total;
         } catch (Exception $e) {    
             return 0;      
-        } 
-               
+        }             
     }
 
     private function excluirItensPedido(Pedido $pedido){
-        if ($pedido->itens){
-            foreach($pedido->itens() as $i){
+        if ($pedido->itens){            
+            foreach($pedido->itens as $i){
                 $i->delete();
             }
         }   
@@ -74,7 +74,7 @@ class PedidoService {
     }
 
     public function getAllPedidos(){
-        return Pedido::get();            
+        return Pedido::orderby('id','desc')->get();            
     }
 
     public function getQtdePedidos($status = null)

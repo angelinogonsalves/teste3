@@ -105,6 +105,7 @@
     <script>       
          $(function () {
             var table = new DataTable('#tabela_itens_produto', {
+                "order": [ 0, 'desc' ],
                 language: {
                     url: "{{asset('plugins/datatables/datatable-pt-BR.json')}}"
                 },
