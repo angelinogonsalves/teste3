@@ -27,6 +27,7 @@
 <body class="hold-transition layout-top-nav">
     <div class="wrapper">
 
+
         <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
             <div class="container">
                 <a href="/" class="navbar-brand">
@@ -53,21 +54,26 @@
 
                 <!-- Right navbar links -->
                 <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-                    <!-- Messages Dropdown Menu -->
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
-                            <i class="fas fa-circle"></i>
-                            <span class="badge badge-danger navbar-badge">Sair</span>
+                            <span class="badge badge-primary">{{ auth()->user()->nome }}</span> - <i class="far fa-user"></i>
                         </a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <div class="dropdown-divider"></div>                               
+                            <a href="{{ url('logout/') }}" class="badge badge-danger dropdown-item"> 
+                                <i class="fas fa-times-circle"></i>   <button type="button" class="btn btn-danger btn-sm">Sair do sistema</button>
+                            </a>
+                        </div>
                     </li>
                 </ul>
             </div>
         </nav>
+
         <!-- /.navbar -->
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <h1>Detalhes do Pedido</h1>
                     </div>
                 </div>
@@ -80,11 +86,11 @@
                     <div class="col-12">
                         <div class="callout callout-info">
                             <h5><i class="fas fa-info"></i> Atenção!</h5>
-                            Confira se todas e informações do seu pedido estão corretas. Confira nome tamanho e demais
+                            Confira se todas e informações do seu pedido estão corretas. Confira nome tamanho e
+                            demais
                             informações.
                             Caso precise mudar avisar o resposável pelo pedido
                         </div>
-
 
                         <!-- Main content -->
                         <div class="invoice p-3 mb-3">
@@ -115,9 +121,9 @@
                                     Para:
                                     <address>
                                         <strong>{{ $pedido->user->nome }}</strong><br>
-                                        {{ $pedido->user->endereco }}, {{ $pedido->user->numero }} -
+                                        {{ $pedido->user->endereco }} {{ $pedido->user->numero }} 
                                         {{ $pedido->user->bairro }} <br>
-                                        {{ $pedido->user->cidade }} / {{ $pedido->user->uf }}<br>
+                                        {{ $pedido->user->cidade }}  {{ $pedido->user->uf }}<br>
                                         Telefone: {{ $pedido->user->telefone }}<br>
                                         Email: {{ $pedido->user->email }}
                                     </address>
@@ -126,7 +132,7 @@
                                 <div class="col-sm-4 invoice-col">
                                     <b>Id Pedido: #{{ $pedido->id }}</b><br>
                                     <b>Id Pagamento:</b> {{ $pedido->id_pagseguro }}<br>
-                                    <b>Data Pagamento:</b> @datetime($pedido->created_at)<br>
+                                    <b>Data Pagamento:</b> <?php echo date('d/m/Y', strtotime($pedido->created_at)); ?><br>
                                     <b>Status:</b> @statusPedido($pedido->status)
                                 </div>
                                 <!-- /.col -->
@@ -152,7 +158,12 @@
                                         <tbody>
                                             @forelse ($pedido->itens as $i)
                                                 <tr>
-                                                    <td><a href="{{ url('produtos/detalhes', [$i->produto->id]) }}">{{ $i->produto->produto }}</a></td>
+                                                    <td>
+                                                        <img width="50px" src="{{ $i->url }}"
+                                                            class="img-thumbnail" alt="produto">
+                                                        <a href="{{ url('produtos/detalhes', [$i->produto->id]) }}">
+                                                            {{ $i->produto->produto }}</a>
+                                                    </td>
                                                     <td>{{ $i->quantidade }}</td>
                                                     <td>@money($i->valor_unitario)</td>
                                                     <td>{{ $i->tamanho->tamanho }}</td>
@@ -172,29 +183,19 @@
                             <!-- /.row -->
 
                             <div class="row">
-
                                 <!-- accepted payments column -->
-                                <div class="col-6">     
-                                    <div class="row">                                                               
-                                        <p class="lead">Métodos de Pagamento:</p>
-                                        <img src="//assets.pagseguro.com.br/ps-integration-assets/banners/pagamento/todos_animado_550_50.gif"
-                                            alt="Logotipos de meios de pagamento do PagSeguro"
-                                            title="Este site aceita pagamentos com as principais bandeiras e bancos, saldo em conta PagSeguro e boleto.">
+                                <div class="col-6">
 
-                                        <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                            Pagamento via cartões de créditos ou PIX.
-                                            Para Ver detalhes do produto como: Descrição, Tamanho com tabela de medidas
-                                            clique em cima do produto para abrir informções.
-                                        </p>
-                                    </div>
-                                    @if ($pedido->status < 3)
-                                    <div class="row">                                         
-                                        <div class="col-12 d-flex justify-content-center ">
-                                            <img id="img_qr_code" height="200px;" src="{{$pedido->url_qr_code}}"/>
-                                        </div>
-                                    </div>
-                                    @endif                                    
-                                    
+                                    <p class="lead">Médtodos de Pagamento:</p>
+                                    <img src="//assets.pagseguro.com.br/ps-integration-assets/banners/pagamento/todos_animado_550_50.gif"
+                                        alt="Logotipos de meios de pagamento do PagSeguro"
+                                        title="Este site aceita pagamentos com as principais bandeiras e bancos, saldo em conta PagSeguro e boleto.">
+
+                                    <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+                                        Pagamento via cartões de créditos ou PIX.
+                                        Para Ver detalhes do produto como: Descrição, Tamanho com tabela de medidas
+                                        clique em cima do produto para abrir informções.
+                                    </p>
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-6">
@@ -225,17 +226,19 @@
                                 <div class="col-12">
                                     @if ($pedido->status == 0)
                                         <span class="badge badge-white">Cancelado</span>
-                                        <p class="float-right">| Não é possível realizar pagamento. Pedido cancelado</p>
+                                        <p class="float-right">| Não é possível realizar pagamento. Pedido
+                                            cancelado</p>
                                     @elseif ($pedido->status == 1)
                                         <span class="badge badge-danger">Aguardando Pagamento</span>
                                         <button type="button" class="btn btn-success float-right"
-                                            onclick="pagseguro()"><i class="far fa-credit-card"></i> Pagar Pedido via
+                                            onclick="pagseguro()"><i class="far fa-credit-card"></i> Pagar
+                                            Pedido via
                                             PagSeguro
                                         </button>
                                         <button class="mr-1 btn btn-secondary float-right" onclick="pix()">Gerar QR Code PIX</button>                                          
                                     @elseif ($pedido->status == 2)
                                         <span class="badge badge-warning">Processando Pagamento</span>
-                                        <button type="button" class="ml-1 btn btn-success float-right"
+                                        <button type="button" class="btn btn-success float-right"
                                             onclick="pagseguro()"><i class="far fa-credit-card"></i> Pagar Pedido via
                                             PagSeguro
                                         </button>

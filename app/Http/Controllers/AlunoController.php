@@ -20,9 +20,20 @@ class AlunoController extends Controller
                 return redirect('/');
             }
         }
-        
+             
         $pagseguroService = new PagseguroService();
         $pedido->url_qr_code = $pagseguroService->geraURLQrCode($pedido);
+        
+        
+        $pedido->itens->map(function($produto) {   
+            $url =  url('/img/perfil.jpg');
+
+            if ($produto->produto->imagens){            
+                $url = url('/img/produtos')  . '/' . $produto->produto->imagens[0]->imagem;
+            }
+            return $produto->url = $url;
+                     
+        }); 
         
         return view('aluno.aluno-detalhes-pedido',['pedido' => $pedido]);
     }
