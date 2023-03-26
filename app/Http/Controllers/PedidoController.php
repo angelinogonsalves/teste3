@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CadastraPedidoRequest;
 use App\Http\Services\ModalidadeService;
+use App\Http\Services\PagseguroService;
 use App\Http\Services\PedidoService;
 use App\Http\Services\TamanhoService;
 use App\Http\Services\UnidadeService;
@@ -42,7 +43,7 @@ class PedidoController extends Controller
             }
             return $produto->url = $url;
                      
-        });      
+        });              
 
         return view('pedido.novo-pedido',['dados' => $pedido,'lista_unidades' => $lista_unidades,'lista_modalidades' => $lista_modalidades]);
     }

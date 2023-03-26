@@ -254,6 +254,8 @@
     <!-- Bootstrap select -->
     <script src="{{ asset('plugins/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <!-- DataTables  & Plugins -->    
     <script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
     <script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>

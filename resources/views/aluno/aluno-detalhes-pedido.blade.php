@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
     <!-- bootstrap select -->
     <link rel="stylesheet" href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.min.css') }}">
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>    
 </head>
 <!--
 `body` tag options:
@@ -172,18 +174,27 @@
                             <div class="row">
 
                                 <!-- accepted payments column -->
-                                <div class="col-6">
+                                <div class="col-6">     
+                                    <div class="row">                                                               
+                                        <p class="lead">Métodos de Pagamento:</p>
+                                        <img src="//assets.pagseguro.com.br/ps-integration-assets/banners/pagamento/todos_animado_550_50.gif"
+                                            alt="Logotipos de meios de pagamento do PagSeguro"
+                                            title="Este site aceita pagamentos com as principais bandeiras e bancos, saldo em conta PagSeguro e boleto.">
 
-                                    <p class="lead">Médtodos de Pagamento:</p>
-                                    <img src="//assets.pagseguro.com.br/ps-integration-assets/banners/pagamento/todos_animado_550_50.gif"
-                                        alt="Logotipos de meios de pagamento do PagSeguro"
-                                        title="Este site aceita pagamentos com as principais bandeiras e bancos, saldo em conta PagSeguro e boleto.">
-
-                                    <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                        Pagamento via cartões de créditos ou PIX.
-                                        Para Ver detalhes do produto como: Descrição, Tamanho com tabela de medidas
-                                        clique em cima do produto para abrir informções.
-                                    </p>
+                                        <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+                                            Pagamento via cartões de créditos ou PIX.
+                                            Para Ver detalhes do produto como: Descrição, Tamanho com tabela de medidas
+                                            clique em cima do produto para abrir informções.
+                                        </p>
+                                    </div>
+                                    @if ($pedido->status < 3)
+                                    <div class="row">                                         
+                                        <div class="col-12 d-flex justify-content-center ">
+                                            <img id="img_qr_code" height="200px;" src="{{$pedido->url_qr_code}}"/>
+                                        </div>
+                                    </div>
+                                    @endif                                    
+                                    
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-6">
@@ -221,12 +232,14 @@
                                             onclick="pagseguro()"><i class="far fa-credit-card"></i> Pagar Pedido via
                                             PagSeguro
                                         </button>
+                                        <button class="mr-1 btn btn-secondary float-right" onclick="pix()">Gerar QR Code PIX</button>                                          
                                     @elseif ($pedido->status == 2)
                                         <span class="badge badge-warning">Processando Pagamento</span>
-                                        <button type="button" class="btn btn-success float-right"
+                                        <button type="button" class="ml-1 btn btn-success float-right"
                                             onclick="pagseguro()"><i class="far fa-credit-card"></i> Pagar Pedido via
                                             PagSeguro
                                         </button>
+                                        <button class="btn btn-secondary float-right" onclick="pix()">Gerar QR Code PIX</button>                                          
                                     @elseif ($pedido->status == 3)
                                         <span class="badge badge-success">Pagamento Aprovado</span>
                                     @elseif ($pedido->status == 4)
@@ -289,16 +302,61 @@
                 type: "GET",
                 url: url,
                 success: function(data) {
-                    if (data.success) {
-                        console.log(data);
+                    if (data.success) {                       
                         window.open(data.url, '_blank');
                     } else {
-                        alert(data.msg_erro);
+                        alert(data.message);
+                    }
+                },              
+                error: function(data) {
+                    swal(data.message, {
+                           icon: "error",
+                     });                  
+                },
+                beforeSend: function() {
+                    swal('Processando...',{
+                    icon:  "info",
+                    buttons: false
+                    });      
+                },
+                complete: function () {
+                    swal.close();
+                },
+            });
+        }
+
+        function pix() {           
+            var url = "{{ url('pedidos/pix', [$pedido->id]) }}";
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function(data) {
+                    console.log('data',data);
+                    if (data.success) {
+                        $("#img_qr_code").attr("src",data.qr_code);                        
+                        swal(data.message, {
+                            icon: "success",
+                        });                                                
+                    } else {
+                        swal(data.message, {
+                           icon: "error",
+                        });  
                     }
                 },
                 error: function(data) {
-                    alert(data.msg_erro);
-                }
+                    swal(data.message, {
+                           icon: "error",
+                     });                  
+                },
+                beforeSend: function() {
+                    swal('Processando...',{
+                    icon:  "info",
+                    buttons: false
+                    });      
+                },
+                complete: function () {
+                    swal.close();
+                },
             });
         }
     </script>

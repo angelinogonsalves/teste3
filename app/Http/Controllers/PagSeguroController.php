@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\PagseguroService;
 use App\Models\Pedido;
-use App\Models\User;
-use Exception;
-use Illuminate\Http\Request;
-use GuzzleHttp\Client;
-use Illuminate\Support\Facades\Log;
 
 class PagSeguroController extends Controller
 {
@@ -17,114 +13,40 @@ class PagSeguroController extends Controller
      * @return void
      */
 
+
+    private $pagSeguroService;
+
     public function __construct()
     {
-     
+        $this->pagSeguroService = new PagseguroService();             
     }
 
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
-     */
+     */    
 
+    public function pix(Pedido $pedido)
+    {
+        return $this->pagSeguroService->pix($pedido);
+    }
 
+    public function payPix(Pedido $pedido)
+    {
+        return  $this->pagSeguroService->payPix($pedido);
+    }
 
     public function pagseguro(Pedido $pedido)
     {
-        $success = true;
-        $msg = '';      
-      // depois mudar pra pegar do banco
-        $ambiente = 'H';
-        $pagseguro_token = 'A4E6E0AFA50F4C6F9C7BB4D18667F887';
-        $pagseguro_email = 'cooperanet.br@gmail.com';
-        $email_comprador_teste = 'c46643784810296169657@sandbox.pagseguro.com.br';
+        return  $this->pagSeguroService->checkout($pedido);
+    }
 
-        if ($pedido)
-        {
-            if (!empty($pedido->id_pagseguro)) {              
-                if ($ambiente == 'H') {
-                    $url = 'https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code='.$pedido->id_pagseguro;
-                } else {
-                    $url = 'https://pagseguro.uol.com.br/v2/checkout/payment.html?code='.$pedido->id_pagseguro;   
-                }
+    public function consulta(Pedido $pedido)
+    {
+        return $this->pagSeguroService->consultaPedido($pedido);
+    }
 
-                return response()->json(['success' => true,'url' => $url]);                 
-            }
-
-            if (!$pedido->user_id) {
-                return response()->json(['success' => false, 'msg_erro' => 'Usuário não vinculado ao pedido']);    
-            }
-             
-            $usuario = User::find($pedido->user_id);                      
-
-            $data['currency'] = 'BRL';
-    
-            $data['itemId1'] = substr('000000' . $pedido->id,6);
-            $data['itemDescription1'] = 'Pedido N° ' . $pedido->id .  ' Razza Esportes';   
-            $data['itemAmount1'] = number_format($pedido->valor,2);
-            $data['itemQuantity1'] = 1;           
-
-          /*  $data['itemId2'] = '000002';
-            $data['itemDescription2'] = 'Frete';   
-            $data['itemAmount2'] = number_format(0,2);
-            $data['itemQuantity2'] = 1;           
-            */
-            $data['reference'] = strtoupper(md5(rand()));
-
-            if ($ambiente == 'H')
-            {
-                $data['senderEmail'] = $email_comprador_teste;
-                $data['nome_comprador'] = '';
-                $urlPagseguro = "https://ws.sandbox.pagseguro.uol.com.br/v2/checkout?email=$pagseguro_email&token=$pagseguro_token";
-            } else
-            {
-                $data['senderEmail'] = $usuario->email;
-                $data['senderName'] = $usuario->nome;
-                $urlPagseguro = "https://ws.pagseguro.uol.com.br/v2/checkout?email=$pagseguro_email&token=$pagseguro_token";
-            }             
-                    
-           // $data['redirectURL'] = url('/meuspedidos/' .  $pedido->id);
-           // $data['notificationURL'] = "https://razzapro.com.br/api/pagseguro/retornopagamento";
-
-            $data['shippingAddressRequired'] = "false";
-
-            $client = new Client();
-            try {
-                $result = $client->post($urlPagseguro, [
-                    'headers' => [              
-                        'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8'                 
-                        ],
-                    'form_params' => $data               
-                    ]
-                );
-                              
-                if ($result->getStatusCode() == 200){                
-                    $xml = $result->getBody()->getContents();
-                                        
-                    $xmlObject = simplexml_load_string($xml);
-                 
-                    $pedido->id_pagseguro = json_decode(json_encode($xmlObject),true)["code"];
-                    $pedido->cod_referencia =  $data['reference']; 
-
-                    $pedido->status = 2;                
-                    $pedido->save();
-                }    
-
-                if ($ambiente == 'H') {
-                    $url = 'https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code='.$pedido->id_pagseguro;
-                } else {
-                    $url = 'https://pagseguro.uol.com.br/v2/checkout/payment.html?code='.$pedido->id_pagseguro;                    
-                }
-                
-                return response()->json(['success' => true,'url' => $url]);   
-
-            } catch (Exception $e){              
-                return response()->json(['success' => false, $e->getMessage()]); 
-            }     
-        }          
-    }    
-	
 
    /* public function retornopagamento(Request $request){
      $notificationCode =$request->notificationCode;

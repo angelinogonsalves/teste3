@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\PagseguroService;
 use App\Models\Pedido;
 
 //use Illuminate\Http\Request;
@@ -19,6 +20,10 @@ class AlunoController extends Controller
                 return redirect('/');
             }
         }
+        
+        $pagseguroService = new PagseguroService();
+        $pedido->url_qr_code = $pagseguroService->geraURLQrCode($pedido);
+        
         return view('aluno.aluno-detalhes-pedido',['pedido' => $pedido]);
     }
 }

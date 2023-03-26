@@ -85,6 +85,9 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/salvar', [PedidoController::class,'salvarPedido'])->name('salvar-pedido');
         Route::get('/detalhes-pedido-print/{pedido}', [PedidoController::class,'detalhesPedidoPrint'])->name('detalhes-pedido-print');
         Route::get('/pagseguro/{pedido}',[PagSeguroController::class,'pagseguro']);
+        Route::get('/pix/{pedido}',[PagSeguroController::class,'pix']);
+        Route::get('/paypixSANDBOX/{pedido}',[PagSeguroController::class,'payPix']);
+        Route::get('/pagseguro/consulta/{pedido}',[PagSeguroController::class,'consulta']);
     });
 
     Route::group(array('prefix' => 'modalidades'), function(){
@@ -99,5 +102,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/imagem/corta', [ImagemController::class,'corta']);
 });
+
 
 
