@@ -184,19 +184,27 @@
 
                             <div class="row">
                                 <!-- accepted payments column -->
-                                <div class="col-6">
+                                <div class="col-6">     
+                                    <div class="row">                                                               
+                                        <p class="lead">Métodos de Pagamento:</p>
+                                        <img src="//assets.pagseguro.com.br/ps-integration-assets/banners/pagamento/todos_animado_550_50.gif"
+                                            alt="Logotipos de meios de pagamento do PagSeguro"
+                                            title="Este site aceita pagamentos com as principais bandeiras e bancos, saldo em conta PagSeguro e boleto.">
 
-                                    <p class="lead">Médtodos de Pagamento:</p>
-                                    <img src="//assets.pagseguro.com.br/ps-integration-assets/banners/pagamento/todos_animado_550_50.gif"
-                                        alt="Logotipos de meios de pagamento do PagSeguro"
-                                        title="Este site aceita pagamentos com as principais bandeiras e bancos, saldo em conta PagSeguro e boleto.">
-
-                                    <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                        Pagamento via cartões de créditos ou PIX.
-                                        Para Ver detalhes do produto como: Descrição, Tamanho com tabela de medidas
-                                        clique em cima do produto para abrir informções.
-                                    </p>
-                                </div>
+                                        <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+                                            Pagamento via cartões de créditos ou PIX.
+                                            Para Ver detalhes do produto como: Descrição, Tamanho com tabela de medidas
+                                            clique em cima do produto para abrir informções.
+                                        </p>
+                                    </div>
+                                    @if ($pedido->status < 3)
+                                    <div class="row">                                         
+                                        <div class="col-12 d-flex justify-content-center ">
+                                            <img id="img_qr_code" height="200px;" src="{{$pedido->url_qr_code}}"/>
+                                        </div>
+                                    </div>
+                                    @endif   
+                                </div>                                                                     
                                 <!-- /.col -->
                                 <div class="col-6">
                                     <p class="lead">Valores do Pedido Data: @date($pedido->created_at)</p>
