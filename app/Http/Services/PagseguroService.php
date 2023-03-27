@@ -11,16 +11,11 @@ class PagseguroService {
 
     private $ambiente = 'H';
     
-   // private $pagseguro_token = '9996707907D54263A026A304F3C8F043';    // token meu
-   /*
-    private $pagseguro_token = 'A4E6E0AFA50F4C6F9C7BB4D18667F887'; //token razza
-    private $pagseguro_email = 'cooperanet.br@gmail.com';
-    private $email_comprador_teste = 'c46643784810296169657@sandbox.pagseguro.com.br';    
-*/
+   
+    private $pagseguro_token = 'E05FF0D44BBB4C48992341397531A9B8'; //teste
+    private $pagseguro_email = 'contato@razzaesportes.com.br';
+    private $email_comprador_teste = 'c52908781517497584391@sandbox.pagseguro.com.br';    
 
-private $pagseguro_token = '9996707907D54263A026A304F3C8F043';
-private $pagseguro_email = 'roque.ata@hotmail.com';
-private $email_comprador_teste = 'c84430557409676847238@sandbox.pagseguro.com.br';
 
 //comprador de testes h85l59c8340y4674copiar
 
