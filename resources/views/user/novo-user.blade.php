@@ -45,6 +45,14 @@
                                 value="{{ old('nome', $dados->ra) }}">
                         </div>
                     </div>
+                    <div class="col-sm-2" id="ra" style="display: none">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label>CPF</label>
+                            <input type="text" name="cpf" class="form-control" placeholder="Digite..."
+                                value="{{ old('cpf', $dados->cpf) }}">
+                        </div>
+                    </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>E-mail</label>
@@ -86,6 +94,13 @@
                         <!-- /.form-group -->
                     </div>
 
+                    <div class="col-sm-1">
+                        <div class="form-group">
+                            <label>DDD</label>
+                            <input type="text" name="ddd" class="form-control" placeholder="informe.."
+                                value="{{ old('ddd', $dados->ddd) }}">
+                        </div>
+                    </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Celular (WhastsApp)</label>
@@ -140,10 +155,7 @@
                             </select>
                         </div>
                     </div>
-
                 </div>
-
-
                 <div class="timeline-item">
                     <div class="timeline-body">
                         <div class="row">

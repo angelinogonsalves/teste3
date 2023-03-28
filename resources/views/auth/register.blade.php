@@ -71,6 +71,21 @@
                         </select>
                     </div>
                     <div class="input-group mb-3">
+                        <input type="text" name="ddd" class="form-control" maxlength="3" placeholder="DD" value="{{old('ddd')}}">
+                        <div class="input-group-append">
+                            <input type="text" name="celular" class="form-control" maxlength="10" placeholder="Celular" value="{{old('celular')}}">
+                        </div>
+                    </div>
+                    
+                    <div class="input-group mb-3">
+                        <input type="text" name="cpf" class="form-control" maxlength="12" placeholder="CPF" value="{{old('cpf')}}">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
                         <input type="email" name="email" class="form-control" placeholder="Email" value="{{old('email')}}">
                         <div class="input-group-append">
                             <div class="input-group-text">
