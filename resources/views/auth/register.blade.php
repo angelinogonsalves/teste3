@@ -71,9 +71,9 @@
                         </select>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" name="ddd" class="form-control" maxlength="3" placeholder="DD" value="{{old('ddd')}}">
+                        <input type="text" name="ddd" class="form-control" maxlength="3" placeholder="DDD" value="{{old('ddd')}}">
                         <div class="input-group-append">
-                            <input type="text" name="celular" class="form-control" maxlength="10" placeholder="Celular" value="{{old('celular')}}">
+                            <input type="text" name="telefone" class="form-control" maxlength="10" placeholder="Celular" value="{{old('telefone')}}">
                         </div>
                     </div>
                     
