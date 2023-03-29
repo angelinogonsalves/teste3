@@ -124,7 +124,7 @@
                                         {{ $pedido->user->endereco }} {{ $pedido->user->numero }} 
                                         {{ $pedido->user->bairro }} <br>
                                         {{ $pedido->user->cidade }}  {{ $pedido->user->uf }}<br>
-                                        Telefone: {{ $pedido->user->telefone }}<br>
+                                        Telefone: ({{ $pedido->user->ddd }}) {{ $pedido->user->telefone }}<br>
                                         Email: {{ $pedido->user->email }}
                                     </address>
                                 </div>
