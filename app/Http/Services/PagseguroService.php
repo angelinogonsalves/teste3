@@ -56,8 +56,8 @@ class PagseguroService {
                 "phones" => [
                     [
                         "country" => "55",
-                        "area" => substr($pedido->user->telefone,0,2),
-                        "number" => substr($pedido->user->telefone,2,9),
+                        "area" => $pedido->user->ddd,
+                        "number" => $pedido->user->telefone,
                         "type" => "MOBILE"
                     ]
                 ]

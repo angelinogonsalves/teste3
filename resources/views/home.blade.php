@@ -93,7 +93,7 @@
                     <tbody>
                         @foreach ($pedidos as $p)
                             <tr>
-                                <td><a href="#">{{ $p->id }}</a></td>
+                                <td><a   href="{{ url('pedidos/cadastro', [$p->id]) }}">{{ $p->id }}</a></a></td>
                                 <td>@datetime($p->created_at)</td>
                                 <td>
                                     {{ $p->nome_aluno }}
