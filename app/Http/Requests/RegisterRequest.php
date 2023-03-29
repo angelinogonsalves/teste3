@@ -27,6 +27,9 @@ class RegisterRequest extends FormRequest
             'unidade_id' => 'integer|required',                      
             'email' => 'email|required|max:100|unique:users',                                 
             'password' => 'required|confirmed|max:100',  
+            'ddd' => 'integer|required|digits_between:,9',                                                
+            'telefone' => 'integer|required|digits:2',       
+            'cpf' => 'string|required|digits:11'
         ];
     }
 }

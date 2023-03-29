@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',       
         'tipo_usuario',
         'unidade_id',
+        'ddd',
         'telefone',
         'endereco',
         'numero',

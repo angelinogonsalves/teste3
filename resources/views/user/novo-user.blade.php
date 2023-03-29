@@ -37,19 +37,18 @@
                                 value="{{ old('nome', $dados->nome) }}">
                         </div>
                     </div>
-                    <div class="col-sm-2" id="ra" style="display: none">
+                    <div class="col-sm-2" id="ra">
                         <!-- text input -->
                         <div class="form-group">
                             <label>RA (caso seja tipo aluno)</label>
                             <input type="text" name="ra" class="form-control" placeholder="Digite..."
-                                value="{{ old('nome', $dados->ra) }}">
+                                value="{{ old('ra', $dados->ra) }}">
                         </div>
                     </div>
-                    <div class="col-sm-2" id="ra" style="display: none">
-                        <!-- text input -->
+                    <div class="col-sm-3">
                         <div class="form-group">
                             <label>CPF</label>
-                            <input type="text" name="cpf" class="form-control" placeholder="Digite..."
+                            <input type="text" name="cpf" class="form-control" placeholder="informe.."
                                 value="{{ old('cpf', $dados->cpf) }}">
                         </div>
                     </div>
@@ -103,11 +102,11 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label>Celular (WhastsApp)</label>
+                            <label>Celular (WhatsApp)</label>
                             <input type="text" name="telefone" class="form-control" placeholder="informe.."
                                 value="{{ old('telefone', $dados->telefone) }}">
                         </div>
-                    </div>
+                    </div>                  
                     <div class="col-sm-9">
                         <div class="form-group">
                             <label>Endereço:</label>

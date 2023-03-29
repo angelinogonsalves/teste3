@@ -27,14 +27,17 @@ class CadastraUsuarioRequest extends FormRequest
             'email' => 'required|max:100',            
             'password' => 'required_without:id|confirmed|max:100',                        
             'tipo_usuario' => 'required|max:4',                        
-            'unidade_id' => 'integer|nullable',                        
-            'telefone' => 'integer|nullable|digits_between:10,12',                                                
+            'unidade_id' => 'integer|nullable',                                    
+            'ddd' => 'numeric|required|digits:2',                                                
+            'telefone' => 'integer|required|digits_between:8,9',                                                
             'endereco' => 'string|nullable|max:150',                                                
             'numero' => 'string|nullable|max:10',                                                
             'bairro' => 'string|nullable|max:100',                                                
             'cep' => 'string|nullable|max:8',                                                
             'cidade' => 'string|nullable|max:100',                                                
-            'uf' => 'string|nullable|max:2'
-        ];
+            'uf' => 'string|nullable|max:2',
+            'cpf' => 'string|required|digits:11',
+            'ra' => 'required_if:tipo_usuario,4'
+        ];        
     }
 }
