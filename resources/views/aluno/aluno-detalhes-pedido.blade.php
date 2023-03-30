@@ -23,10 +23,8 @@
 <!--
 `body` tag options:
 -->
-
 <body class="hold-transition layout-top-nav">
     <div class="wrapper">
-
 
         <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
             <div class="container">
@@ -59,9 +57,13 @@
                             <span class="badge badge-primary">{{ auth()->user()->nome }}</span> - <i class="far fa-user"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <div class="dropdown-divider"></div>                               
-                            <a href="{{ url('logout/') }}" class="badge badge-danger dropdown-item"> 
-                                <i class="fas fa-times-circle"></i>   <button type="button" class="btn btn-danger btn-sm">Sair do sistema</button>
+                            <div class="dropdown-divider"></div>
+                            <a href="" class="dropdown-item">
+                                <i class="fas fa-envelope"> </i> Email: {{ auth()->user()->email }} 
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="{{ url('logout/') }}" class="badge badge dropdown-item">
+                                 <button type="button"  class="btn btn-danger btn-sm"> <i class="fas fa-power-off"></i> Sair do sistema</button>
                             </a>
                         </div>
                     </li>

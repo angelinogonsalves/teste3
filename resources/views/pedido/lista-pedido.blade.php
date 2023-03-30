@@ -25,8 +25,8 @@
                     <div class="card">
                         <div class="card-header">
                             <a href="{{ url('pedidos/cadastro') }}"class="btn btn btn-primary">Adicionar Novo Pedido</a>
-                            <a href="{{ url('/pedidos') }}" class="btn btn btn-success float-right">Atualizar dados
-                                Pagamentos </a>
+                            {{-- <a href="{{ url('/pedidos') }}" class="btn btn btn-success float-right">Atualizar dados
+                                Pagamentos </a> --}}
 
                         </div>
                         <!-- /.card-header  usar modelo table que baixa em CSV-->
@@ -67,18 +67,24 @@
                                                     <span class="badge badge-primary">Pedido Entregue</span>
                                                 @endif
                                             </td>
-                                            <td> {{ $p->unidade->nome_fantasia}} </td>
+                                            <td> {{ $p->unidade->nome_fantasia }} </td>
                                             <td>
                                                 <form action="{{ url('pedidos/mudar-status', [$p->id]) }}" method="post">
                                                     @csrf
                                                     <a class="btn btn-primary btn-sm"
-                                                        href="{{ url('pedidos/cadastro', [$p->id]) }}">Ver | Editar</a>
+                                                        href="{{ url('pedidos/cadastro', [$p->id]) }}"><i
+                                                        class="fas fa-edit"> </i> Ver | Editar</a>
 
-                                                        <a href="{{ url('pedidos/detalhes-pedido-print', [$p->id]) }}" rel="noopener" target="_blank"
-                                                            class="btn btn-default btn-sm"><i class="fas fa-print"></i> Imprimir</a>
+                                                    <a href="{{ url('pedidos/detalhes-pedido-print', [$p->id]) }}"
+                                                        rel="noopener" target="_blank" class="btn btn-default btn-sm"><i
+                                                            class="fas fa-print"></i>Imprimir</a>
 
-                                                        {{-- <input type="submit" value="Excluir" class="btn btn-danger btn-sm"> --}}
-                                                        {{-- <input type="submit" value="Mudar Status" class="btn btn-info btn-sm"> --}}
+                                                    <a href="{{ url('pedidos/pagseguro/consulta/', [$p->id]) }}"
+                                                        target="_blank" class="btn btn-success btn-sm"><i
+                                                            class="fas fa-sync"> </i> Atualiza Pag.</a>
+
+                                                    {{-- <input type="submit" value="Excluir" class="btn btn-danger btn-sm"> --}}
+                                                    {{-- <input type="submit" value="Mudar Status" class="btn btn-info btn-sm"> --}}
 
                                                 </form>
                                             </td>
@@ -102,14 +108,14 @@
         </div>
     </section>
 
-    <script>       
-         $(function () {
+    <script>
+        $(function() {
             var table = new DataTable('#tabela_itens_produto', {
-                "order": [ 0, 'desc' ],
+                "order": [0, 'desc'],
                 language: {
-                    url: "{{asset('plugins/datatables/datatable-pt-BR.json')}}"
+                    url: "{{ asset('plugins/datatables/datatable-pt-BR.json') }}"
                 },
-             });       
+            });
         });
-      </script>
+    </script>
 @endsection

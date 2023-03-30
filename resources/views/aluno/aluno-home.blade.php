@@ -31,7 +31,7 @@
                     <a href="/" class="navbar-brand">
                         <img src="{{ asset('/img/LogoRazza.png') }}" alt="Logo" class="brand-image img "
                             style="opacity:1">
-                        <span class="brand-text font-weight-light">RazzaPRO - inicio</span>
+                        <span class="brand-text font-weight-light">Razza PRO </span>
                     </a>
 
                     <button class="navbar-toggler order-1" type="button" data-toggle="collapse"
@@ -44,12 +44,10 @@
                         <!-- Left navbar links -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a href="https://www.razzaesportes.com.br/" target="_blank" class="nav-link">Site
-                                    Razza</a>
+                                <a href="https://www.razzaesportes.com.br/" target="_blank" class="nav-link">Contato</a>
                             </li>
                         </ul>
                     </div>
-
                     <!-- Right navbar links -->
                     <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
                         <li class="nav-item dropdown">
@@ -57,13 +55,17 @@
                                 <span class="badge badge-primary">{{ auth()->user()->nome }}</span> - <i class="far fa-user"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                <div class="dropdown-divider"></div>                               
-                                <a href="{{ url('logout/') }}" class="badge badge-danger dropdown-item"> 
-                                    <i class="fas fa-times-circle"></i>   <button type="button" class="btn btn-danger btn-sm">Sair do sistema</button>
+                                <div class="dropdown-divider"></div>
+                                <a href="" class="dropdown-item">
+                                    <i class="fas fa-envelope"> </i> Email: {{ auth()->user()->email }} 
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="{{ url('logout/') }}" class="badge badge dropdown-item">
+                                     <button type="button"  class="btn btn-danger btn-sm"> <i class="fas fa-power-off"></i> Sair do sistema</button>
                                 </a>
                             </div>
                         </li>
-                    </ul>
+                    </ul>   
                 </div>
             </nav>
             <!-- /.navbar -->
@@ -92,7 +94,7 @@
                     </div><!-- /.container-fluid -->
                 </div>
                 <!-- /.content-header -->
-
+            
                 <!-- Main content -->
                 <div class="content-wrapper">
                     <div class="container">
@@ -171,17 +173,27 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="col-lg-12">
+                            <div class="col-lg-12">
                             <div class="card card-primary card-outline">
                                 <div class="card-body">
-                                    <h5 class="card-title">Meus dados</h5>
+                                    <h5 class="card-title">Meus dados de cadastrais</h5>
                                     <p class="card-text">
-                                        Endereço informações do Cliente Aluno
+                                        <div class="col-sm-4 invoice-col">                    
+                                            <address>
+                                                Nome: <strong> {{ auth()->user()->nome }}</strong><br>
+                                                Registro academico (Ra): <strong> {{ auth()->user()->ra }} </strong> <br>
+                                                CPF: {{ auth()->user()->cpf }} <br>
+                                                Telefone: ({{ auth()->user()->ddd }}) {{ auth()->user()->telefone }}<br>
+                                                Email: {{ auth()->user()->email }} <br>
+                                                Endereço: {{ auth()->user()->endereco }} {{ auth()->user()->numero }} {{ auth()->user()->bairro }}
+                                                {{ auth()->user()->cep }} {{ auth()->user()->cidade }} {{ auth()->user()->uf }}.   
+                                            </address>
+                                        </div>
                                     </p>
-                                    <a href="#" class="btn btn-primary">Atualizar</a>
+                                    {{--    <a href="#" class="btn btn-primary">Atualizar</a> --}}
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                         </div>
                     </div>
                     <!-- /.col-md-6 -->
