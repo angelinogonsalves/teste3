@@ -255,8 +255,8 @@
                         $.each(data, function(key, value) {
                             $("#div_tamanhos").append(
                                 ' <label class="btn btn-default text-center">' +
-                                '   <input type="radio" name="add_tamanho_id" value="' + value.id +
-                                '" autocomplete="off"> ' +
+                                '   <input type="radio" name="add_tamanho_id" value="' + value.id + '" texto="'+value.tamanho+'"'+
+                                ' autocomplete="off"> ' +
                                 '     <span class="text-xl">' + value.tamanho + '</span> ' +
                                 ' </label> ');
                         });
@@ -279,13 +279,10 @@
             let personaliza_nome = $("#add_produto option:selected").attr('personaliza_nome');
             let personaliza_numero = $("#add_produto option:selected").attr('personaliza_numero');
             let personaliza_modalidade = $("#add_produto option:selected").attr('personaliza_modalidade');
-            let url_imagem = $("#add_produto option:selected").attr('url');
+            let url_imagem = $("#add_produto option:selected").attr('url');                        
 
-            let tamanho_id = false;
-
-            if (document.querySelector('input[name="add_tamanho_id"]:checked')) {
-                tamanho_id = document.querySelector('input[name="add_tamanho_id"]:checked').value;
-            }
+            let tamanho_id = $('input[name=add_tamanho_id]:checked').val();
+            let tamanho_texto = $('input[name=add_tamanho_id]:checked').attr('texto');           
 
             let formatter = new Intl.NumberFormat('pt-BR', {
                 style: 'currency',
@@ -309,7 +306,7 @@
                         "<a target='blank' href=''>  " + nome_produto + "</a></td>" +
                         "<td><input class='form-control-sm quantidade' required type='number' value='1' min='0' max='10' step='0'/ onchange='calcularTotal()'></td>" +
                         "<td>" + valor + "</td>" +
-                        "<td>" + tamanho_id + "</td>" +
+                        "<td>" + tamanho_texto + "</td>" +
                         "<td>" + nome_modalidade + "</td>" +
                         "<td>" + nome_personalizado + "</td>" +
                         "<td>" + numero_personalizado + "</td>" +
@@ -377,9 +374,7 @@
             $.each($('.itens_produtos'), function(key, value) {
 
                 let produto_id = $(this).attr('produto_id')
-                let modalidade_id = $(this).attr('modalidade_id');
-
-                alert(modalidade_id);
+                let modalidade_id = $(this).attr('modalidade_id');                
                 let tamanho_id = 1; // só para salvar, depois arrumar o front
                 let nome_personalizado = $(this).attr('nome_personalizado');
                 let numero_personalizado = $(this).attr('numero_personalizado');

@@ -169,7 +169,7 @@
                                                     <td>{{ $i->quantidade }}</td>
                                                     <td>@money($i->valor_unitario)</td>
                                                     <td>{{ $i->tamanho->tamanho }}</td>
-                                                    <td>{{ $i->modalidade->modalidade }}</td>
+                                                    <td>{{ $i->modalidade?->modalidade }}</td>
                                                     <td>{{ $i->nome_personalizado }}</td>
                                                     <td>{{ $i->numero_personalizado }}</td>
                                                     <td>@money($i->valor_unitario * $i->quantidade)</td>
@@ -198,14 +198,7 @@
                                             Para Ver detalhes do produto como: Descrição, Tamanho com tabela de medidas
                                             clique em cima do produto para abrir informções.
                                         </p>
-                                    </div>
-                                    @if ($pedido->status < 3)
-                                    <div class="row">                                         
-                                        <div class="col-12 d-flex justify-content-center ">
-                                            <img id="img_qr_code" height="200px;" src="{{$pedido->url_qr_code}}"/>
-                                        </div>
-                                    </div>
-                                    @endif   
+                                    </div>                                   
                                 </div>                                                                     
                                 <!-- /.col -->
                                 <div class="col-6">
@@ -244,15 +237,13 @@
                                             onclick="pagseguro()"><i class="far fa-credit-card"></i> Pagar
                                             Pedido via
                                             PagSeguro
-                                        </button>
-                                        <button class="mr-1 btn btn-secondary float-right" onclick="pix()">Gerar QR Code PIX</button>                                          
+                                        </button>                                        
                                     @elseif ($pedido->status == 2)
                                         <span class="badge badge-warning">Processando Pagamento</span>
                                         <button type="button" class="btn btn-success float-right"
                                             onclick="pagseguro()"><i class="far fa-credit-card"></i> Pagar Pedido via
                                             PagSeguro
-                                        </button>
-                                        <button class="btn btn-secondary float-right" onclick="pix()">Gerar QR Code PIX</button>                                          
+                                        </button>                                        
                                     @elseif ($pedido->status == 3)
                                         <span class="badge badge-success">Pagamento Aprovado</span>
                                     @elseif ($pedido->status == 4)
