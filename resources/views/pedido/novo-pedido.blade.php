@@ -301,10 +301,10 @@
                 } else if (personaliza_modalidade == 1 && modalidade_id == '') {
                     alert("Preencha a Modalidade");
                 } else {
-                    $("#tbodyitens_produto").append("<tr class='itens_produtos' valor_produto=" + valor_produto + " ra_aluno=" +
-                        ra_aluno + " nome_aluno=" + nome_aluno + " unidade_id=" + unidade_id + " produto_id=" + produto_id +
-                        " tamanho_id=" + tamanho_id + " modalidade_id=" + modalidade_id + " nome_personalizado=" +
-                        nome_personalizado + " numero_personalizado=" + numero_personalizado + ">" +
+                    $("#tbodyitens_produto").append("<tr class='itens_produtos' valor_produto='" + valor_produto + "' ra_aluno='" +
+                        ra_aluno + "' nome_aluno='" + nome_aluno + "' unidade_id='" + unidade_id + "' produto_id='" + produto_id +
+                        "' tamanho_id='" + tamanho_id + "' modalidade_id='" + modalidade_id + "' nome_personalizado='" +
+                        nome_personalizado + "' numero_personalizado='" + numero_personalizado + "'>" +
                         "<td><img width='50px' src='"+url_imagem+"' class='img-thumbnail' alt='produto'>"+
                         "<a target='blank' href=''>  " + nome_produto + "</a></td>" +
                         "<td><input class='form-control-sm quantidade' required type='number' value='1' min='0' max='10' step='0'/ onchange='calcularTotal()'></td>" +
@@ -378,6 +378,8 @@
 
                 let produto_id = $(this).attr('produto_id')
                 let modalidade_id = $(this).attr('modalidade_id');
+
+                alert(modalidade_id);
                 let tamanho_id = 1; // só para salvar, depois arrumar o front
                 let nome_personalizado = $(this).attr('nome_personalizado');
                 let numero_personalizado = $(this).attr('numero_personalizado');
