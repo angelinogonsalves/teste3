@@ -149,9 +149,9 @@
                                                     step='0' onchange='calcularTotal()' /></td>
                                             <td class="align-middle">@money($p->valor_unitario)</td>
                                             <td class="align-middle">{{ $p->tamanho->tamanho }}</td>
-                                            <td class="align-middle">{{ $p->modalidade->modalidade }}</td>
-                                            <td class="align-middle">{{ $p->modalidade->nome_personalizado }}</td>
-                                            <td class="align-middle">{{ $p->modalidade->numero_personalizado }}</td>
+                                            <td class="align-middle">{{ $p->modalidade?->modalidade }}</td>
+                                            <td class="align-middle">{{ $p->nome_personalizado }}</td>
+                                            <td class="align-middle">{{ $p->numero_personalizado }}</td>
                                             <td class="align-middle">
                                                 <button class='btn btn-sm btn-default excluir' type='button'
                                                     title='Remover'> <span class='text-danger fas fa-trash-alt'></span>
