@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="number" name="ra" class="form-control" placeholder="R.A (Registro Academico)" value="{{old('ra')}}">
+                        <input type="number" name="ra" class="form-control" placeholder="Número da Matricula R.A." value="{{old('ra')}}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -63,14 +63,14 @@
                     </div>
                     <div class="input-group mb-3">
                         <select class="form-control select2" name="unidade_id" data-placeholder="selecione sua Unidade" style="width: 100%;">
-                            <option value="">Selecione Unidade..</option>
+                            <option value="">Selecione sua Unidade. (colégio)</option>
                             @forelse ($unidades as $u)
                                 <option value="{{$u->id}}">{{$u->nome_fantasia}}</option>
                             @empty                                    
                             @endforelse                              
                         </select>
                     </div>
-                    <div class="input-group mb-3">
+                    {{-- <div class="input-group mb-3">
                         <input type="text" name="ddd" class="form-control" maxlength="3" placeholder="DDD" value="{{old('ddd')}}">
                         <div class="input-group-append">
                             <input type="text" name="telefone" class="form-control" maxlength="10" placeholder="Celular" value="{{old('telefone')}}">
@@ -84,7 +84,7 @@
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="input-group mb-3">
                         <input type="email" name="email" class="form-control" placeholder="Email" value="{{old('email')}}">
                         <div class="input-group-append">

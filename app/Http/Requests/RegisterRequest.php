@@ -26,10 +26,10 @@ class RegisterRequest extends FormRequest
             'ra' => 'required|unique:users',          
             'unidade_id' => 'integer|required',                      
             'email' => 'email|required|max:100|unique:users',                                 
-            'password' => 'required|confirmed|max:100',              
-            'ddd' => 'required|digits:2',       
-            'telefone' => 'required|digits_between:8,9',                                                
-            'cpf' => 'string|required|digits:11'
+            'password' => 'required|confirmed|max:100'             
+            // 'ddd' => 'required|digits:2',       
+            // 'telefone' => 'required|digits_between:8,9',                                                
+            // 'cpf' => 'string|required|digits:11'
         ];
     }
 }
