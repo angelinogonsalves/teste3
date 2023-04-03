@@ -182,11 +182,11 @@
                                             <address>
                                                 Nome: <strong> {{ auth()->user()->nome }}</strong><br>
                                                 Registro academico (Ra): <strong> {{ auth()->user()->ra }} </strong> <br>
-                                                CPF: {{ auth()->user()->cpf }} <br>
-                                                Telefone: ({{ auth()->user()->ddd }}) {{ auth()->user()->telefone }}<br>
+                                                {{-- CPF: {{ auth()->user()->cpf }} <br> --}}
+                                                {{-- Telefone: ({{ auth()->user()->ddd }}) {{ auth()->user()->telefone }}<br> --}}
                                                 Email: {{ auth()->user()->email }} <br>
-                                                Endereço: {{ auth()->user()->endereco }} {{ auth()->user()->numero }} {{ auth()->user()->bairro }}
-                                                {{ auth()->user()->cep }} {{ auth()->user()->cidade }} {{ auth()->user()->uf }}.   
+                                                {{-- Endereço: {{ auth()->user()->endereco }} {{ auth()->user()->numero }} {{ auth()->user()->bairro }}
+                                                {{ auth()->user()->cep }} {{ auth()->user()->cidade }} {{ auth()->user()->uf }}.    --}}
                                             </address>
                                         </div>
                                     </p>

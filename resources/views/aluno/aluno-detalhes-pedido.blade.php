@@ -235,14 +235,12 @@
                                         <span class="badge badge-danger">Aguardando Pagamento</span>
                                         <button type="button" class="btn btn-success float-right"
                                             onclick="pagseguro()"><i class="far fa-credit-card"></i> Pagar
-                                            Pedido via
-                                            PagSeguro
+                                            Pedido 
                                         </button>                                        
                                     @elseif ($pedido->status == 2)
                                         <span class="badge badge-warning">Processando Pagamento</span>
                                         <button type="button" class="btn btn-success float-right"
-                                            onclick="pagseguro()"><i class="far fa-credit-card"></i> Pagar Pedido via
-                                            PagSeguro
+                                            onclick="pagseguro()"><i class="far fa-credit-card"></i> Pagar Pedido
                                         </button>                                        
                                     @elseif ($pedido->status == 3)
                                         <span class="badge badge-success">Pagamento Aprovado</span>
