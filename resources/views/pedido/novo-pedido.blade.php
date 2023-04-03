@@ -36,7 +36,7 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label>R.A (Registro academico)*</label>
+                            <label>Matricula do Aluno (R.A)*</label>
                             <input type="text" name="ra_aluno" id="ra_aluno" class="form-control"
                                 placeholder="Informe.." value="{{ $dados->ra_aluno }}">
                         </div>
@@ -77,7 +77,7 @@
                             <div class="select-purple">
                                 <select name="modalidade_id" id="modalidade_id" class="form-control"
                                     data-placeholder="Selecione Modalidade">
-                                    <option value="">Selecione...</option>
+                                    <option value=""></option>
                                     @forelse ($lista_modalidades as $m)
                                         <option value="{{ $m->id }}">{{ $m->modalidade }}</option>
                                     @empty
