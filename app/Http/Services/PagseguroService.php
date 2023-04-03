@@ -9,15 +9,19 @@ use GuzzleHttp\Client;
 
 class PagseguroService {
 
-    private $ambiente = 'H';
-    
-   
+    //Variaveis Ambente Teste // em produção deixar comentado
+/*
+    private $ambiente = 'H';    
     private $pagseguro_token = 'E05FF0D44BBB4C48992341397531A9B8'; //teste
+*/
+
+    // Vairaiaveis em Ambinete de produçao
+    private $ambiente = 'P'; 
+    private $pagseguro_token = '0bde81b7-48a4-42d6-aff7-185044813948a2c489cd4df9b1de4ab298d4187959b1a2db-7b73-42d7-9a24-afc9f8f88086'; //Produção
+    
     private $pagseguro_email = 'contato@razzaesportes.com.br';
     private $email_comprador_teste = 'c52908781517497584391@sandbox.pagseguro.com.br';    
 
-
-//comprador de testes h85l59c8340y4674copiar
 
     public function geraURLQrCode(Pedido $pedido) 
     {
