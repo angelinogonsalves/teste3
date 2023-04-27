@@ -73,15 +73,17 @@
                                                     @csrf
                                                     <a class="btn btn-primary btn-sm"
                                                         href="{{ url('pedidos/cadastro', [$p->id]) }}"><i
-                                                        class="fas fa-edit"> </i> Ver | Editar</a>
+                                                            class="fas fa-edit"> </i> Ver | Editar</a>
 
                                                     <a href="{{ url('pedidos/detalhes-pedido-print', [$p->id]) }}"
                                                         rel="noopener" target="_blank" class="btn btn-default btn-sm"><i
                                                             class="fas fa-print"></i>Imprimir</a>
 
-                                                    <a href="{{ url('pedidos/pagseguro/consulta/', [$p->id]) }}"
-                                                        target="_blank" class="btn btn-success btn-sm"><i
-                                                            class="fas fa-sync"> </i> Atualiza Pag.</a>
+                                                    <button id="btn-pagamento-pagseguro type=" button
+                                                        onclick="verificarPagamento('{{ $p->id }}')"
+                                                        class="btn btn-success btn-sm"><i
+                                                            class="fas fa-sync"> </i> Atualizar
+                                                        Status </button>
 
                                                     {{-- <input type="submit" value="Excluir" class="btn btn-danger btn-sm"> --}}
                                                     {{-- <input type="submit" value="Mudar Status" class="btn btn-info btn-sm"> --}}
@@ -117,5 +119,50 @@
                 },
             });
         });
+
+        function verificarPagamento($id) {
+
+            url_atualiza = "{{ url('pedidos/pagseguro/consulta/') }}" + '/' + $id;
+
+            $.ajax({
+                url: url_atualiza,
+                method: "GET",
+                data: {
+                    id: $id,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(data) {
+                    console.log(data);
+                    if (data.success) {
+                        swal(data.msg, {
+                            icon: "success",
+                            
+                        }).then((ok) => {
+                            location.reload();
+                        });
+                    } else {
+                        swal(data.msg, {
+                            icon: "error",
+                        })
+                    }
+                },
+                complete: function() {
+                    swal.close();
+                },
+                beforeSend: function() {
+                    swal('Processando...', {
+                        icon: "info",
+                        buttons: false
+                    })
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.error(xhr.responseText);
+                    swal("Falha ao consultar o Status no PagSeguro, Tente novamente", {
+                        icon: "error",
+                    });
+                }
+
+            });
+        }
     </script>
 @endsection
