@@ -76,12 +76,11 @@ class ProdutoController extends BaseController
     }
 
     public function listaPorUnidade(Unidade $unidade) {
-        $produtos = $this->produtoService->getProdutosPorUnidade($unidade);    
-        
+        $produtos = $this->produtoService->getProdutosPorUnidade($unidade);
+
         $produtos->map(function($produto) {   
             $url =  url('/img/perfil.jpg');
-
-            if ($produto->imagens){            
+            if (count($produto->imagens) > 0){  
                 $url = url('/img/produtos')  . '/' . $produto->imagens[0]->imagem;
             }
             return $produto->url = $url;

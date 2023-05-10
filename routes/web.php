@@ -47,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
     Route::group(array('prefix' => 'aluno'), function(){        
       //  Route::get('/home', [AlunoController::class,'inicio'])->name('home-aluno');
         Route::get('/detalhes-pedido/{pedido}', [AlunoController::class,'detalhesPedido'])->name('detalhes-pedido');
+        Route::get('/novo-pedido/{pedido?}', [AlunoController::class,'novoPedido'])->name('novo-pedido');
         
     });
 

@@ -24,6 +24,11 @@ class PedidoController extends Controller
     public function index()
     {   
         $pedidos = $this->pedidoService->getAllPedidos();
+
+        if (auth()->user()->tipo_usuario == 4){        
+            return view('aluno.aluno-home',['pedidos' => $pedidos]);
+        }
+        
         return view('pedido.lista-pedido',['dados' =>  $pedidos]);
     }
 

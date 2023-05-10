@@ -13,7 +13,20 @@
                 <input type="hidden" name="id" value="{{ old('id', $dados->id) }}">
 
                 <div class="row col-md-12">
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
+                        <label>Produto disponível para:</label>
+                        <div class="form-group">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="disponibilidade" id="disponibilidade_coordenador" value="coordenador" {{ (old('disponibilidade', $dados->disponibilidade) == 'coordenador' ? 'checked' : '')}}>
+                                <label class="form-check-label" for="disponibilidade_coordenador">coordenador</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="disponibilidade" id="disponibilidade_aluno" value="aluno" {{ (old('disponibilidade', $dados->disponibilidade) == 'aluno' ? 'checked' : '')}}>
+                                <label class="form-check-label" for="disponibilidade_aluno">aluno</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
                         <!-- text input -->
                         <div class="form-group">
                             <label>Código RZ</label>

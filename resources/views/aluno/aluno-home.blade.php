@@ -104,7 +104,14 @@
                             <div class="col-lg-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5 class="card-title m-0">Meus Pedidos</h5>
+                                        <div class="row">
+                                            <div class="col-md-6 card-title">
+                                                <h5 class="">Meus Pedidos</h5>
+                                            </div>
+                                            <div class="col-md-6 text-right">
+                                                <a href="{{ url('aluno/novo-pedido') }}"class="btn btn-sm btn-primary">Adicionar Novo Pedido</a>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="card-body">

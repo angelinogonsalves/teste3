@@ -9,7 +9,7 @@ use Exception;
 
 class ProdutoService {
 public function salvaProduto(array $produtoData) : array
-    {        
+    {   
         try {   
             if ($produtoData['id']){
                 $produto = Produto::find($produtoData['id']);
@@ -53,8 +53,18 @@ public function salvaProduto(array $produtoData) : array
         }
     }   
 
-    public function getProdutosPorUnidade(Unidade $unidade){         
-        return Produto::orderby('produto')->get();
+    public function getProdutosPorUnidade(Unidade $unidade){
+        $disponibilidade = 'coordenador';
+        if (auth()->user()->tipo_usuario == 4){
+            $disponibilidade = 'aluno';
+        }
+
+        return Produto::whereHas('unidades', function ($query) use ($unidade) {
+                            $query->where('unidade_id', $unidade->id);
+                        })
+                        ->where('disponibilidade', $disponibilidade)
+                        ->orderBy('produto')
+                        ->get();
     }
 
     public function getProdutoDataById($id) {

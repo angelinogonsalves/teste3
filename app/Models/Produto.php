@@ -22,7 +22,8 @@ class Produto extends Model
         'imagem_medida',
         'personaliza_numero',
         'personaliza_nome',
-        'personaliza_modalidade'        
+        'personaliza_modalidade',
+        'disponibilidade'       
     ];
 
     public function produtoTamanhos(): HasMany
