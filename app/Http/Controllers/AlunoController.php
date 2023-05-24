@@ -42,6 +42,22 @@ class AlunoController extends Controller
 
     public function novoPedido(Pedido $pedido)
     {
+        $produtos = Produto::whereHas('unidades', function ($query) {
+                        $query->where('unidade_id', auth()->user()->unidade_id);
+                    })
+                    ->where('disponibilidade', 'aluno')
+                    ->orderBy('produto')
+                    ->get();
+
+        $produtos->map(function($produto) {   
+            $url =  url('/img/perfil.jpg');
+            if (count($produto->imagens) > 0){  
+                $url = url('/img/produtos')  . '/' . $produto->imagens[0]->imagem;
+            }
+            return $produto->url = $url;
+                        
+        });   
+        
         $pedido->itens->map(function($produto) {   
             $url =  url('/img/perfil.jpg');
 
@@ -51,21 +67,6 @@ class AlunoController extends Controller
             return $produto->url = $url;        
         });
 
-        // $unidade_id = auth()->user()->unidade_id;
-
-        // $produtos = Produto::whereHas('unidades', function ($query) use ($unidade_id) {
-        //     $query->where('unidade_id', $unidade_id);
-        // })->orderBy('produto')->get();
-
-        // $produtos->map(function($produto) {   
-        //     $url =  url('/img/perfil.jpg');
-        //     if (count($produto->imagens) > 0){  
-        //         $url = url('/img/produtos')  . '/' . $produto->imagens[0]->imagem;
-        //     }
-        //     return $produto->url = $url;
-                     
-        // });
-
-        return view('aluno.aluno-novo-pedido',['dados' => $pedido]);
+        return view('aluno.aluno-novo-pedido',['dados' => $pedido, 'produtos' => $produtos]);
     }
 }

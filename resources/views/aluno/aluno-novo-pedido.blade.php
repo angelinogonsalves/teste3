@@ -105,27 +105,125 @@
                                     <hr>
                                 </div> -->
 
-                                <!-- <div class="col-sm-12">
+                                <div class="col-sm-12">
                                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
                                             <div class="row">
-                                                <div class="col-sm-3">
-                                                    
-                                                    <div class="card" onclick="selectProduct('produto1')">
-                                                        <img class="card-img-top" src="{{ asset('img/perfil.jpg') }}" alt="Produto 1" height="275px" width="350px">
-                                                        <div class="card-body">
-                                                            <h5 class="card-title">{{ asset('img/perfil.jpg') }}</h5>
-                                                            <p class="card-text">{{ asset('img/perfil.jpg') }}</p>
+                                                <div class="col-sm-2">
+                                                    @forelse($produtos as $produto)
+                                                        <div class="card" onclick="selectProduct('{{ $produto->id }}')">
+                                                            <img class="card-img-top" src="{{ asset($produto->url) }}" alt="{{ $produto->produto }}" width="275px" height="350px">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">{{ $produto->produto }}</h5>
+                                                                <p class="card-text">{{ $produto->descricao }}</p>
+                                                                <label class="card-text">Valor: R$ {{ $produto->valor }}</label>
+                                                            </div>
+                                                            <div class="card-footer">
+                                                                <label class="btn btn-default text-center">
+                                                                    <input type="radio" name="add_tamanho_id" value="1" texto="P">
+                                                                    <span class="">P</span>
+                                                                </label>
+                                                                <label class="btn btn-default text-center">
+                                                                    <input type="radio" name="add_tamanho_id" value="2" texto="M">
+                                                                    <span class="">M</span>
+                                                                </label>
+                                                                <label class="btn btn-default text-center">
+                                                                    <input type="radio" name="add_tamanho_id" value="3" texto="G">
+                                                                    <span class="">G</span>
+                                                                </label>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    @empty
+                                                    @endforelse
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    @forelse($produtos as $produto)
+                                                        <div class="card" onclick="selectProduct('{{ $produto->id }}')">
+                                                            <img class="card-img-top" src="{{ asset($produto->url) }}" alt="{{ $produto->produto }}" width="275px" height="350px">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">{{ $produto->produto }}</h5>
+                                                                <p class="card-text">{{ $produto->descricao }}</p>
+                                                                <label class="card-text">Valor: R$ {{ $produto->valor }}</label>
+                                                            </div>
+                                                            <div class="card-footer">
+                                                                <label class="btn btn-default text-center">
+                                                                    <input type="radio" name="add_tamanho_id" value="1" texto="P">
+                                                                    <span class="">P</span>
+                                                                </label>
+                                                                <label class="btn btn-default text-center">
+                                                                    <input type="radio" name="add_tamanho_id" value="2" texto="M">
+                                                                    <span class="">M</span>
+                                                                </label>
+                                                                <label class="btn btn-default text-center">
+                                                                    <input type="radio" name="add_tamanho_id" value="3" texto="G">
+                                                                    <span class="">G</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    @empty
+                                                    @endforelse
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    @forelse($produtos as $produto)
+                                                        <div class="card" onclick="selectProduct('{{ $produto->id }}')">
+                                                            <img class="card-img-top" src="{{ asset($produto->url) }}" alt="{{ $produto->produto }}" width="275px" height="350px">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">{{ $produto->produto }}</h5>
+                                                                <p class="card-text">{{ $produto->descricao }}</p>
+                                                                <label class="card-text">Valor: R$ {{ $produto->valor }}</label>
+                                                            </div>
+                                                            <div class="card-footer">
+                                                                <label class="btn btn-default text-center">
+                                                                    <input type="radio" name="add_tamanho_id" value="1" texto="P">
+                                                                    <span class="">P</span>
+                                                                </label>
+                                                                <label class="btn btn-default text-center">
+                                                                    <input type="radio" name="add_tamanho_id" value="2" texto="M">
+                                                                    <span class="">M</span>
+                                                                </label>
+                                                                <label class="btn btn-default text-center">
+                                                                    <input type="radio" name="add_tamanho_id" value="3" texto="G">
+                                                                    <span class="">G</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    @empty
+                                                    @endforelse
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    @forelse($produtos as $produto)
+                                                        <div class="card" onclick="selectProduct('{{ $produto->id }}')">
+                                                            <img class="card-img-top" src="{{ asset($produto->url) }}" alt="{{ $produto->produto }}" width="275px" height="350px">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">{{ $produto->produto }}</h5>
+                                                                <p class="card-text">{{ $produto->descricao }}</p>
+                                                                <label class="card-text">Valor: R$ {{ $produto->valor }}</label>
+                                                            </div>
+                                                            <div class="card-footer">
+                                                                <label class="btn btn-default text-center">
+                                                                    <input type="radio" name="add_tamanho_id" value="1" texto="P">
+                                                                    <span class="">P</span>
+                                                                </label>
+                                                                <label class="btn btn-default text-center">
+                                                                    <input type="radio" name="add_tamanho_id" value="2" texto="M">
+                                                                    <span class="">M</span>
+                                                                </label>
+                                                                <label class="btn btn-default text-center">
+                                                                    <input type="radio" name="add_tamanho_id" value="3" texto="G">
+                                                                    <span class="">G</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    @empty
+                                                    @endforelse
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
 
-                                <div class="col-sm-4">
+                                <!-- <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>Escolha produto para Adicionar aos itens *</label>
                                         <div class="select-purple">
@@ -140,7 +238,7 @@
                                     <div class="col-md-4 d-flex">
                                         <img id="imagem_produto" src="{{url('/img/perfil.jpg')}}" class="img-thumbnail" alt="produto" width="275px" height="350px">
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="col-12 col-sm-12">
                                     <label>Selecione um tamanho para o produto *</label>
