@@ -300,11 +300,9 @@
                     "<td><input class='form-control-sm quantidade' required type='number' value='1' min='0' max='10' step='0'/ onchange='calcularTotal()'></td>" +
                     "<td>" + valor + "</td>" +
                     "<td>" + tamanho_texto + "</td>" +
-                    "<td> <button class='btn btn-sm btn-default excluir' type='button' title='Remover'> <span class='text-danger fas fa-trash-alt'></span> </button></td>" +
+                    "<td> <button class='btn btn-sm btn-default excluir' type='button' onclick='excluir(this)' title='Remover'> <span class='text-danger fas fa-trash-alt'></span> </button></td>" +
                     "</tr>"
                 );
-
-                excluir();
                 calcularTotal();
                 adicionarQuantidade();
             } else {
@@ -312,8 +310,10 @@
             }
         }
 
-        function excluir() {
-
+        function excluir(button) {
+            $(button).closest('tr').remove();
+            calcularTotal();
+            adicionarQuantidade();
         }
 
         function calcularTotal() {
