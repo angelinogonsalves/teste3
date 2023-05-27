@@ -154,11 +154,8 @@
 
                         <div class="row">
                             <div class="col-12">
-                                <!-- /.card -->
-                                <div class="card">
-                                    <!-- /.card-header  usar modelo table que baixa em CSV-->
+                                <div class="card">                                    
                                     <div class="card-body table-responsive p-0">
-
                                         <table id="tabela_itens_produto" class="table table-bordered table-hover">
                                             <thead>
                                                 <tr>
@@ -194,35 +191,30 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <!-- /.card-body -->
-                                </div>
-                                <!-- /.card -->
+
+                                    <div class="card-footer table-responsive">
+                                        <table class="table">
+                                            <tr>
+                                                <th style="width:50%">Total de produtos:</th>
+                                                <td><strong id="totalProdutos"></strong></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>        
                             </div>
-                            <div class="col-6">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <tr>
-                                            <th style="width:50%">Total de produtos:</th>
-                                            <td><strong id="totalProdutos"></strong></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer text-center">
-                            <button onclick="salvar();" type="button" class="btn btn-success float-center" id="fechar-pedido"><i
-                                    class="far fa-credit-card"></i>
-                                Fechar Pedido
-                            </button>
                         </div>
                     </div>
+
+                    <div class="card-footer text-center">
+                        <button onclick="salvar();" type="button" class="btn btn-success float-center" id="fechar-pedido"><i
+                                class="far fa-credit-card"></i>
+                            Fechar Pedido
+                        </button>
+                    </div>
                 </div>
-
-                
-
-            </div><!-- /.container-fluid -->
+            </div>
         </section>
-        <!-- FIM FORMULÁRIO NOVO PEDIDO -->
+      
 
 
         <!-- /.content -->
