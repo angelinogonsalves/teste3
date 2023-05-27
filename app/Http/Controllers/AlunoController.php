@@ -42,7 +42,8 @@ class AlunoController extends Controller
 
     public function novoPedido(Pedido $pedido)
     {
-        $produtos = Produto::whereHas('unidades', function ($query) {
+        $produtos = Produto::with('tamanhos')
+                    ->whereHas('unidades', function ($query) {
                         $query->where('unidade_id', auth()->user()->unidade_id);
                     })
                     ->where('disponibilidade', 'aluno')
@@ -57,7 +58,7 @@ class AlunoController extends Controller
             return $produto->url = $url;
                         
         });   
-        
+
         $pedido->itens->map(function($produto) {   
             $url =  url('/img/perfil.jpg');
 

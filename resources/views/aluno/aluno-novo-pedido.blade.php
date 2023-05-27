@@ -110,158 +110,47 @@
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
                                             <div class="row">
-                                                <div class="col-sm-2">
-                                                    @forelse($produtos as $produto)
-                                                        <div class="card" onclick="selectProduct('{{ $produto->id }}')">
-                                                            <img class="card-img-top" src="{{ asset($produto->url) }}" alt="{{ $produto->produto }}" width="275px" height="350px">
+                                                @forelse($produtos as $produto)
+                                                    <div class="col-sm-12 col-md-3">
+                                                        <div class="card">
+                                                            <img class="card-img-top" id="url_produto_{{ $produto->id }}" src="{{ asset($produto->url) }}" alt="{{ $produto->produto }}" max-width="275px" max-height="350px">
                                                             <div class="card-body">
-                                                                <h5 class="card-title">{{ $produto->produto }}</h5>
-                                                                <p class="card-text">{{ $produto->descricao }}</p>
-                                                                <label class="card-text">Valor: R$ {{ $produto->valor }}</label>
+                                                                <h5 class="card-title" id="nome_produto_{{ $produto->id }}" texto="{{ $produto->produto }}">{{ $produto->produto }}</h5>
+                                                                <p class="card-text" id="descricao_produto_{{ $produto->id }}" texto="{{ $produto->descricao }}">{{ $produto->descricao }}</p>
+                                                                <label class="card-text" id="valor_produto_{{ $produto->id }}" texto="{{ $produto->valor }}">Valor: R$ {{ $produto->valor }}</label>
                                                             </div>
                                                             <div class="card-footer">
-                                                                <label class="btn btn-default text-center">
-                                                                    <input type="radio" name="add_tamanho_id" value="1" texto="P">
-                                                                    <span class="">P</span>
-                                                                </label>
-                                                                <label class="btn btn-default text-center">
-                                                                    <input type="radio" name="add_tamanho_id" value="2" texto="M">
-                                                                    <span class="">M</span>
-                                                                </label>
-                                                                <label class="btn btn-default text-center">
-                                                                    <input type="radio" name="add_tamanho_id" value="3" texto="G">
-                                                                    <span class="">G</span>
-                                                                </label>
+                                                                <div>
+                                                                    @forelse($produto->tamanhos as $tamanho)
+                                                                        <label class="btn btn-default btn-sm text-center">
+                                                                            <input type="radio" name="tamanho_produto_{{ $produto->id }}" value="{{ $tamanho->id }}" texto="{{ $tamanho->tamanho }}">
+                                                                            <span>{{ $tamanho->tamanho }}</span>
+                                                                        </label>
+                                                                    @empty
+                                                                    @endforelse
+                                                                </div>
+                                                                <div>
+                                                                    <button type="button" class="btn btn-primary btn-sm" onclick="adicionarItem('{{ $produto->id }}');">
+                                                                        <i class="fas fa-cart-plus fa-lg mr-2"></i>
+                                                                        Adicionar item
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    @empty
-                                                    @endforelse
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    @forelse($produtos as $produto)
-                                                        <div class="card" onclick="selectProduct('{{ $produto->id }}')">
-                                                            <img class="card-img-top" src="{{ asset($produto->url) }}" alt="{{ $produto->produto }}" width="275px" height="350px">
-                                                            <div class="card-body">
-                                                                <h5 class="card-title">{{ $produto->produto }}</h5>
-                                                                <p class="card-text">{{ $produto->descricao }}</p>
-                                                                <label class="card-text">Valor: R$ {{ $produto->valor }}</label>
-                                                            </div>
-                                                            <div class="card-footer">
-                                                                <label class="btn btn-default text-center">
-                                                                    <input type="radio" name="add_tamanho_id" value="1" texto="P">
-                                                                    <span class="">P</span>
-                                                                </label>
-                                                                <label class="btn btn-default text-center">
-                                                                    <input type="radio" name="add_tamanho_id" value="2" texto="M">
-                                                                    <span class="">M</span>
-                                                                </label>
-                                                                <label class="btn btn-default text-center">
-                                                                    <input type="radio" name="add_tamanho_id" value="3" texto="G">
-                                                                    <span class="">G</span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    @empty
-                                                    @endforelse
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    @forelse($produtos as $produto)
-                                                        <div class="card" onclick="selectProduct('{{ $produto->id }}')">
-                                                            <img class="card-img-top" src="{{ asset($produto->url) }}" alt="{{ $produto->produto }}" width="275px" height="350px">
-                                                            <div class="card-body">
-                                                                <h5 class="card-title">{{ $produto->produto }}</h5>
-                                                                <p class="card-text">{{ $produto->descricao }}</p>
-                                                                <label class="card-text">Valor: R$ {{ $produto->valor }}</label>
-                                                            </div>
-                                                            <div class="card-footer">
-                                                                <label class="btn btn-default text-center">
-                                                                    <input type="radio" name="add_tamanho_id" value="1" texto="P">
-                                                                    <span class="">P</span>
-                                                                </label>
-                                                                <label class="btn btn-default text-center">
-                                                                    <input type="radio" name="add_tamanho_id" value="2" texto="M">
-                                                                    <span class="">M</span>
-                                                                </label>
-                                                                <label class="btn btn-default text-center">
-                                                                    <input type="radio" name="add_tamanho_id" value="3" texto="G">
-                                                                    <span class="">G</span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    @empty
-                                                    @endforelse
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    @forelse($produtos as $produto)
-                                                        <div class="card" onclick="selectProduct('{{ $produto->id }}')">
-                                                            <img class="card-img-top" src="{{ asset($produto->url) }}" alt="{{ $produto->produto }}" width="275px" height="350px">
-                                                            <div class="card-body">
-                                                                <h5 class="card-title">{{ $produto->produto }}</h5>
-                                                                <p class="card-text">{{ $produto->descricao }}</p>
-                                                                <label class="card-text">Valor: R$ {{ $produto->valor }}</label>
-                                                            </div>
-                                                            <div class="card-footer">
-                                                                <label class="btn btn-default text-center">
-                                                                    <input type="radio" name="add_tamanho_id" value="1" texto="P">
-                                                                    <span class="">P</span>
-                                                                </label>
-                                                                <label class="btn btn-default text-center">
-                                                                    <input type="radio" name="add_tamanho_id" value="2" texto="M">
-                                                                    <span class="">M</span>
-                                                                </label>
-                                                                <label class="btn btn-default text-center">
-                                                                    <input type="radio" name="add_tamanho_id" value="3" texto="G">
-                                                                    <span class="">G</span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    @empty
-                                                    @endforelse
-                                                </div>
+                                                    </div>
+                                                @empty
+                                                @endforelse
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <!-- <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label>Escolha produto para Adicionar aos itens *</label>
-                                        <div class="select-purple">
-                                            <select name="add_produto" id="add_produto" class="form-control" onchange="buscaTamanhos()";
-                                                data-placeholder="Selecione unidades"style="width: 100%;">
-                                                <option value="">Selecione...</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="col-md-4 d-flex">
-                                        <img id="imagem_produto" src="{{url('/img/perfil.jpg')}}" class="img-thumbnail" alt="produto" width="275px" height="350px">
-                                    </div>
-                                </div> -->
-
-                                <div class="col-12 col-sm-12">
-                                    <label>Selecione um tamanho para o produto *</label>
-                                </div>
-                                <div class="col-12 col-sm-12">
-                                    <div class="form-group">
-                                        <div id="div_tamanhos" class="btn-group" data-toggle="buttons">
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            <div class="col-12 col-sm-12">
-                                <h5 class="mt-12 text-center"><small>Confira os itens do pedido na tabela abaixo</small></h5>
-                                <hr>
-                            </div>
-                            <div class="card-footer text-center">
-                                <button type="button" class="btn btn-primary btn-sm" onclick="adicionarItem();">
-                                    <i class="fas fa-cart-plus fa-lg mr-2"></i>
-                                    Adicionar item
-                                </button>
+                                </div>                                
                             </div>
                         </form>
+                        
+                        <div class="col-12 col-sm-12">
+                            <h5 class="mt-12 text-center"><small>Confira os itens do pedido na tabela abaixo</small></h5>
+                            <hr>
+                        </div>
 
                         <div class="row">
                             <div class="col-12">
@@ -376,108 +265,32 @@
     </script>
     <script>
         $(document).ready(function() {
-            buscaProdutos();
             calcularTotal();
             $('.excluir').on('click', function() {
                 $(this).parent().parent().remove();
                 calcularTotal();
             });
-
         });
 
-        function buscaProdutos() {
-            unidade_id = $("#unidade_id").val();
 
-            $("#add_produto").empty().append('<option value="">Selecione...</option>');
+        function adicionarItem(produto_id) {
 
-            if (unidade_id) {
-                url = '{{ url('/produtos/listaporunidade/') }}' + '/' + unidade_id;
-
-                $.ajax({
-                    type: 'GET',
-                    url: url,
-                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                    async: true,
-                    success: function(data) {
-                        console.log(data);
-                        $.each(data, function(key, value) {
-                            $("#add_produto").append('<option '+
-                                ' url='+value.url+
-                                ' valor=' + value.valor + ' value=' + value
-                                .id + '>' + value.produto +
-                                '</option>');
-                        });
-                    },
-
-                    complete: function() {
-
-                    },
-                    beforeSend: function() {
-
-                    },
-                    error: function(data) {
-
-                    }
-                });
-            }
-        }
-
-        function addImagemProduto() {
-            var url = $("#add_produto option:selected").attr('url');
-            if (url !== undefined) {
-                $("#imagem_produto").prop('src', url);
-            } else {
-                $("#imagem_produto").prop('src', "{{url('/img/perfil.jpg')}}");
-            }
-        }
-
-        function buscaTamanhos() {
-            $("#div_tamanhos").html('');
-
-            produto_id = $("#add_produto").val();
-
-            if (produto_id) {
-                url = '{{ url('/tamanhos/listaporproduto/') }}' + '/' + produto_id;
-
-                $.ajax({
-                    type: 'GET',
-                    url: url,
-                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                    async: true,
-                    success: function(data) {
-                        $.each(data, function(key, value) {
-                            $("#div_tamanhos").append(
-                                ' <label class="btn btn-default text-center">' +
-                                '   <input type="radio" name="add_tamanho_id" value="' + value.id + '" texto="'+value.tamanho+'"'+
-                                ' autocomplete="off"> ' +
-                                '     <span class="text-xl">' + value.tamanho + '</span> ' +
-                                ' </label> ');
-                        });
-                    },
-                });
-            }
-
-            addImagemProduto();
-        }
-
-        function adicionarItem() {
             let unidade_id = $('#unidade_id').val();
             let nome_aluno = $('#nome_aluno').val();
             let ra_aluno = $('#ra_aluno').val();
-            let produto_id = $('#add_produto').val();
-            let nome_produto = $("#add_produto option:selected").text();
-            let valor_produto = $("#add_produto option:selected").attr('valor');
-            let url_imagem = $("#add_produto option:selected").attr('url');                        
+            let nome_produto = $('#nome_produto_'+produto_id).attr('texto');
+            let valor_produto = $('#valor_produto_'+produto_id).attr('texto');
+            let url_imagem = $('#url_produto_'+produto_id).attr('src');                        
 
-            let tamanho_id = $('input[name=add_tamanho_id]:checked').val();
-            let tamanho_texto = $('input[name=add_tamanho_id]:checked').attr('texto');           
+            let tamanho_id = $('input[name=tamanho_produto_'+produto_id+']:checked').val();
+            let tamanho_texto = $('input[name=tamanho_produto_'+produto_id+']:checked').attr('texto');           
 
             let formatter = new Intl.NumberFormat('pt-BR', {
                 style: 'currency',
                 currency: 'BRL',
             });
             valor = formatter.format(valor_produto).substring(3);
-        
+
             if (unidade_id && nome_aluno && ra_aluno && tamanho_id) {
                 $("#tbodyitens_produto").append("<tr class='itens_produtos' valor_produto='" + valor_produto + "' ra_aluno='" +
                     ra_aluno + "' nome_aluno='" + nome_aluno + "' unidade_id='" + unidade_id + "' produto_id='" + produto_id +
