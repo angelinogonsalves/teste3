@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
     <!-- bootstrap select -->
     <link rel="stylesheet" href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.min.css') }}">
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>   
 </head>
 <!--
 `body` tag options:
@@ -125,10 +127,16 @@
                                                             <th>Valor Pedido</th>
                                                             <th>Status</th>
                                                             <th>Ações</th>
+                                                            <th width="1%">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="check-all">
+                                                                    <label class="form-check-label" for="check-all"></label>
+                                                                </div>
+                                                            </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @forelse ($pedidos as $p)
+                                                        @forelse ($pedidos as $p) 
                                                             <tr>
                                                                 <td><a
                                                                         href="{{ url('aluno/detalhes-pedido', [$p->id]) }}">{{ $p->id }}</a>
@@ -167,10 +175,25 @@
                                                                     <a href="{{ url('aluno/detalhes-pedido', [$p->id]) }}"
                                                                         class="btn btn-info  btn-sm">Ver Pedido</a>
                                                                 </td>
+                                                                <td>
+                                                                    @if ($p->podePagar())
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="checkbox" id="check-{{ $p->id }}" name="check_pedidos[]" value="{{ $p->id }}">
+                                                                            <label class="form-check-label" for="check-{{ $p->id }}"></label>
+                                                                        </div>
+                                                                    @endif
+                                                                </td>
                                                             </tr>
                                                         @empty
                                                         @endforelse
                                                     </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th colspan="6" class="text-right">
+                                                                <a id="button_pagamento" href="#"class="btn btn-sm btn-secondary disabled">Fazer pagamento</a>
+                                                            </th>
+                                                        </tr>
+                                                    </tfoot>
                                                 </table>
                                             </div>
                                             <!-- /.table-responsive -->
@@ -252,6 +275,111 @@
             }
         });
     </script>
+
+    <script>
+        // Função para marcar/desmarcar todos os checkboxes
+        function toggleCheckboxes() {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"][name^="check_pedidos"]');
+            var checkAll = document.getElementById('check-all');
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = checkAll.checked;
+            }
+            performAction();
+        }
+
+        // Função para realizar uma ação em massa nos checkboxes marcados
+        function performAction() {
+            var isSelected = false;
+            var buttonPagamento = document.getElementById('button_pagamento');
+
+            var checkboxes = document.querySelectorAll('input[type="checkbox"][name^="check_pedidos"]');
+            var checkedCheckboxes = [];
+            
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    checkedCheckboxes.push(checkboxes[i].value);
+                    isSelected = true;
+                }
+            }
+            if (isSelected) {
+                buttonPagamento.classList.remove('btn-secondary');
+                buttonPagamento.classList.remove('disabled');
+                buttonPagamento.classList.add('btn-success');
+            } else {
+                buttonPagamento.classList.remove('btn-success');
+                buttonPagamento.classList.add('btn-secondary');
+                buttonPagamento.classList.add('disabled');
+            }
+            // Aqui você pode realizar a ação desejada com os checkboxes marcados
+            // Por exemplo, enviar uma requisição AJAX para processar os pedidos selecionados
+            // console.log('Pedidos selecionados:', checkedCheckboxes);
+        }
+
+        function pagseguro() {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"][name^="check_pedidos"]');
+            var checkedCheckboxes = [];
+            isSelected = false;
+            
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    checkedCheckboxes.push(checkboxes[i].value);
+                    isSelected = true;
+                }
+            }
+
+            if(!isSelected) { 
+                alert('Deve ser selecionado um pedido!');
+                exit(0);
+            }
+
+            console.log(checkedCheckboxes);
+
+            
+            var queryString = 'others[]=' + checkedCheckboxes.join('&others[]=');
+            console.log(queryString);
+            
+            var query_url = 'pedidos/pagseguro/'+checkedCheckboxes[0]+'?'+queryString;
+
+            var url = "{{ url('') }}" + '/' + query_url;
+            console.log(url);
+            
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function(data) {
+                    if (data.success) {                       
+                        window.open(data.url, '_blank');
+                    } else {
+                        alert(data.message);
+                    }
+                },              
+                error: function(data) {
+                    swal(data.message, {
+                           icon: "error",
+                     });                  
+                },
+                beforeSend: function() {
+                    swal('Processando...',{
+                    icon:  "info",
+                    buttons: false
+                    });      
+                },
+                complete: function () {
+                    swal.close();
+                },
+            });
+        }
+
+        // Adiciona os event listeners aos elementos
+        document.getElementById('check-all').addEventListener('change', toggleCheckboxes);
+        var checkboxes = document.querySelectorAll('input[type="checkbox"][name^="check_pedidos"]');
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].addEventListener('change', performAction);
+        }
+
+        document.getElementById('button_pagamento').addEventListener('click', pagseguro);
+    </script>
+
 </body>
 
 </html>

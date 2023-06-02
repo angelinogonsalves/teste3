@@ -71,19 +71,21 @@
                                             <td>
                                                 <form action="{{ url('pedidos/mudar-status', [$p->id]) }}" method="post">
                                                     @csrf
+                                                    @if ($p->podeEditar())
                                                     <a class="btn btn-primary btn-sm"
                                                         href="{{ url('pedidos/cadastro', [$p->id]) }}"><i
                                                             class="fas fa-edit"> </i> Ver | Editar</a>
+                                                    @endif
 
                                                     <a href="{{ url('pedidos/detalhes-pedido-print', [$p->id]) }}"
                                                         rel="noopener" target="_blank" class="btn btn-default btn-sm"><i
-                                                            class="fas fa-print"></i>Imprimir</a>
+                                                            class="fas fa-print"></i> Imprimir</a>
 
-                                                    <button id="btn-pagamento-pagseguro type=" button
+                                                    <!-- <button id="btn-pagamento-pagseguro type=" button
                                                         onclick="verificarPagamento('{{ $p->id }}')"
                                                         class="btn btn-success btn-sm"><i
                                                             class="fas fa-sync"> </i> Atualizar
-                                                        Status </button>
+                                                        Status </button> -->
 
                                                     {{-- <input type="submit" value="Excluir" class="btn btn-danger btn-sm"> --}}
                                                     {{-- <input type="submit" value="Mudar Status" class="btn btn-info btn-sm"> --}}

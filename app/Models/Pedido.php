@@ -23,6 +23,13 @@ class Pedido extends Model
         'total'
     ];
 
+    const CANELADO = 0;  
+    const AGUARDANDO_PAGAMENTO = 1;  
+    const PROCESSANDO_PAGAMENTO = 2;  
+    const PAGAMENTO_APROVADO = 3;  
+    const EM_PRODUCAO = 4;  
+    const PEDIDO_FINALIZADO = 5;  
+    const PEDIDO_ENTREGUE = 6;
 
     public function itens(): HasMany
     {
@@ -37,5 +44,15 @@ class Pedido extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function podeEditar() {
+        if(in_array($this->status,[self::AGUARDANDO_PAGAMENTO])) return true;
+        else return false;
+    }
+
+    public function podePagar() {
+        if(in_array($this->status,[self::AGUARDANDO_PAGAMENTO, self::PROCESSANDO_PAGAMENTO])) return true;
+        else return false;
     }
 }

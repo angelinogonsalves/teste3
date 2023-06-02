@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Services\PagseguroService;
 use App\Models\Pedido;
+use Illuminate\Http\Request;
 
 class PagSeguroController extends Controller
 {
@@ -37,9 +38,9 @@ class PagSeguroController extends Controller
         return  $this->pagSeguroService->payPix($pedido);
     }
 
-    public function pagseguro(Pedido $pedido)
+    public function pagseguro(Request $request, Pedido $pedido)
     {
-        return  $this->pagSeguroService->checkout($pedido);
+        return  $this->pagSeguroService->checkout($request, $pedido);
     }
 
     public function consulta(Pedido $pedido)

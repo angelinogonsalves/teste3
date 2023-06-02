@@ -24,8 +24,10 @@ class AlunoController extends Controller
             }
         }
              
-        $pagseguroService = new PagseguroService();
-        // $pedido->url_qr_code = $pagseguroService->geraURLQrCode($pedido);0
+        if($pedido->podePagar()) {
+            $pagseguroService = new PagseguroService();
+            $pagseguroService->consultaPedido($pedido);
+        }
         
         $pedido->itens->map(function($produto) {   
             $url =  url('/img/perfil.jpg');

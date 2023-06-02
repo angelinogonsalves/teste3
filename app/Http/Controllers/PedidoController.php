@@ -25,6 +25,13 @@ class PedidoController extends Controller
     {   
         $pedidos = $this->pedidoService->getAllPedidos();
 
+        $pagseguroService = new PagseguroService();
+        foreach($pedidos as $pedido) {
+            if($pedido->podePagar()) {
+                $pagseguroService->consultaPedido($pedido);
+            }
+        }
+
         if (auth()->user()->tipo_usuario == 4){        
             return view('aluno.aluno-home',['pedidos' => $pedidos]);
         }

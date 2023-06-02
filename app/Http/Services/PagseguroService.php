@@ -6,6 +6,7 @@ use App\Models\Pedido;
 use App\Models\User;
 use Exception;
 use GuzzleHttp\Client;
+use Illuminate\Http\Request;
 
 class PagseguroService {
 
@@ -30,35 +31,61 @@ class PagseguroService {
         
     }
 
-    public function checkout(Pedido $pedido)
+    public function checkout(Request $request, Pedido $pedido)
     {                 
-      // depois mudar pra pegar do banco       
+        // depois mudar pra pegar do banco       
+        
+        $others = $request->input('others', []);
+        $outros_pedidos = [];
+        $outros_valores = 0;
 
         if ($pedido) {
-            if (!empty($pedido->id_pagseguro)) {              
-                if ($this->ambiente == 'H') {
-                    $url = 'https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code='.$pedido->id_pagseguro;
-                } else {
-                    $url = 'https://pagseguro.uol.com.br/v2/checkout/payment.html?code='.$pedido->id_pagseguro;   
+
+            if ($others && !empty($others)) {
+                foreach($others as $i => $id_pedido) {
+                    $outros_pedidos[$id_pedido] = Pedido::find($id_pedido);
+                    $outros_valores += $outros_pedidos[$id_pedido]->valor;
+
+                    if (!$outros_pedidos[$id_pedido]->user_id) {
+                        return response()->json(['success' => false, 'message' => 'Usuário não vinculado ao pedido']);    
+                    }
+
+                    $data['itemId'.$i] = substr('000000' . $outros_pedidos[$id_pedido]->id,6);
+                    $data['itemDescription'.$i] = 'Pedido N° ' . $outros_pedidos[$id_pedido]->id .  ' Razza Esportes';   
+                    $data['itemAmount'.$i] = number_format($outros_pedidos[$id_pedido]->valor,2);
+                    $data['itemQuantity'.$i] = 1; 
+
+                }
+            } 
+
+            else {
+
+                if (!$pedido->user_id) {
+                    return response()->json(['success' => false, 'message' => 'Usuário não vinculado ao pedido']);    
                 }
 
-                return response()->json(['success' => true,'url' => $url]);                 
+                $data['itemId1'] = substr('000000' . $pedido->id,6);
+                $data['itemDescription1'] = 'Pedido N° ' . $pedido->id .  ' Razza Esportes';   
+                $data['itemAmount1'] = number_format($pedido->valor+$outros_valores,2);
+                $data['itemQuantity1'] = 1;  
+
             }
 
-            if (!$pedido->user_id) {
-                return response()->json(['success' => false, 'message' => 'Usuário não vinculado ao pedido']);    
-            }
+            // if (!empty($pedido->id_pagseguro)) {              
+            //     if ($this->ambiente == 'H') {
+            //         $url = 'https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code='.$pedido->id_pagseguro;
+            //     } else {
+            //         $url = 'https://pagseguro.uol.com.br/v2/checkout/payment.html?code='.$pedido->id_pagseguro;   
+            //     }
+
+            //     return response()->json(['success' => true,'url' => $url]);                 
+            // }
+
+            
              
             $usuario = User::find($pedido->user_id);                      
 
-            $data['currency'] = 'BRL';
-    
-            $data['itemId1'] = substr('000000' . $pedido->id,6);
-            $data['itemDescription1'] = 'Pedido N° ' . $pedido->id .  ' Razza Esportes';   
-            $data['itemAmount1'] = number_format($pedido->valor,2);
-            $data['itemQuantity1'] = 1;           
-
- 
+            $data['currency'] = 'BRL'; 
             $data['reference'] = strtoupper(md5(rand()));
 
             if ($this->ambiente == 'H')
@@ -99,6 +126,17 @@ class PagseguroService {
                     $pedido->status = 2; 
                     $pedido->tipo_pagamento = 'C';
                     $pedido->save();
+
+                    if (!empty($outros_pedidos)) {
+                        foreach($outros_pedidos as $outro_pedido) {
+                            $outro_pedido->id_pagseguro = $pedido->id_pagseguro;
+                            $outro_pedido->cod_referencia = $pedido->cod_referencia;
+                            $outro_pedido->status = $pedido->status; 
+                            $outro_pedido->tipo_pagamento = $pedido->tipo_pagamento;
+                            $pedido->save();
+                        }
+                    }
+
                 }    
 
                 if ($this->ambiente == 'H') {
@@ -143,7 +181,7 @@ class PagseguroService {
 
                 if (isset($xmlObject->transactions)){
 
-                    $trans = $xmlObject->transactions->transaction[0];         
+                    $trans = $xmlObject->transactions->transaction[0];   
 
                     if (($pedido) && $trans )
                     {                                                 
@@ -153,7 +191,8 @@ class PagseguroService {
                         $pedido->total_liquido = $trans->netAmount;                 
                         $pedido->data_pagamento =date('Y-m-d H:i:s',$data);             
                         
-                        if (($pedido->status_pagamento == 3) || ($pedido->status_pagamento == 4)) {
+                        // Paga ou Disponível -- https://m.pagseguro.uol.com.br/v3/guia-de-integracao/consulta-de-transacoes-por-intervalo-de-datas.html?_rnt=dd#!rmcl
+                        if (($trans->status == 3) || ($trans->status == 4)) {
                             $pedido->status = 3;
                         }
                         $pedido->save();      
