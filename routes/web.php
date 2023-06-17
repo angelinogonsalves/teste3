@@ -8,6 +8,7 @@ use App\Http\Controllers\ModalidadeController;
 use App\Http\Controllers\PagSeguroController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\RelatorioController;
 use App\Http\Controllers\TamanhoController;
 use App\Http\Controllers\UnidadeController;
 use App\Http\Controllers\UserController;
@@ -91,8 +92,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/pagseguro/consulta/{pedido}',[PagSeguroController::class,'consulta']);
     });
 
+    Route::group(array('prefix' => 'relatorios'), function(){
+        Route::get('/', [RelatorioController::class,'index'])->name('relatorios');
+        Route::get('/imprimir-pedidos', [RelatorioController::class,'imprimir'])->name('imprimir');
+    });
+
     Route::group(array('prefix' => 'modalidades'), function(){
-        Route::get('/list', [ModalidadeController::class,'listAllModalidades'])->name('lista-modalidade');
+        Route::get('/list', [ModalidadeController::class,''])->name('lista-modalidade');
     });
 
     Route::group(array('prefix' => 'tamanhos'), function(){

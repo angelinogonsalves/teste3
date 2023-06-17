@@ -6,11 +6,8 @@ use App\Http\Requests\CadastraPedidoRequest;
 use App\Http\Services\ModalidadeService;
 use App\Http\Services\PagseguroService;
 use App\Http\Services\PedidoService;
-use App\Http\Services\TamanhoService;
 use App\Http\Services\UnidadeService;
 use App\Models\Pedido;
-use App\Models\Unidade;
-use Illuminate\Http\Request;
 
 class PedidoController extends Controller
 {

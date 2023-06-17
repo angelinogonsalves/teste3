@@ -22,9 +22,12 @@
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/croppie.css') }}">
     <script src="{{ asset('js/croppie.js') }}"></script>
-    <link href="https://cdn.datatables.net/v/bs4/dt-1.13.4/datatables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/v/dt/dt-1.13.4/b-2.3.6/b-print-2.3.6/datatables.min.css" rel="stylesheet"/>
+    <script src="https://cdn.datatables.net/v/dt/dt-1.13.4/b-2.3.6/b-print-2.3.6/datatables.min.js"></script>
 
-    <script src="https://cdn.datatables.net/v/bs4/dt-1.13.4/datatables.min.js"></script>
+    <!-- <link href="https://cdn.datatables.net/v/bs4/dt-1.13.4/datatables.min.css" rel="stylesheet" />
+    <script src="https://cdn.datatables.net/v/bs4/dt-1.13.4/datatables.min.js"></script> -->
+
 </head>
 <!--
 `body` tag options:
@@ -171,7 +174,7 @@
                         </li>
                         <li class="nav-header">Relatórios</li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ url('/relatorios') }}" class="nav-link">
                                 <i class="nav-icon fas fa-calendar-alt"></i>
                                 <p>
                                     Relatórios
