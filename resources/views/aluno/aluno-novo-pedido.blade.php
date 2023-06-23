@@ -17,8 +17,13 @@
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
     <!-- bootstrap select -->
     <link rel="stylesheet" href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.min.css') }}">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- owl carousel -->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
 
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>    
+    <script src="https://kit.fontawesome.com/9ee599b2dc.js" crossorigin="anonymous"></script>
 </head>
 <!--
 `body` tag options:
@@ -106,42 +111,43 @@
                                 </div> -->
 
                                 <div class="col-sm-12">
-                                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <div class="row">
-                                                @forelse($produtos as $produto)
-                                                    <div class="col-sm-12 col-md-3">
-                                                        <div class="card">
-                                                            <img class="card-img-top" id="url_produto_{{ $produto->id }}" src="{{ asset($produto->url) }}" alt="{{ $produto->produto }}" max-width="275px" max-height="350px">
-                                                            <div class="card-body">
-                                                                <h5 class="card-title" id="nome_produto_{{ $produto->id }}" texto="{{ $produto->produto }}">{{ $produto->produto }}</h5>
-                                                                <p class="card-text" id="descricao_produto_{{ $produto->id }}" texto="{{ $produto->descricao }}">{{ $produto->descricao }}</p>
-                                                                <label class="card-text" id="valor_produto_{{ $produto->id }}" texto="{{ $produto->valor }}">Valor: R$ {{ $produto->valor }}</label>
+                                    <div class="row">
+                                        @forelse($produtos as $produto)
+                                            <div class="col-sm-12 col-md-3">
+                                                <div class="card">
+                                                    <div class="owl-carousel owl-theme">
+                                                        @foreach ($produto->imagens as $produto_imagem)
+                                                            <div class="item">
+                                                                <img class="card-img-top" id="url_produto_{{ $produto_imagem->produto_id }}" src="{{ asset('img/produtos/' . $produto_imagem->imagem) }}" alt="{{ $produto_imagem->produto }}" max-width="275px" max-height="350px">
                                                             </div>
-                                                            <div class="card-footer">
-                                                                <div>
-                                                                    @forelse($produto->tamanhos as $tamanho)
-                                                                        <label class="btn btn-default btn-sm text-center">
-                                                                            <input type="radio" name="tamanho_produto_{{ $produto->id }}" value="{{ $tamanho->id }}" texto="{{ $tamanho->tamanho }}">
-                                                                            <span>{{ $tamanho->tamanho }}</span>
-                                                                        </label>
-                                                                    @empty
-                                                                    @endforelse
-                                                                </div>
-                                                                <div>
-                                                                    <button type="button" class="btn btn-primary btn-sm" onclick="adicionarItem('{{ $produto->id }}');">
-                                                                        <i class="fas fa-cart-plus fa-lg mr-2"></i>
-                                                                        Adicionar item
-                                                                    </button>
-                                                                </div>
-                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <h5 class="card-title" id="nome_produto_{{ $produto->id }}" texto="{{ $produto->produto }}">{{ $produto->produto }}</h5>
+                                                        <p class="card-text" id="descricao_produto_{{ $produto->id }}" texto="{{ $produto->descricao }}">{{ $produto->descricao }}</p>
+                                                        <label class="card-text" id="valor_produto_{{ $produto->id }}" texto="{{ $produto->valor }}">Valor: R$ {{ $produto->valor }}</label>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <div>
+                                                            @forelse($produto->tamanhos as $tamanho)
+                                                                <label class="btn btn-default btn-sm text-center">
+                                                                    <input type="radio" name="tamanho_produto_{{ $produto->id }}" value="{{ $tamanho->id }}" texto="{{ $tamanho->tamanho }}">
+                                                                    <span>{{ $tamanho->tamanho }}</span>
+                                                                </label>
+                                                            @empty
+                                                            @endforelse
+                                                        </div>
+                                                        <div>
+                                                            <button type="button" class="btn btn-primary btn-sm" onclick="adicionarItem('{{ $produto->id }}');">
+                                                                <i class="fas fa-cart-plus fa-lg mr-2"></i>
+                                                                Adicionar item
+                                                            </button>
                                                         </div>
                                                     </div>
-                                                @empty
-                                                @endforelse
+                                                </div>
                                             </div>
-                                        </div>
+                                        @empty
+                                        @endforelse
                                     </div>
                                 </div>                                
                             </div>
@@ -239,6 +245,9 @@
     <!-- AdminLTE -->
     <script src="{{ asset('/js/adminlte.js') }}"></script>
 
+    <!-- owl carousel js-->
+    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+
     <!-- OPTIONAL SCRIPTS -->
     <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
@@ -262,6 +271,18 @@
                 $(this).parent().parent().remove();
                 calcularTotal();
             });
+
+            $('.owl-carousel').owlCarousel({
+                loop:true,
+                margin:10,
+                nav:true,
+                navText: ["<i class='fa-solid fa-chevron-left'></i>" ,"<i class='fa-solid fa-chevron-right'></i>"],
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                }
+            })
         });
 
 
