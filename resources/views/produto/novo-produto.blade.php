@@ -172,45 +172,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group text-center">
-                                    <label for="fu_imagem_tamanhos">
-                                        <span> <a class="btn btn-secondary">Adicionar Imagem grade (275x350)
-                                                <i class="fas fa-desktop"></i></a>
-                                        </span>
-                                        <input type="file" id="fu_imagem_tamanhos" name="fu_imagem_tamanhos"
-                                            style="display:none" class="custom-file-input">
-                                    </label>
-                                </div>
-
-                                <div id="imagem_tamanhos" class="row d-flex justify-content-center">
-                                    @forelse ($dados->imagens as $i)
-                                        @if ($i->tipo == 'T')
-                                            <div class="col-md-4 imgProduto">
-                                                <div class="form-group">
-                                                    <img src="{{ $i->url }}" class="img-thumbnail"
-                                                        id="img_produto" name="img_produto" data-nome="' . $name . '" />
-                                                    <input type="hidden" name="foto_tamanho[]"
-                                                        value="{{ $i->imagem }}">
-                                                    <div class="row text-center">
-                                                        <div class="col-md-12">
-                                                            <button class="btn btn-danger btnexcluiimagem"
-                                                                onclick="excluiimagem(this)"><i
-                                                                    class="fas fa-times-circle"> </i>Remover</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endif
-                                    @empty
-                                    @endforelse
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="row">
