@@ -97,7 +97,7 @@
                                         <td>{{ $i->quantidade }}</td>
                                         <td>@money($i->valor_unitario)</td>
                                         <td>{{ $i->tamanho->tamanho }}</td>
-                                        <td>{{ $i->modalidade->modalidade }}</td>
+                                        <td>{{ $i->modalidade ? $i->modalidade->modalidade : 'Sem Modalidade' }}</td>
                                         <td>{{ $i->nome_personalizado }}</td>
                                         <td>{{ $i->numero_personalizado }}</td>
                                         <td>@money($i->valor_unitario * $i->quantidade)</td>
