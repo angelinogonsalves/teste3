@@ -39,7 +39,7 @@ class PedidoController extends Controller
     public function verPedido(Pedido $pedido)
     {
         $unidadeService = new UnidadeService();
-        $lista_unidades = $unidadeService->getAllUnidades();
+        $lista_unidades = $unidadeService->getAllUnidades(auth()->user()->grupo_id);
 
         $modalidadeService = new ModalidadeService();
         $lista_modalidades = $modalidadeService->getAllModalidades();

@@ -29,11 +29,17 @@ class UnidadeService {
         }               
     }
 
-    public function getAllUnidades(){
+    public function getAllUnidades($grupo_id = null){
         
         if ((auth()->check()) && (auth()->user()->tipo_usuario >=4)) {
+            if($grupo_id) {
+                return Unidade::where('unidade_id',auth()->user()->unidade_id)->where('grupo_id', $grupo_id)->orderby('nome_fantasia')->get();  
+            }
             return Unidade::where('unidade_id',auth()->user()->unidade_id)->orderby('nome_fantasia')->get();  
-        }   
+        }  
+        if($grupo_id) {
+            return Unidade::where('grupo_id', $grupo_id)->orderby('nome_fantasia')->get();                    
+        }
         return Unidade::orderby('nome_fantasia')->get();                    
         
     }

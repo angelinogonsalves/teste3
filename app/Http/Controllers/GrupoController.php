@@ -35,7 +35,7 @@ class GrupoController extends BaseController
         return $this->responseData($returnGrupo,'grupos');                   
     }
 
-    public function salvaUnidade(CadastraGrupoRequest $request){    
+    public function salvaGrupo(CadastraGrupoRequest $request){    
     
         $validatedGrupo = $request->validated();
 

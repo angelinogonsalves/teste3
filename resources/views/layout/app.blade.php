@@ -120,7 +120,6 @@
                                     <i class="nav-icon fas fa-user"></i>
                                     <p>
                                         Usuários
-                                        <span class="right badge badge-primary">New</span>
                                     </p>
                                 </a>
                             </li>
@@ -129,7 +128,14 @@
                                     <i class="nav-icon fas fa-city"></i>
                                     <p>
                                         Unidades
-                                        <span class="right badge badge-info">New</span>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('grupos') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-city"></i>
+                                    <p>
+                                        Grupos
                                     </p>
                                 </a>
                             </li>

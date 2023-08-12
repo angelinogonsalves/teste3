@@ -34,6 +34,7 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Grupo</th>
                                         <th>Unidade Nome Fantasia</th>
                                         <th>CNPJ</th>
                                         <th>Cidade</th>
@@ -45,6 +46,7 @@
                                     @forelse($dados as $d)
                                         <tr>
                                             <td>{{$d->id}}</td>
+                                            <td>{{$d->grupo->nome}}</td>
                                             <td>{{$d->nome_fantasia}}</td>
                                             <td>{{$d->cnpj}}</td>                                            
                                             <td>{{$d->cidade}}</td>                                                                                        
