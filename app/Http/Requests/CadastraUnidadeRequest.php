@@ -33,7 +33,8 @@ class CadastraUnidadeRequest extends FormRequest
             'bairro' => 'string|nullable|max:100',                                                
             'cep' => 'string|nullable|max:8',                                                
             'cidade' => 'string|nullable|max:100',                                                
-            'uf' => 'string|nullable|max:2'
+            'uf' => 'string|nullable|max:2',
+            'grupo_id' => 'integer|required'
         ];
     }
 }

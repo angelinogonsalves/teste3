@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImagemController;
 use App\Http\Controllers\ModalidadeController;
@@ -77,6 +78,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/cadastro/{unidade?}', [UnidadeController::class,'verUnidade'])->name('ver-unidade');    
         Route::post('/excluir/{unidade}', [UnidadeController::class,'excluirUnidade'])->name('excluir-unidade');
         Route::post('/salvar', [UnidadeController::class,'salvaUnidade'])->name('salvar-unidade');
+    });
+
+    Route::group(array('prefix' => 'grupos'), function(){
+        Route::get('/', [GrupoController::class,'index'])->name('grupos');
+        Route::get('/cadastro/{grupo?}', [GrupoController::class,'verGrupo'])->name('ver-grupo');    
+        Route::post('/excluir/{grupo}', [GrupoController::class,'excluirGrupo'])->name('excluir-grupo');
+        Route::post('/salvar', [GrupoController::class,'salvaGrupo'])->name('salvar-grupo');
     });
 
     Route::group(array('prefix' => 'pedidos'), function(){

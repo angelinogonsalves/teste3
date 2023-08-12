@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CadastraUsuarioRequest;
+use App\Http\Services\GrupoService;
 use App\Http\Services\UnidadeService;
 use App\Http\Services\UsuarioService;
 use App\Models\User;
@@ -28,7 +29,11 @@ class UserController extends BaseController
     {                           
         $unidadeService = new UnidadeService(); 
         $unidades = $unidadeService->getAllUnidades();
-        return view('user.novo-user',['dados' => $user,'unidades' => $unidades]);
+        
+        $grupoService = new GrupoService();
+        $grupos = $grupoService->getAllGrupos();
+
+        return view('user.novo-user',['dados' => $user,'unidades' => $unidades, 'grupos' => $grupos]);
     }
 
     public function excluirUsuario(User $user){              

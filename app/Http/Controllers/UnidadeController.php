@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CadastraUnidadeRequest;
+use App\Http\Services\GrupoService;
 use App\Http\Services\UnidadeService;
 use App\Models\Unidade;
 
@@ -24,8 +25,11 @@ class UnidadeController extends BaseController
     }
 
     public function verUnidade(Unidade $unidade)
-    {                   
-        return view('unidade.nova-unidade',['dados' => $unidade]);
+    {      
+        $grupoService = new GrupoService();
+        $grupos = $grupoService->getAllGrupos();
+
+        return view('unidade.nova-unidade',['dados' => $unidade, 'grupos' => $grupos]);
     }
 
     public function excluirUnidade(Unidade $unidade){              

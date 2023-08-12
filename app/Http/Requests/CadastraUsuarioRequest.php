@@ -28,6 +28,7 @@ class CadastraUsuarioRequest extends FormRequest
             'password' => 'required_without:id|confirmed|max:100',                        
             'tipo_usuario' => 'required|max:4',                        
             'unidade_id' => 'integer|nullable',                                    
+            'grupo_id' => 'integer|required',                                    
             'ddd' => 'numeric|required|digits:2',                                                
             'telefone' => 'integer|required|digits_between:8,9',                                                
             'endereco' => 'string|nullable|max:150',                                                

@@ -84,6 +84,23 @@
                             </select>
                         </div>
                     </div>
+                     <!-- Define o grupo ao qual irá pertencer -->
+                     <div class="col-12 col-sm-12" id="grupo">
+                        <div class="form-group">
+                            <label>Vincular Grupo</label>
+                            <div class="select-purple">
+                                <select name="grupo_id" id="grupo" class="form-control" data-placeholder="Selecione o grupo">
+                                    <option value="">Selecione...</option>
+                                    @forelse($grupos as $g)
+                                        <option value="{{ $g->id }}"
+                                            {{ old('grupo_id', $dados->grupo_id) == $g->id ? 'selected' : '' }}>
+                                            {{ $g->nome }}</option>
+                                    @empty
+                                    @endforelse
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="timeline-item">

@@ -37,7 +37,6 @@ class UnidadeService {
         return Unidade::orderby('nome_fantasia')->get();                    
         
     }
-
     public function getUnidadeUsuario(User $user){
                  
     }

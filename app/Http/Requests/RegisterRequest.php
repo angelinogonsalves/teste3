@@ -25,6 +25,7 @@ class RegisterRequest extends FormRequest
             'nome' => 'required|max:100',
             'ra' => "required|unique:users,ra,null,id,unidade_id,{$this->input('unidade_id')}",          
             'unidade_id' => 'integer|required',                      
+            'grupo_id' => 'integer|required',                      
             'email' => 'email|required|max:100|unique:users',                                 
             'password' => 'required|confirmed|max:100'             
             // 'ddd' => 'required|digits:2',       

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Services\GrupoService;
 use App\Http\Services\UnidadeService;
 use App\Http\Services\UsuarioService;
 use App\Models\User;
@@ -45,8 +46,11 @@ class AuthController extends BaseController
     {
         $unidadeService = new UnidadeService();
         $unidades = $unidadeService->getAllUnidades();
+        
+        $grupoService = new GrupoService();
+        $grupos = $grupoService->getAllGrupos();
 
-        return view('auth.register',['unidades' => $unidades]);
+        return view('auth.register',['unidades' => $unidades, 'grupos' => $grupos]);
     }
 
 

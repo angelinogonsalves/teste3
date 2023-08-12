@@ -62,6 +62,15 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
+                        <select class="form-control select2" name="grupo_id" data-placeholder="selecione seu Grupo" style="width: 100%;">
+                            <option value="">Selecione seu Grupo.</option>
+                            @forelse ($grupos as $g)
+                                <option value="{{$g->id}}">{{$g->nome}}</option>
+                            @empty                                    
+                            @endforelse                              
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
                         <select class="form-control select2" name="unidade_id" data-placeholder="selecione sua Unidade" style="width: 100%;">
                             <option value="">Selecione sua Unidade. (colégio)</option>
                             @forelse ($unidades as $u)
@@ -70,7 +79,7 @@
                             @endforelse                              
                         </select>
                     </div>
-                    {{-- <div class="input-group mb-3">
+                    <div class="input-group mb-3">
                         <input type="text" name="ddd" class="form-control" maxlength="3" placeholder="DDD" value="{{old('ddd')}}">
                         <div class="input-group-append">
                             <input type="text" name="telefone" class="form-control" maxlength="10" placeholder="Celular" value="{{old('telefone')}}">
