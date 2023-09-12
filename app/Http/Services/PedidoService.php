@@ -74,6 +74,12 @@ class PedidoService {
     }
 
     public function getAllPedidos(){
+        if (auth()->user()->tipo_usuario ==3) {
+            return Pedido::join('unidades', 'unidades.id', 'pedidos.unidade_id')
+                        ->where('unidades.grupo_id', auth()->user()->grupo_id)
+                        ->orderBy('pedidos.id', 'desc')->get();
+        }
+
         return Pedido::orderby('id','desc')->get();            
     }
 
@@ -90,6 +96,11 @@ class PedidoService {
     public function getUltimosPedidos($qtde){
         if (auth()->user()->tipo_usuario ==4) {
             return Pedido::where('user_id',auth()->user()->id)->orderBy('id', 'desc')->take($qtde)->get();        
+        }
+        if (auth()->user()->tipo_usuario ==3) {
+            return Pedido::join('unidades', 'unidades.id', 'pedidos.unidade_id')
+                        ->where('unidades.grupo_id', auth()->user()->grupo_id)
+                        ->orderBy('pedidos.id', 'desc')->take($qtde)->get();
         }
 
         return Pedido::orderBy('id', 'desc')->take($qtde)->get();        

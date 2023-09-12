@@ -32,7 +32,7 @@ class GrupoService {
     public function getAllGrupos(){
         
         if ((auth()->check()) && (auth()->user()->tipo_usuario >=4)) {
-            return Grupo::where('grupo_id',auth()->user()->unidade_id)->orderby('nome')->get();  
+            return Grupo::where('grupo_id',auth()->user()->grupo_id)->orderby('nome')->get();  
         }   
         return Grupo::orderby('nome')->get();                    
         
