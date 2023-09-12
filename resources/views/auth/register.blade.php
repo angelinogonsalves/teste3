@@ -93,7 +93,7 @@
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                     <div class="input-group mb-3">
                         <input type="email" name="email" class="form-control" placeholder="Email" value="{{old('email')}}">
                         <div class="input-group-append">
