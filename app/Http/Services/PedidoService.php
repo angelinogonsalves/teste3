@@ -69,6 +69,16 @@ class PedidoService {
         }   
     }
 
+    public function excluirPedido(Pedido $pedido){
+        try {
+            $this->excluirItensPedido($pedido);
+            $pedido->delete();             
+            return ["success" => true, "result" => null,"message" => "Unidade excluida com sucesso"];                  
+        } catch (Exception $e) {    
+            return ["success" => false, "message" => "Erro ao tentar excluir a Unidade. " . $e->getMessage()];                      
+        }        
+    }
+
     public function getPedidosPorRa($ra){
         return Pedido::where('ra_aluno',$ra)->get();
     }

@@ -55,4 +55,11 @@ class Pedido extends Model
         if(in_array($this->status,[self::AGUARDANDO_PAGAMENTO, self::PROCESSANDO_PAGAMENTO])) return true;
         else return false;
     }
+
+    public function podeExcluir() {
+        if ($this->podeEditar()) {
+            return auth()->user()->tipo_usuario == 1;
+        }
+        return false;
+    }
 }

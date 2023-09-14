@@ -67,9 +67,9 @@
                                                     <span class="badge badge-primary">Pedido Entregue</span>
                                                 @endif
                                             </td>
-                                            <td> {{ $p->unidade->nome_fantasia ?? '' }} </td>
+                                            <td> {{ $p->unidade->nome_fantasia }} </td>
                                             <td>
-                                                <form class="excluir-pedido" action="{{url('pedidos/excluir',[$p->id])}}" method="post">
+                                                <form action="{{ url('pedidos/mudar-status', [$p->id]) }}" method="post">
                                                     @csrf
                                                     @if ($p->podeEditar())
                                                     <a class="btn btn-primary btn-sm"
@@ -81,9 +81,14 @@
                                                         rel="noopener" target="_blank" class="btn btn-default btn-sm"><i
                                                             class="fas fa-print"></i> Imprimir</a>
 
-                                                    @if($p->podeExcluir())
-                                                        <input type="button" value="Excluir" class="btn btn-danger btn-sm" onclick="confirmarExclusao(this);">
-                                                    @endif
+                                                    <!-- <button id="btn-pagamento-pagseguro type=" button
+                                                        onclick="verificarPagamento('{{ $p->id }}')"
+                                                        class="btn btn-success btn-sm"><i
+                                                            class="fas fa-sync"> </i> Atualizar
+                                                        Status </button> -->
+
+                                                    {{-- <input type="submit" value="Excluir" class="btn btn-danger btn-sm"> --}}
+                                                    {{-- <input type="submit" value="Mudar Status" class="btn btn-info btn-sm"> --}}
 
                                                 </form>
                                             </td>
@@ -108,12 +113,6 @@
     </section>
 
     <script>
-        function confirmarExclusao(button) {
-            if (confirm('Tem certeza de que deseja excluir?')) {
-                $(button).closest('form.excluir-pedido').submit();
-            }
-        }
-
         $(function() {
             var table = new DataTable('#tabela_itens_produto', {
                 "order": [0, 'desc'],

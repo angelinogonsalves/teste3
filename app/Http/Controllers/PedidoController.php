@@ -9,7 +9,7 @@ use App\Http\Services\PedidoService;
 use App\Http\Services\UnidadeService;
 use App\Models\Pedido;
 
-class PedidoController extends Controller
+class PedidoController extends BaseController
 {
     public $pedidoService;
 
@@ -62,10 +62,15 @@ class PedidoController extends Controller
         return view('pedido.detalhes-pedido-print',['pedido' => $pedido]);
     }
     
-    // só para ver se está chegando
     public function salvarPedido(CadastraPedidoRequest $request)
     {        
         $validated_Pedido = $request->validated();    
         return $this->pedidoService->salvaPedido($validated_Pedido);        
+    }
+
+    public function excluir(Pedido $pedido)
+    { 
+        $returnPedido = $this->pedidoService->excluirPedido($pedido);    
+        return $this->responseData($returnPedido,'pedidos');
     }
 }
