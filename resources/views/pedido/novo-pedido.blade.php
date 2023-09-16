@@ -14,8 +14,8 @@
                         <div class="form-group">
                             <label>Selecione a unidade *</label>
                             <div class="select-purple">
-                                <select name="unidade_id" id="unidade_id" class="form-control"
-                                    data-placeholder="Selecione as unidades" onchange="buscaProdutos()">
+                                <select name="unidade_id" id="unidade_id" class="form-control selectpicker"
+                                    title="Selecione as unidades" onchange="buscaProdutos()"  data-live-search="true">
                                     <option value="">Selecione...</option>
                                     @forelse ($lista_unidades as $u)
                                         <option value="{{ $u->id }}"
@@ -49,8 +49,8 @@
                         <div class="form-group">
                             <label>Escolha produto para Adicionar aos itens *</label>
                             <div class="select-purple">
-                                <select name="add_produto" id="add_produto" class="form-control" onchange="buscaTamanhos()";
-                                    data-placeholder="Selecione unidades"style="width: 100%;">
+                                <select name="add_produto" id="add_produto" class="formcontrol selectpicker" onchange="buscaTamanhos()"
+                                    title="Selecione o produto" style="width: 100%;" data-live-search="true">
                                     <option value="">Selecione...</option>
                                 </select>
                             </div>
@@ -75,8 +75,8 @@
                         <div class="form-group">
                             <label>Selecione Modalidade (se houver)</label>
                             <div class="select-purple">
-                                <select name="modalidade_id" id="modalidade_id" class="form-control"
-                                    data-placeholder="Selecione Modalidade">
+                                <select name="modalidade_id" id="modalidade_id" class="form-control selectpicker"
+                                    title="Selecione Modalidade" data-live-search="true">
                                     <option value=""></option>
                                     @forelse ($lista_modalidades as $m)
                                         <option value="{{ $m->id }}">{{ $m->modalidade }}</option>
@@ -204,6 +204,7 @@
             $("#add_produto").empty().append('<option value="">Selecione...</option>');
 
             if (unidade_id) {
+                asset = "{{ asset('img/produtos/') }}";
                 url = '{{ url('/produtos/listaporunidade/') }}' + '/' + unidade_id;
 
                 $.ajax({
@@ -212,17 +213,20 @@
                     contentType: "application/x-www-form-urlencoded; charset=UTF-8",
                     async: true,
                     success: function(data) {
-                        console.log(data);
+                        // console.log(data);
                         $.each(data, function(key, value) {
                             $("#add_produto").append('<option '+
                                 ' personaliza_nome='+value.personaliza_nome+
                                 ' personaliza_numero='+value.personaliza_numero+
                                 ' personaliza_modalidade='+value.personaliza_modalidade+
                                 ' url='+value.url+
-                                ' valor=' + value.valor + ' value=' + value
-                                .id + '>' + value.produto +
+                                ' valor=' + value.valor + ' value=' + value.id + 
+                                ` data-content=" ` + 
+                                ` <img src='`+value.url+`' width='30' height='30'> `+ value.produto +`" ` + 
+                                ' >' + value.produto +
                                 '</option>');
                         });
+                        $('.selectpicker').selectpicker('refresh');
                     },
 
                     complete: function() {

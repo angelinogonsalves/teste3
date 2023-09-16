@@ -53,7 +53,7 @@
                             <label>Tamanhos disponiveis</label>
                             <div class="select2-purple">
                                 <select name="tamanhos[]" class="selectpicker bs-select form-control" multiple=""
-                                    data-live-search="true" data-placeholder="Selecione ">
+                                    data-live-search="true" title="Selecione ">
                                     @forelse ($lista_tamanhos as $t)
                                         <option value="{{ $t->id }}"
                                             @if ($dados->tamanhos->find($t->id)) selected="" @endif> {{ $t->tamanho }}
@@ -77,7 +77,7 @@
                             <label>Produtos disponiveis nas seguintes unidades</label>
                             <div class="select2-purple">
                                 <select name="unidades[]" class="selectpicker bs-select form-control" multiple=""
-                                    data-live-search="true" data-placeholder="Selecione as  ">
+                                    data-live-search="true" title="Selecione as unidades">
                                     @forelse ($lista_unidades as $u)
                                         <option value="{{ $u->id }}"
                                             @if ($dados->unidades->find($u->id)) selected="" @endif> {{ $u->nome_fantasia }}

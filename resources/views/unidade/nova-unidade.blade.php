@@ -89,7 +89,7 @@
                         <div class="form-group">
                             <label>Vincular Grupo</label>
                             <div class="select-purple">
-                                <select name="grupo_id" id="grupo" class="form-control" data-placeholder="Selecione o grupo">
+                                <select name="grupo_id" id="grupo" class="form-control selectpicker" title="Selecione o grupo" data-live-search="true">
                                     <option value="">Selecione...</option>
                                     @forelse($grupos as $g)
                                         <option value="{{ $g->id }}"
