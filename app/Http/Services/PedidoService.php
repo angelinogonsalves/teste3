@@ -4,6 +4,7 @@ namespace App\Http\Services;
 
 use App\Models\Pedido;
 use Exception;
+use Illuminate\Foundation\Http\FormRequest;
 
 class PedidoService {
     public function salvaPedido(array $pedidoData) : array
@@ -73,9 +74,22 @@ class PedidoService {
         try {
             $this->excluirItensPedido($pedido);
             $pedido->delete();             
-            return ["success" => true, "result" => null,"message" => "Unidade excluida com sucesso"];                  
+            return ["success" => true, "result" => null,"message" => "Pedido excluida com sucesso"];                  
         } catch (Exception $e) {    
-            return ["success" => false, "message" => "Erro ao tentar excluir a Unidade. " . $e->getMessage()];                      
+            return ["success" => false, "message" => "Erro ao tentar excluir o Pedido. " . $e->getMessage()];                      
+        }        
+    }
+
+    public function alterarStatusPedido(Pedido $pedido){
+        if(!$pedido->podeMudarStatus()) {
+            return ["success" => false, "message" => "Erro ao tentar alterar o status do pedido. "]; 
+        }
+        try {
+            $pedido->status = $pedido->novoStatus();
+            $pedido->save();  
+            return ["success" => true, "result" => null,"message" => "Pedido alterado com sucesso"];                  
+        } catch (Exception $e) {    
+            return ["success" => false, "message" => "Erro ao tentar alterar o status do pedido. " . $e->getMessage()];                      
         }        
     }
 

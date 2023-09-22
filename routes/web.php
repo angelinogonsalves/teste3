@@ -91,6 +91,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [PedidoController::class,'index'])->name('pedidos');
         Route::get('/cadastro/{pedido?}', [PedidoController::class,'verPedido'])->name('verPedido');
         Route::post('/excluir/{pedido}', [PedidoController::class,'excluir'])->name('excluir-pedido');
+        Route::post('/alterarStatus/{pedido}', [PedidoController::class,'alterarStatus'])->name('alterar-status-pedido');
         //add salvar pedido
         Route::post('/salvar', [PedidoController::class,'salvarPedido'])->name('salvar-pedido');
         Route::get('/detalhes-pedido-print/{pedido}', [PedidoController::class,'detalhesPedidoPrint'])->name('detalhes-pedido-print');

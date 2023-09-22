@@ -15,3 +15,11 @@ resources/views/layout/app.blade.php
 resources/views/relatorios/pedidos.blade.php
 routes/web.php
 
+
+app/Http/Controllers/PedidoController.php
+app/Http/Services/PedidoService.php
+app/Models/Pedido.php
+resources/views/pedido/lista-pedido.blade.php
+routes/web.php
+
+

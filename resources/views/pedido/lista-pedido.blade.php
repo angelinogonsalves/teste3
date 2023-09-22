@@ -51,41 +51,35 @@
                                             <td>{{ $p->nome_aluno }} - {{ $p->ra_aluno }}</td>
                                             <td>{{ $p->valor }}</td>
                                             <td>
-                                                @if ($p->status == 0)
-                                                    <span class="badge badge-white">Cancelado</span>
-                                                @elseif ($p->status == 1)
-                                                    <span class="badge badge-danger">Aguardando Pagamento</span>
-                                                @elseif ($p->status == 2)
-                                                    <span class="badge badge-warning">Processando Pagamento</span>
-                                                @elseif ($p->status == 3)
-                                                    <span class="badge badge-success">Pagamento Aprovado</span>
-                                                @elseif ($p->status == 4)
-                                                    <span class="badge badge-dark">Em Produção</span>
-                                                @elseif ($p->status == 5)
-                                                    <span class="badge badge-info">Pedido Finalizado</span>
-                                                @elseif ($p->status == 6)
-                                                    <span class="badge badge-primary">Pedido Entregue</span>
-                                                @endif
+                                                <span class="badge badge-{{$p->classeStatus()}}">{{$p->nomeStatus()}}</span>
                                             </td>
                                             <td> {{ $p->unidade->nome_fantasia ?? '' }} </td>
                                             <td>
-                                                <form class="excluir-pedido" action="{{url('pedidos/excluir',[$p->id])}}" method="post">
+                                                @if ($p->podeEditar())
+                                                    <a class="btn btn-primary btn-sm p-1" href="{{ url('pedidos/cadastro', [$p->id]) }}">
+                                                        <i class="fas fa-edit"> </i> Ver | Editar
+                                                    </a>
+                                                @endif
+
+                                                <a href="{{ url('pedidos/detalhes-pedido-print', [$p->id]) }}" rel="noopener" target="_blank" class="btn btn-default btn-sm p-1">
+                                                    <i class="fas fa-print"></i> Imprimir
+                                                </a>
+
+                                                <form class="alterar-status-pedido p-1" action="{{url('pedidos/alterarStatus',[$p->id])}}" method="post">
                                                     @csrf
-                                                    @if ($p->podeEditar())
-                                                    <a class="btn btn-primary btn-sm"
-                                                        href="{{ url('pedidos/cadastro', [$p->id]) }}"><i
-                                                            class="fas fa-edit"> </i> Ver | Editar</a>
+                                                    @if ($p->podeMudarStatus())
+                                                        <input type="hidden" name="novo_status" value="{{$p->novoStatus()}}">
+                                                        <input type="button" value="Mudar para {{$p->novoNomeStatus()}}" class="btn btn-sm btn-{{$p->novaClasseStatus()}}" onclick="confirmarAlteracao(this);">
                                                     @endif
+                                                </form>
 
-                                                    <a href="{{ url('pedidos/detalhes-pedido-print', [$p->id]) }}"
-                                                        rel="noopener" target="_blank" class="btn btn-default btn-sm"><i
-                                                            class="fas fa-print"></i> Imprimir</a>
-
+                                                <form class="excluir-pedido p-1" action="{{url('pedidos/excluir',[$p->id])}}" method="post">
+                                                    @csrf
                                                     @if($p->podeExcluir())
                                                         <input type="button" value="Excluir" class="btn btn-danger btn-sm" onclick="confirmarExclusao(this);">
                                                     @endif
-
                                                 </form>
+
                                             </td>
 
                                         </tr>
@@ -111,6 +105,12 @@
         function confirmarExclusao(button) {
             if (confirm('Tem certeza de que deseja excluir?')) {
                 $(button).closest('form.excluir-pedido').submit();
+            }
+        }
+
+        function confirmarAlteracao(button) {
+            if (confirm('Tem certeza de que deseja alterar o Status do Pedido?')) {
+                $(button).closest('form.alterar-status-pedido').submit();
             }
         }
 

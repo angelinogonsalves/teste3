@@ -73,4 +73,10 @@ class PedidoController extends BaseController
         $returnPedido = $this->pedidoService->excluirPedido($pedido);    
         return $this->responseData($returnPedido,'pedidos');
     }
+
+    public function alterarStatus(Pedido $pedido)
+    { 
+        $returnPedido = $this->pedidoService->alterarStatusPedido($pedido);    
+        return $this->responseData($returnPedido,'pedidos');
+    }
 }
