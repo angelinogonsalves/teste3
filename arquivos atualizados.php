@@ -23,3 +23,6 @@ resources/views/pedido/lista-pedido.blade.php
 routes/web.php
 
 
+resources/views/unidade/lista-unidade.blade.php
+
+
