@@ -64,7 +64,7 @@ class Pedido extends Model
 
     public function podeMudarStatus() 
     {
-        if (auth()->user()->tipo_usuario == 1 && in_array($this->status,[self::CANCELADO, self::PEDIDO_ENTREGUE])) {
+        if (auth()->user()->tipo_usuario != 1 && in_array($this->status,[self::CANCELADO, self::PEDIDO_ENTREGUE])) {
             return false;
         } 
         return true;
