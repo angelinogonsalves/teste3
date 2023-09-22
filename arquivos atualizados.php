@@ -25,4 +25,9 @@ routes/web.php
 
 resources/views/unidade/lista-unidade.blade.php
 
+app/Http/Controllers/RelatorioController.php
+app/Models/Pedido.php
+resources/views/pedido/lista-pedido.blade.php
+resources/views/relatorios/pedidos.blade.php
+
 

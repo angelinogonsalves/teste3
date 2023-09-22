@@ -167,4 +167,9 @@ class Pedido extends Model
         }
         return '';
     }
+
+    public function dataFormatada($formato = 'd/m/Y') 
+    {
+        return date($formato, strtotime($this->created_at));
+    }
 }

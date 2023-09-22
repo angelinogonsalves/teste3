@@ -42,42 +42,39 @@
                             <table id="relatorio_de_produtos" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
+                                        <th>Nº Item</th>
+                                        <th>Nº Pedido</th>
                                         <th>Data Pedido</th>
-                                        <th>Aluno - R.A.</th>
-                                        <th>Status</th>
                                         <th>Unidade</th>
+                                        <th>R.A. Aluno</th>
+                                        <th>Nome Aluno</th>
+                                        <th>Produto</th>
+                                        <th>Modalidade</th>
+                                        <th>Tamanho</th>
+                                        <th>Nome Persinalizado</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @forelse($dados as $p)
                                         <tr>
-                                            <td>{{ $p->id }}</td>
-                                            <td><?php echo date('d/m/Y', strtotime($p->created_at)); ?></td>
-                                            <td>{{ $p->nome_aluno }} - {{ $p->ra_aluno }}</td>
+                                            <td>{{ $p->numero_item }}</td>
+                                            <td>{{ $p->numero_pedido }}</td>
+                                            <td>{{ $p->dataFormatada() }}</td>
+                                            <td>{{ $p->nome_fantasia }} </td>
+                                            <td>{{ $p->ra_aluno }} </td>
+                                            <td>{{ $p->nome_aluno }}</td>
+                                            <td>{{ $p->produto }}</td>
+                                            <td>{{ $p->modalidade }}</td>
+                                            <td>{{ $p->tamanho }}</td>
+                                            <td>{{ $p->nome_personalizado }}</td>
                                             <td>
-                                                @if ($p->status == 0)
-                                                    <span class="badge badge-white">Cancelado</span>
-                                                @elseif ($p->status == 1)
-                                                    <span class="badge badge-danger">Aguardando Pagamento</span>
-                                                @elseif ($p->status == 2)
-                                                    <span class="badge badge-warning">Processando Pagamento</span>
-                                                @elseif ($p->status == 3)
-                                                    <span class="badge badge-success">Pagamento Aprovado</span>
-                                                @elseif ($p->status == 4)
-                                                    <span class="badge badge-dark">Em Produção</span>
-                                                @elseif ($p->status == 5)
-                                                    <span class="badge badge-info">Pedido Finalizado</span>
-                                                @elseif ($p->status == 6)
-                                                    <span class="badge badge-primary">Pedido Entregue</span>
-                                                @endif
+                                                <span class="badge badge-{{ $p->classeStatus() }}">{{ $p->nomeStatus() }}</span>
                                             </td>
-                                            <td> {{ $p->nome_fantasia }} </td>
-
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="5" class="text-center">Não foram encontrados Produtos</td>
+                                            <td colspan="11" class="text-center">Não foram encontrados Produtos</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -92,7 +89,7 @@
     <script>
         $(function() {
             var table = new DataTable('#relatorio_de_produtos', {
-                "order": [0, 'desc'],
+                "order": [0, 'asc'],
                 language: {
                     url: "{{ asset('plugins/datatables/datatable-pt-BR.json') }}"
                 },

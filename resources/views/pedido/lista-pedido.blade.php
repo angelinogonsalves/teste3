@@ -47,11 +47,11 @@
                                     @forelse($dados as $p)
                                         <tr>
                                             <td>{{ $p->id }}</td>
-                                            <td><?php echo date('d/m/Y', strtotime($p->created_at)); ?></td>
+                                            <td>{{ $p->dataFormatada() }}</td>
                                             <td>{{ $p->nome_aluno }} - {{ $p->ra_aluno }}</td>
                                             <td>{{ $p->valor }}</td>
                                             <td>
-                                                <span class="badge badge-{{$p->classeStatus()}}">{{$p->nomeStatus()}}</span>
+                                                <span class="badge badge-{{$p->classeStatus()}}">{{ $p->nomeStatus() }}</span>
                                             </td>
                                             <td> {{ $p->unidade->nome_fantasia ?? '' }} </td>
                                             <td>
@@ -65,11 +65,12 @@
                                                     <i class="fas fa-print"></i> Imprimir
                                                 </a>
 
-                                                <form class="alterar-status-pedido p-1" action="{{url('pedidos/alterarStatus',[$p->id])}}" method="post">
+                                                <form class="alterar-status-pedido p-1" action="{{ url('pedidos/alterarStatus',[$p->id]) }}" method="post">
                                                     @csrf
                                                     @if ($p->podeMudarStatus())
-                                                        <input type="hidden" name="novo_status" value="{{$p->novoStatus()}}">
-                                                        <input type="button" value="Mudar para {{$p->novoNomeStatus()}}" class="btn btn-sm btn-{{$p->novaClasseStatus()}}" onclick="confirmarAlteracao(this);">
+                                                        <input type="hidden" name="novo_status" value="{{ $p->novoStatus() }}">
+                                                        <input type="button" value="Mudar para {{ $p->novoNomeStatus() }}" class="btn btn-sm btn-{{ $p->novaClasseStatus() }}" 
+                                                            onclick="confirmarAlteracao(this);">
                                                     @endif
                                                 </form>
 
