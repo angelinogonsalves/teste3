@@ -42,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
                 5 => 'Pedido Finalizado',
                 6 => 'Pedido Entregue',
                 default => ''
-            };  
+            };
             ?>";
         });
 

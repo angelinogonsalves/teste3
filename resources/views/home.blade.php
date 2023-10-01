@@ -7,32 +7,25 @@
                 <span class="info-box-icon bg-info elevation-1"><i class="fas fa-shopping-cart"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Total de Pedidos</span>
+                    <span class="info-box-text">Total de a</span>
                     <span class="info-box-number">
-                        {{$qtde_pedidos}}
-                        <small>Pedidos</small>
+                        0
+                        <small>a</small>
                     </span>
                 </div>
-                <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box -->
         </div>
-        <!-- /.col -->
         <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
                 <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-down"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Pagamentos pedentes</span>
-                    <span class="info-box-number">{{$qtde_pedidos_pendentes}}</span>
+                    <span class="info-box-text">b</span>
+                    <span class="info-box-number">0</span>
                 </div>
-                <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box -->
         </div>
-        <!-- /.col -->
 
-        <!-- fix for small devices only -->
         <div class="clearfix hidden-md-up"></div>
 
         <div class="col-12 col-sm-6 col-md-3">
@@ -40,32 +33,26 @@
                 <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Pedidos Pagos</span>
-                    <span class="info-box-number">{{$qtde_pedidos_pagos}}</span>
+                    <span class="info-box-text">c</span>
+                    <span class="info-box-number">0</span>
                 </div>
-                <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box -->
         </div>
-        <!-- /.col -->
         <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
                 <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-cog"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">Pedidos Em produção</span>
-                    <span class="info-box-number">{{$qtde_pedidos_producao}}
-                        <small>Produzindo</small>
+                    <span class="info-box-text">d</span>
+                    <span class="info-box-number">0
+                        <small>d...</small>
                     </span>
                 </div>
-                <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box -->
         </div>
-        <!-- /.col -->
     </div>
     <div class="card">
         <div class="card-header border-transparent">
-            <h3 class="card-title">Ultimos pedidos</h3>
+            <h3 class="card-title">e</h3>
 
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -76,10 +63,11 @@
                 </button>
             </div>
         </div>
-        <!-- /.card-header -->
+
         <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table m-0">
+                    <caption>f...</caption>
                     <thead>
                         <tr>
                             <th>Id</th>
@@ -91,37 +79,41 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pedidos as $p)
+                        @php $manutencoes = []; @endphp
+                        @foreach ($manutencoes as $manutencao)
                             <tr>
-                                <td><a   href="{{ url('pedidos/cadastro', [$p->id]) }}">{{ $p->id }}</a></a></td>
-                                <td>@datetime($p->created_at)</td>
                                 <td>
-                                    {{ $p->nome_aluno }}
+                                    <a href="{{ url('pedidos/cadastro', [$manutencao->id]) }}">{{ $manutencao->id }}
+                                    </a>
+                                </td>
+                                <td>@datetime($manutencao->created_at)</td>
+                                <td>
+                                    {{ $manutencao->nome_aluno }}
                                     <small class="text-success mr-3">
-                                        {{ $p->ra_aluno }}
+                                        {{ $manutencao->ra_aluno }}
                                     </small>
                                 </td>
                                 <td>
-                                    <div class="sparkbar" data-color="#00a65a" data-height="20">{{ $p->valor }}</div>
+                                    <div class="sparkbar" data-color="#00a65a" data-height="20">
+                                        {{ $manutencao->valor }}
+                                    </div>
                                 </td>
-                                <td> {{-- <td>  REGRA DOS STATUS AQUI NESTA TELA  --}}
-                                    @if ($p->status == 0)
+                                <td>
+                                    @if ($manutencao->status == 0)
                                         <span class="badge badge-white">Cancelado</span>
-                                    @elseif ($p->status == 1)
+                                    @elseif ($manutencao->status == 1)
                                         <span class="badge badge-danger">Aguardando Pagamento</span>
-                                    @elseif ($p->status == 2)
+                                    @elseif ($manutencao->status == 2)
                                         <span class="badge badge-warning">Processando Pagamento</span>
-                                    @elseif ($p->status == 3)
+                                    @elseif ($manutencao->status == 3)
                                         <span class="badge badge-success">Pagamento Aprovado</span>
-                                    @elseif ($p->status == 4)
+                                    @elseif ($manutencao->status == 4)
                                         <span class="badge badge-dark">Em Produção</span>
-                                    @elseif ($p->status == 5)
+                                    @elseif ($manutencao->status == 5)
                                         <span class="badge badge-info">Pedido Finalizado</span>
-                                    @elseif ($p->status == 6)
+                                    @elseif ($manutencao->status == 6)
                                         <span class="badge badge-primary">Pedido Entregue</span>
                                     @endif
-                                <td>
-                                    {{ $p->unidade->nome_fantasia}}
                                 </td>
                             </tr>
                         @endforeach
@@ -129,13 +121,9 @@
                     </tbody>
                 </table>
             </div>
-            <!-- /.table-responsive -->
         </div>
-        <!-- /.card-body -->
         <div class="card-footer clearfix">
-            <a href="{{ url('/pedidos') }}" class="btn btn-sm btn-secondary float-right">Ver todos Pedidos</a>
+            <a href="{{ url('/manutencao') }}" class="btn btn-sm btn-secondary float-right">Ver todos as manutenções</a>
         </div>
-        <!-- /.card-footer -->
     </div>
-    <!-- /.card -->
 @endsection

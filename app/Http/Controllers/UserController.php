@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CadastraUsuarioRequest;
-use App\Http\Services\GrupoService;
-use App\Http\Services\UnidadeService;
 use App\Http\Services\UsuarioService;
 use App\Models\User;
 
@@ -21,34 +19,28 @@ class UserController extends BaseController
 
     public function index()
     {
-        $usuarios =  $this->usuarioService->getAllUsuarios(); 
-        return view('user.lista-user',['dados' => $usuarios]);
+        $usuarios =  $this->usuarioService->getAllUsuarios();
+        return view('user.lista-user',['users' => $usuarios]);
     }
 
     public function verUsuario(User $user)
-    {                           
-        $unidadeService = new UnidadeService(); 
-        $unidades = $unidadeService->getAllUnidades();
-        
-        $grupoService = new GrupoService();
-        $grupos = $grupoService->getAllGrupos();
-
-        return view('user.novo-user',['dados' => $user,'unidades' => $unidades, 'grupos' => $grupos]);
+    {
+        return view('user.novo-user',['user' => $user]);
     }
 
-    public function excluirUsuario(User $user){              
+    public function excluirUsuario(User $user)
+    {
+        $returnUser = $this->usuarioService->excluiUsuario($user);
 
-        $returnUser = $this->usuarioService->excluiUsuario($user);    
-
-        return $this->responseData($returnUser,'usuarios');                   
+        return $this->responseData($returnUser,'usuarios');
     }
 
-    public function salvaUsuario(CadastraUsuarioRequest $request){    
-    
+    public function salvaUsuario(CadastraUsuarioRequest $request)
+    {
         $validatedUsuario = $request->validated();
 
-        $returnUsuario = $this->usuarioService->salvaUser($validatedUsuario);    
+        $returnUsuario = $this->usuarioService->salvaUser($validatedUsuario);
 
-        return $this->responseData($returnUsuario,'/usuarios/cadastro');                   
+        return $this->responseData($returnUsuario,'/usuarios/cadastro');
     }
 }

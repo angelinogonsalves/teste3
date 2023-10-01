@@ -20,8 +20,8 @@ class LoginRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
     public function rules(): array
-    {        
-        return [            
+    {
+        return [
             'email' => 'email|required|max:100',
             'password' => 'string|required|max:100'
         ];

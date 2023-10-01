@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
-use App\Http\Services\GrupoService;
-use App\Http\Services\UnidadeService;
 use App\Http\Services\UsuarioService;
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +29,7 @@ class AuthController extends BaseController
         ])->onlyInput('email');
     }
 
-    public function logout(Request $request): RedirectResponse 
+    public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
  
@@ -44,13 +41,7 @@ class AuthController extends BaseController
 
     public function register()
     {
-        $unidadeService = new UnidadeService();
-        $unidades = $unidadeService->getAllUnidades();
-        
-        $grupoService = new GrupoService();
-        $grupos = $grupoService->getAllGrupos();
-
-        return view('auth.register',['unidades' => $unidades, 'grupos' => $grupos]);
+        return view('auth.register');
     }
 
 
@@ -58,13 +49,13 @@ class AuthController extends BaseController
     {
         $validatedUser = $request->validated();
 
-        $validatedUser['tipo_usuario'] = 4;
+        $validatedUser['tipo_usuario'] = 1;
 
         $usuarioService = new UsuarioService();
 
-        $returnUsuario = $usuarioService->salvaUser($validatedUser); 
+        $returnUsuario = $usuarioService->salvaUser($validatedUser);
 
-        return $this->responseData($returnUsuario,'/login',false); 
+        return $this->responseData($returnUsuario,'/login',false);
     }
 
     public function recuperarSenha()

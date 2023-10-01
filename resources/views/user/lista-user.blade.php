@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('content')
-    <!-- Content Header (Page header) -->
+
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -15,23 +15,23 @@
                     </ol>
                 </div>
             </div>
-        </div><!-- /.container-fluid -->
+        </div>
     </section>
 
-    <!-- Main content -->
+
     <section class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <!-- /.card -->
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{url('usuarios/cadastro')}}" class="btn btn-primary">Adicionar Novo <i
-                                    class="nav-icon far fa-plus-square"></i></a>
+                            <a href="{{url('usuarios/cadastro')}}" class="btn btn-primary">
+                                Adicionar Novo <i class="nav-icon far fa-plus-square"></i>
+                            </a>
                         </div>
-                        <!-- /.card-header -->
                         <div class="card-body">
                             <table id="usuarios" class="table table-bordered table-striped">
+                                <caption>Tabela de Usuários</caption>
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -39,45 +39,44 @@
                                         <th>Email</th>
                                         <th>Tipo</th>
                                         <th>Ações</th>
-
                                     </tr>
                                 </thead>
-
-                                <tbody>                        
-                                    @forelse($dados as $d)
-                                    <tr>
-                                        <td>{{$d->id}}</td>
-                                        <td>{{$d->nome}}</td>
-                                        <td>{{$d->email}}</td>                                            
-                                        <td>{{$d->tipo_usuario}}</td>                                                                                        
-                                        <td>
-                                        <form action="{{url('usuarios/excluir',[$d->id])}}" method="post">
-                                            @csrf
-                                            <a class="btn btn-primary btn-sm" href="{{url('usuarios/cadastro',[$d->id])}}">Ver | Editar</a>                                                
-                                                <input type="submit" value="Delete" class="btn btn-danger btn-sm">                                                    
-                                            </form>                                              
-                                        </td>
-                                    </tr>
-                                    @empty                                                                        
-                                    <tr>
-                                        <td colspan="5" class="text-center">Não foram encontradas Usuários</td>                                      
-                                    </tr>
-                                @endforelse                  
+                                <tbody>
+                                    @forelse($users as $user)
+                                        <tr>
+                                            <td>{{ $user->id }}</td>
+                                            <td>{{ $user->nome }}</td>
+                                            <td>{{ $user->email }}</td>
+                                            <td>{{ $user->tipo_usuario }}</td>
+                                            <td>
+                                                <form action="{{ url('usuarios/excluir',[$user->id]) }}" method="post">
+                                                    @csrf
+                                                    <a class="btn btn-primary btn-sm" 
+                                                        href="{{url('usuarios/cadastro',[$user->id])}}"
+                                                    >
+                                                        Ver | Editar
+                                                    </a>
+                                                    <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="5" class="text-center">
+                                                Não foram encontradas Usuários
+                                            </td>
+                                        </tr>
+                                    @endforelse
                                 </tfoot>
                             </table>
                         </div>
-                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
         </div>
-        <!-- /.container-fluid -->
     </section>
     <script>
-        $(document).ready(function () {         
+        $(document).ready(function () {
             var table = new DataTable('#usuarios', {
                 language: {
                     url: "{{asset('plugins/datatables/datatable-pt-BR.json')}}"

@@ -20,17 +20,12 @@ class RegisterRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
     public function rules(): array
-    {        
-        return [   
+    {
+        return [
             'nome' => 'required|max:100',
-            'ra' => "required|unique:users,ra,null,id,unidade_id,{$this->input('unidade_id')}",          
-            'unidade_id' => 'integer|required',                      
-            'grupo_id' => 'integer|required',                      
-            'email' => 'email|required|max:100|unique:users',                                 
-            'password' => 'required|confirmed|max:100'             
-            // 'ddd' => 'required|digits:2',       
-            // 'telefone' => 'required|digits_between:8,9',                                                
-            // 'cpf' => 'string|required|digits:11'
+            'email' => 'email|required|max:100|unique:users',
+            'password' => 'required|confirmed|max:100',
+            'cpf' => 'string|nullable|digits:11',
         ];
     }
 }
